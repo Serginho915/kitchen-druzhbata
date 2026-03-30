@@ -1,0 +1,54 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+:root {
+  --background: #{$bg-color};
+  --foreground: #{$prim-black};
+}
+
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-inter), sans-serif;
+  font-size: 20px;
+  @include main-container;
+
+
+
+  @include mobile {
+    font-size: 16px;
+  }
+
+}
+
+h1 {
+  color: rgba(255, 255, 255, 0.90);
+  font-family: var(--font-comfortaa);
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 68px;
+  width: 515px;
+
+  @include desktop-sm {
+    font-size: 60px;
+  }
+
+  @include tablet {
+    font-size: 56px;
+    line-height: 60;
+    width: 100%;
+  }
+
+  @include mobile {
+    font-size: 40px;
+    line-height: 44px;
+  }
+}

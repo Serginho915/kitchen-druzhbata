@@ -1,0 +1,165 @@
+@use "@/styles/mixins" as *;
+@use "@/styles/variables" as *;
+
+.header {
+    padding: 0 60px;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 1001;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition:
+        transform 0.4s ease-in-out,
+        opacity 0.4s ease-in-out;
+    background: transparent;
+    max-width: 1440px; 
+
+    &.headerHidden {
+        transform: translateX(-50%) translateY(-101%);
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    @include desktop-sm {
+        padding: 0 40px;
+        top: 24px;
+    }
+
+    @include tablet {
+        padding: 0 40px;
+        top: 22px;
+    }
+
+    @include mobile {
+        padding: 0 24px;
+        top: 22px;
+    }
+}
+
+.logoBlock {
+    display: flex;
+    align-items: center;
+
+    a {
+        display: flex;
+        align-items: center;
+        height: 80px;
+
+        @include mobile {
+            height: 56px;
+        }
+    }
+}
+
+.logoBlock img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    display: block;
+
+    @include mobile {
+        width: 56px;
+        height: 56px;
+    }
+}
+
+.navBlock {
+    @include tablet {
+        display: none;
+    }
+}
+
+.navList {
+    display: flex;
+    padding: 20px;
+    border-radius: 64px;
+    background: #fff;
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25);
+    gap: 40px;
+    list-style: none;
+}
+
+.navItem a {
+    text-decoration: none;
+    color: $prim-black;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.userBlock {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    @include mobile {
+        gap: 8px;
+    }
+}
+
+.bgUserBlock {
+    border-radius: 20px;
+    border: 2px solid #c6c6c6;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+
+    @include mobile {
+        // padding: 10px;
+        border-radius: 16px;
+    }
+}
+
+.icon {
+    width: 29px;
+    height: 29px;
+
+    @include mobile {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+.userItem {
+    cursor: pointer;
+}
+
+.phoneIcon {
+    @include tablet {
+        display: none;
+    }
+}
+
+.burgerIcon {
+    display: none;
+    cursor: pointer;
+
+    @include tablet {
+        display: block;
+    }
+}
+
+.mobileMenu {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.98);
+    z-index: 1000;
+    padding: 40px 24px;
+}
+
+.mobileNavList {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+}

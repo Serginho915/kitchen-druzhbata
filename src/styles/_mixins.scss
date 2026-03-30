@@ -1,0 +1,46 @@
+@use "variables" as *;
+
+// 1439 - 1200
+@mixin desktop-sm {
+  @media (max-width: ($desktop-large - 1)) {
+    @content;
+  }
+}
+
+// 1199 - 768
+@mixin tablet {
+  @media (max-width: ($desktop-small - 1)) {
+    @content;
+  }
+}
+
+// 767 - 320
+@mixin mobile {
+  @media (max-width: ($tablet - 1)) {
+    @content;
+  }
+}
+
+@mixin main-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 16px 44px 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 58px;
+
+  @include desktop-sm() {
+    padding: 16px 24px;
+    gap: 54px;
+  }
+
+  @include tablet() {
+    gap: 44px;
+  }
+
+  @include mobile() {
+    padding: 8px 8px 8px 16px;
+    gap: 32px;
+  }
+
+}
