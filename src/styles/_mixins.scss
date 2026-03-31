@@ -9,12 +9,12 @@
 
 // 1199 - 768
 @mixin tablet {
-  @media (max-width: ($desktop-small - 1)) {
+  @media (min-width: $tablet) and (max-width: ($desktop-small - 1)) {
     @content;
   }
 }
 
-// 767 - 320
+// 767 - 0
 @mixin mobile {
   @media (max-width: ($tablet - 1)) {
     @content;

@@ -68,8 +68,9 @@ export const Header = () => {
       </nav>
 
       <div className={styles.userBlock}>
-        <div className={`${styles.userItem} ${styles.bgUserBlock}`}>
+        <div className={`${styles.userItem} ${styles.bgUserBlock} ${styles.cartBlock}`}>
           <Link href="/cart">
+            <span className={styles.cartBadge}>?</span>
             <Image src={cart} alt="Cart Icon" width={44} height={44} className={styles.icon} />
           </Link>
         </div>

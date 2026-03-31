@@ -76,12 +76,13 @@
 
 .navList {
     display: flex;
-    padding: 20px;
+    padding: 20px 0;
     border-radius: 64px;
     background: #fff;
     box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25);
-    gap: 40px;
     list-style: none;
+    gap: 8px;
+
 }
 
 .navItem a {
@@ -89,6 +90,7 @@
     color: $prim-black;
     font-size: 20px;
     font-weight: 500;
+    padding: 20px 16px;
 }
 
 .userBlock {
@@ -98,6 +100,36 @@
 
     @include mobile {
         gap: 8px;
+    }
+}
+
+.cartBlock {
+    position: relative;
+}
+
+.cartBadge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ff8a00; // Sample orange
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #fff;
+    z-index: 2;
+
+    @include mobile {
+        width: 18px;
+        height: 18px;
+        font-size: 10px;
+        top: -6px;
+        right: -6px;
     }
 }
 
@@ -111,8 +143,7 @@
     padding: 10px;
 
     @include mobile {
-        // padding: 10px;
-        border-radius: 16px;
+        border-radius: 12px;
     }
 }
 
