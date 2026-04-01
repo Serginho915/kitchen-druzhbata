@@ -37,6 +37,14 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+
+    @include tablet{
+      min-height:256px;;
+    }
+
+    @include mobile{
+      min-height:256px;;
+    }
   }
 }
 

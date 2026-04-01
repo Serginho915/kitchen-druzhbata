@@ -17,7 +17,7 @@
         transform 0.4s ease-in-out,
         opacity 0.4s ease-in-out;
     background: transparent;
-    max-width: 1440px; 
+    max-width: 1440px;
 
     &.headerHidden {
         transform: translateX(-50%) translateY(-101%);
@@ -72,6 +72,10 @@
     @include tablet {
         display: none;
     }
+
+    @include mobile {
+        display: none;
+    }
 }
 
 .navList {
@@ -91,6 +95,7 @@
     font-size: 20px;
     font-weight: 500;
     padding: 20px 16px;
+    
 }
 
 .userBlock {
@@ -165,6 +170,10 @@
     @include tablet {
         display: none;
     }
+
+    @include mobile {
+        display: none;
+    }
 }
 
 .burgerIcon {
@@ -172,6 +181,10 @@
     cursor: pointer;
 
     @include tablet {
+        display: block;
+    }
+
+    @include mobile {
         display: block;
     }
 }
@@ -185,6 +198,14 @@
     background: rgba(255, 255, 255, 0.98);
     z-index: 1000;
     padding: 40px 24px;
+    display: flex;
+    justify-content: center;
+    border-radius: 0;
+    border: none;
+
+    @include mobile {
+        top: 56px;
+    }
 }
 
 .mobileNavList {

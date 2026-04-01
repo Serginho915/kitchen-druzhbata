@@ -20,10 +20,14 @@
   height: 480px;
   border-radius: 32px;
   overflow: hidden;
-  margin-bottom: 20px;
+
+  @include tablet {
+    gap: 24px;
+  }
 
   @include mobile {
     height: 380px;
+    gap: 20px;
   }
 }
 
@@ -108,9 +112,19 @@
 // Info Section
 .infoSection {
   display: flex;
-  justify-content: space-between;
   align-items: stretch;
   width: 100%;
+  gap: 16px;
+
+  @include tablet {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  @include mobile {
+    flex-direction: column;
+    gap: 20px; 
+  }
 }
 
 .infoList {
@@ -118,6 +132,8 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  padding-right: 16px;
+  width: 100%;
 }
 
 .infoItem {
@@ -128,8 +144,19 @@
   background: #fff;
   box-shadow: 0 1px 4px 0 rgba(240, 170, 24, 0.5);
   padding: 8px 16px;
+
+  @include mobile {
+    gap: 16px;
+    padding: 8px 16px 8px 8px;
+  }
 }
 
+.icon{
+  @include mobile {
+    width: 22px;
+    height: 22px;
+  }
+}
 .imgWrapper {
   width: 64px;
   height: 64px;
@@ -138,13 +165,35 @@
   justify-content: center;
   border-radius: 44px;
   background: $prim-black;
-}
 
+  @include mobile {
+    width: 44px;
+    height: 44px;
+  }
+}
+.infoText{
+  font-size: 18px;
+  font-weight: 500;
+  color: $prim-black;
+
+  @include mobile {
+    font-size: 16px;
+  }
+}
 .hotSales {
-  width: 586px;
+  //width: 586px;
   position: relative;
   border-radius: 32px;
   overflow: hidden;
+  min-width: 586px;
+
+  @include tablet {
+    min-width: 0;
+  }
+
+  @include mobile {
+    min-width: 0;
+  }
 
   img {
     width: 100%;

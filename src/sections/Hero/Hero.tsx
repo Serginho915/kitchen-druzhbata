@@ -27,9 +27,17 @@ export const Hero = () => {
         <ul className={styles.infoList}>
           <li className={styles.infoItem}>
             <div className={styles.imgWrapper}>
-              <Image src={infoSoup} alt="Info Icon" width={28} height={28} />
+              <Image
+                src={infoSoup}
+                alt="Info Icon"
+                width={28}
+                height={28}
+                className={styles.icon}
+              />
             </div>
-            <span>Истинска храна, приготвена днес</span>
+            <span className={styles.infoText}>
+              Истинска храна, приготвена днес
+            </span>
           </li>
           <li className={styles.infoItem}>
             <div className={styles.imgWrapper}>
@@ -38,9 +46,10 @@ export const Hero = () => {
                 alt="Delivery Icon"
                 width={28}
                 height={28}
+                className={styles.icon}
               />
             </div>
-            <span>Безплатна доставка в София</span>
+            <span className={styles.infoText}>Безплатна доставка в София</span>
           </li>
           <li className={styles.infoItem}>
             <div className={styles.imgWrapper}>
@@ -49,9 +58,10 @@ export const Hero = () => {
                 alt="Calendar Icon"
                 width={28}
                 height={28}
+                className={styles.icon}
               />
             </div>
-            <span>Всеки делник (Пон-Пет)</span>
+            <span className={styles.infoText}>Всеки делник (Пон-Пет)</span>
           </li>
         </ul>
         <div className={styles.hotSales}>
@@ -61,4 +71,3 @@ export const Hero = () => {
     </section>
   );
 };
-
