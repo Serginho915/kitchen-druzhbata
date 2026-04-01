@@ -6,6 +6,8 @@ import calendarInfo from "@/assets/images/Vectors/calendarInfo.svg";
 import deliveryIcon from "@/assets/images/Vectors/deliveryIcon.svg";
 import infoSoup from "@/assets/images/Vectors/infoSoup.svg";
 
+import { CarouselInfo } from "@/components/ui/CarouselInfo/CarouselInfo";
+
 export const Hero = () => {
   return (
     <section className={styles.hero}>
@@ -53,14 +55,10 @@ export const Hero = () => {
           </li>
         </ul>
         <div className={styles.hotSales}>
-          <Image
-            src="/hotSales.png"
-            alt="Hot Sales"
-            width={586}
-            height={0}
-          />
+          <CarouselInfo />
         </div>
       </div>
     </section>
   );
 };
+

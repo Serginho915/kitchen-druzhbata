@@ -137,5 +137,23 @@
   align-items: center;
   justify-content: center;
   border-radius: 44px;
-    background: $prim-black;
+  background: $prim-black;
+}
+
+.hotSales {
+  width: 586px;
+  position: relative;
+  border-radius: 32px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  @include tablet {
+    width: 100%;
+    margin-top: 24px;
+  }
 }
