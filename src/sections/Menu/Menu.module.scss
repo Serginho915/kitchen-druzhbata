@@ -1,35 +1,159 @@
 @use "@/styles/mixins" as *;
 @use "@/styles/variables" as *;
 
-.mainTitle{
-    text-align: center;
-    color:#000;
-    font-size: 60px;
+.menuSection {
+  padding: 0 16px;
+  background-image: url("../../assets/images/bgImage.svg");
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  background-size: auto; 
+  position: relative;
+  min-height: 400px; 
 
-    @include tablet{
-        font-size: 48px;
-        font-weight: 500;
-    }
-
-    @include mobile{
-       font-size: 34px;
-       font-weight: 500;
-    }
-
+  @include tablet {
+    padding: 0;
+    background-image: none;
+  }
+  @include mobile {
+    padding: 0;
+    background-image: none;
+  }
 }
 
-.subTitle{
-    text-align: center;
-    color:rgba(0, 0, 0, 0.80);;
-    font-size: 32px;
-    font-weight: 600;
+.category {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  @include tablet {
+    gap: 16px;
+  }
 
-    @include tablet{
-        font-size: 28px;
+  @include mobile {
+    gap: 8px;
+  }
+}
+
+.categoryHeader {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  padding: 12px 0;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  @include mobile {
+    gap: 12px;
+  }
+}
+
+.iconWrapper {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0aa18;
+  border-radius: 50%;
+  flex-shrink: 0;
+
+  @include mobile {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  filter: brightness(0) invert(1);
+
+  @include mobile {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 600;
+  font-family: $font-secondary;
+  color: $prim-black;
+  margin: 0;
+
+  @include tablet {
+    font-size: 28px;
+  }
+
+  @include mobile {
+    font-size: 20px;
+  }
+}
+
+.accordionContent {
+  overflow: hidden;
+  max-height: 0;
+  transition:
+    max-height 0.3s ease-out,
+    padding 0.3s ease-out;
+  padding: 0;
+}
+
+.accordionContentExpanded {
+  max-height: 2000px; 
+}
+
+.dishesGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+  padding: 12px 0;
+
+  @include desktop-sm {
+    gap:16px;
+  }
+  @include tablet {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+.favorites {
+  .accordionContent {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+      display: none;
     }
 
-    @include mobile{
-       font-size: 16px;
-       color: rgba(0, 0, 0, 0.60);
+    @include tablet {
+      overflow-x: visible;
     }
-}   
+  }
+
+  .dishesGrid {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 16px;
+
+    @include tablet {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      flex-wrap: wrap;
+    }
+    @include mobile {
+      display: grid;
+      grid-template-columns: 1fr;
+      flex-wrap: wrap;
+    }
+  }
+}
