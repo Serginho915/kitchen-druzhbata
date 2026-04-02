@@ -3,5 +3,17 @@
 
 
 .page {
-    
+    display: flex;
+    flex-direction: column;
+    gap: 58px;
+
+    @include desktop-sm() {
+        gap: 54px;
+    }
+    @include tablet() {
+        gap: 44px;
+    }
+    @include mobile() {
+        gap: 32px;
+    }
 }

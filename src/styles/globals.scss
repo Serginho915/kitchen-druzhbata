@@ -33,9 +33,9 @@ h1 {
   font-family: var(--font-comfortaa);
   font-size: 64px;
   font-style: normal;
-  font-weight: 700;
+  //font-weight: 700;
   line-height: 68px;
-  width: 515px;
+  // width: 515px;
 
   @include desktop-sm {
     font-size: 60px;
