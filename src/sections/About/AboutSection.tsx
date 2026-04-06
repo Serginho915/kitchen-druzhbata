@@ -26,7 +26,13 @@ export const AboutSection = () => {
             ></iframe>
           </div>
 
-          <div className={styles.info}></div>
+          <div className={styles.info}>
+            <div className={styles.openingHours}>
+              <h3 className={styles.infoTitle}>Отворени сме Пон-Пет</h3>
+              <div className={styles.hours}>10:00 - 21:00</div>
+            </div>
+            <p>Очакваме ви на обяд и вечеря с вкусно домашно меню, приготвено с внимание и любов, в уютна атмосфера.</p>
+          </div>
         </div>
         <ul className={styles.rightList}>
           {REVIEWS.map((review) => (

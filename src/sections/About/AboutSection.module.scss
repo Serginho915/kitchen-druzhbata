@@ -2,114 +2,118 @@
 @use "@/styles/variables" as *;
 
 .section {
-    width: 100%;
+  width: 100%;
 }
 
 .title {
-    margin-bottom: 80px;
+  margin-bottom: 80px;
 
-    @include tablet {
-        margin-bottom: 60px;
-    }
+  @include tablet {
+    margin-bottom: 60px;
+  }
 
-    @include mobile {
-        margin-bottom: 24px;
-    }
+  @include mobile {
+    margin-bottom: 24px;
+  }
 }
 
 .content {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
 
-    @include tablet {
-        flex-direction: column;
-        gap: 24px;
-        padding: 0 44px;
-        margin: 0 auto;
-    }
+  @include tablet {
+    flex-direction: column;
+    gap: 24px;
+    padding: 0 44px;
+    margin: 0 auto;
+  }
 
-    @include mobile {
-        flex-direction: column;
-        gap: 16px;
-        padding: 0;
-    }
+  @include mobile {
+    flex-direction: column;
+    gap: 16px;
+    padding: 0;
+  }
 }
 
 .leftContent {
-    width: 616px;
-    max-width: 100%;
+  width: 616px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 
-    @include tablet {
-        width: 100%;
-    }
+  @include tablet {
+    width: 100%;
+  }
 
-    @include mobile {
-        width: 100%;
-    }
+  @include mobile {
+    width: 100%;
+  }
 }
 
 .mapContent {
-    position: relative;
-    width: 100%;
-    max-width: 616px;
+  position: relative;
+  width: 100%;
+  max-width: 616px;
 
-    @include tablet {
-        max-width: 100%;
-    }
+  @include tablet {
+    max-width: 100%;
+  }
 
-    @include mobile {
-        max-width: 100%;
-    }
+  @include mobile {
+    max-width: 100%;
+  }
 }
 
 .locationInfo {
-    position: absolute;
-    top: -30px;
-    right: -60px;
-    background-color: $prim-black;
-    padding: 12px 32px;
-    border-radius: 50px;
-    color: #fff;
-    font-size: 20px;
-    font-weight: 600;
-    line-height: 1.2;
-    z-index: 2;
-    width: max-content;
-    white-space: nowrap;
-    font-family: $font-secondary;
+  position: absolute;
+  top: -30px;
+  right: -60px;
+  background-color: $prim-black;
+  padding: 12px 32px;
+  border-radius: 50px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+  z-index: 2;
+  width: max-content;
+  white-space: nowrap;
+  font-family: $font-secondary;
 
-    @include tablet {
-        top: -24px;
-        right: 0;
-        font-size: 16px;
-        padding: 10px 24px;
-    }
+  @include tablet {
+    top: -24px;
+    right: 0;
+    font-size: 16px;
+    padding: 10px 24px;
+  }
 
-    @include mobile {
-        position: static;
-        margin-bottom: 12px;
-        border-radius: 20px;
-        width: 100%;
-        white-space: normal;
-        padding: 16px 24px;
-    }
+  @include mobile {
+    position: static;
+    margin-bottom: 12px;
+    border-radius: 20px;
+    width: 100%;
+    white-space: normal;
+    padding: 16px 24px;
+  }
 }
 
 .rightList {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  list-style: none;
+  padding: 16px 0 0 0;
+  margin: 0;
+  width: 100%;
+  max-width: 500px;
 
-    @include tablet {
-        max-width: 100%;
-        margin-top: 32px;
-    }
-      @include tablet {
+  @include tablet {
+    max-width: 100%;
+    margin-top: 32px;
+  }
+  @include tablet {
     max-width: 100%;
   }
   @include mobile {
@@ -117,10 +121,40 @@
   }
 }
 
-
 .map {
-    border-radius: 40px;
-    border: 1px solid #B2B3B5;
-    width: 100%;
-    display: block;
+  border-radius: 40px;
+  border: 1px solid #b2b3b5;
+  width: 100%;
+  display: block;
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.openingHours {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+
+}
+
+.infoTitle {
+  color: $prim-black;
+  font-family: $font-secondary;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.hours {
+  font-size: 20px;
+  font-weight: 600;
+  color: #fffbfb;
+
+  padding: 8px 24px;
+  border-radius: 28px;
+  background: #3b3a3a;
 }
