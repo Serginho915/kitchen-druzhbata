@@ -1,12 +1,11 @@
-"use client"
-
-import React from 'react'
-import styles from './Title.module.scss'
+import React from "react";
+import styles from "./Title.module.scss";
+import { SectionTitle } from "@/components/ui/SectionTitle/SectionTitle";
 
 export const Title = () => {
   return (
     <section>
-        <h1 className={styles.mainTitle}>Днешно Меню</h1>
+        <SectionTitle text="Днешно Меню" className={styles.mainTitle}/>
         <h3 className={styles.subTitle}>Пссст… още е горещо!</h3>
     </section>
   )

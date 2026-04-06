@@ -5,15 +5,18 @@
     text-align: center;
     color:#000;
     font-size: 60px;
+    margin-bottom: 24px;
 
     @include tablet{
         font-size: 48px;
         font-weight: 500;
+        margin-bottom: 16px;
     }
 
     @include mobile{
        font-size: 34px;
        font-weight: 500;
+       margin-bottom: 12px;
     }
 
 }
@@ -22,7 +25,8 @@
     text-align: center;
     color:rgba(0, 0, 0, 0.80);;
     font-size: 32px;
-    font-weight: 600;
+    font-weight: 400;
+    font-family: $font-primary;
 
     @include tablet{
         font-size: 28px;

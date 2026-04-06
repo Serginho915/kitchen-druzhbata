@@ -3,10 +3,14 @@
 import React, { useState } from "react";
 import styles from "./Menu.module.scss";
 import Image from "next/image";
-import { MenuData, Category, Dish } from "./MenuData";
+import { Category, Dish } from "./MenuData";
 import { DishCard } from "@/components/ui/DishCard/DishCard";
 
-export const Menu = () => {
+export interface MenuProps {
+  data: Category[];
+}
+
+export const Menu: React.FC<MenuProps> = ({ data }) => {
   const [openCategoryIds, setOpenCategoryIds] = useState<string[]>(["favorites"]);
 
   const toggleCategory = (id: string) => {
@@ -17,7 +21,7 @@ export const Menu = () => {
 
   return (
     <section className={styles.menuSection}>
-      {MenuData.map((category: Category) => (
+      {data.map((category: Category) => (
         <div
           key={category.id}
           className={`${styles.category} ${category.id === "favorites" ? styles.favorites : ""}`}

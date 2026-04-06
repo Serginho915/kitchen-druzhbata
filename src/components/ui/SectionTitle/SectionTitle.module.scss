@@ -1,0 +1,23 @@
+@use "@/styles/mixins" as *;
+@use "@/styles/variables" as *;
+
+.title {
+    text-align: center;
+    color: #000;
+    font-size: 60px;
+    font-family: $font-primary;
+
+    font-weight: 400;
+
+    @include tablet {
+        font-size: 48px;
+        font-weight: 500;
+
+    }
+
+    @include mobile {
+        font-size: 34px;
+        font-weight: 500;
+
+    }
+}
