@@ -11,6 +11,10 @@
   width: 100%;
   max-width: 429px;
   position: relative;
+
+  @include mobile {
+    max-width: 100%;
+  }
   // box-shadow: 0 4px 0px rgba(0, 0, 0, 0.04);
   transition:
     transform 0.2s ease,
