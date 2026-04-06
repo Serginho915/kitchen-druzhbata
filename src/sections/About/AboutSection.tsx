@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "./AboutSection.module.scss";
 import { SectionTitle } from "@/components/ui/SectionTitle/SectionTitle";
+import { ReviewCard } from "@/components/ui/ReviewCard/ReviewCard";
+import { REVIEWS } from "./AboutData";
 
 export const AboutSection = () => {
   return (
@@ -26,7 +28,13 @@ export const AboutSection = () => {
 
           <div className={styles.info}></div>
         </div>
-        <ul className={styles.rightList}></ul>
+        <ul className={styles.rightList}>
+          {REVIEWS.map((review) => (
+            <li key={review.id} className={styles.reviewItem}>
+              <ReviewCard {...review} />
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

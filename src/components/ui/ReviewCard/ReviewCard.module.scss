@@ -1,0 +1,51 @@
+@use "@/styles/mixins" as *;
+@use "@/styles/variables" as *;
+
+.card {
+  border-radius: 24px 24px 24px 0;
+  background: #fff;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.25);
+  padding: 16px;
+  max-width: 488px;
+
+  @include tablet {
+    max-width: 100%;
+  }
+  @include mobile {
+    max-width: 100%;
+  }
+}
+.mark {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 8px 0;
+  display: flex;
+  gap: 2px;
+}
+
+.text {
+  font-family: $font-secondary;
+  font-size: 16px;
+  color: #000;
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-weight: 400;
+}
+
+.author {
+  margin-bottom: 0;
+}
+
+.imgWrapper {
+  display: flex;
+  padding: 8px 16px;
+  align-items: center;
+  border-radius: 100px;
+  background: #efeeee;
+}
+
+.info{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

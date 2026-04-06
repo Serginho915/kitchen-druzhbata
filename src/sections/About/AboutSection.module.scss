@@ -23,12 +23,13 @@
 
     @include tablet {
         flex-direction: column;
-        gap: 32px;
+        gap: 24px;
         padding: 0 44px;
         margin: 0 auto;
     }
 
     @include mobile {
+        flex-direction: column;
         gap: 16px;
         padding: 0;
     }
@@ -93,6 +94,29 @@
         padding: 16px 24px;
     }
 }
+
+.rightList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    max-width: 500px;
+
+    @include tablet {
+        max-width: 100%;
+        margin-top: 32px;
+    }
+      @include tablet {
+    max-width: 100%;
+  }
+  @include mobile {
+    max-width: 100%;
+  }
+}
+
 
 .map {
     border-radius: 40px;
