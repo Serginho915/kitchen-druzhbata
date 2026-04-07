@@ -1,12 +1,51 @@
-import React from "react";
+"use client"
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./AboutSection.module.scss";
 import { SectionTitle } from "@/components/ui/SectionTitle/SectionTitle";
 import { ReviewCard } from "@/components/ui/ReviewCard/ReviewCard";
 import { REVIEWS } from "./AboutData";
 
 export const AboutSection = () => {
+  const [offset, setOffset] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(true);
+  const [isPaused, setIsPaused] = useState(false);
+  const listRef = useRef<HTMLUListElement>(null);
+
+  const originalLength = REVIEWS.length;
+
+  useEffect(() => {
+    if (isPaused) return;
+
+    const interval = setInterval(() => {
+      const items = listRef.current?.children;
+      if (!items) return;
+
+      
+      const nextIndex = currentIndex + 1;
+
+      
+      const currentItemHeight = (items[currentIndex] as HTMLElement).offsetHeight + 16;
+
+      setIsTransitioning(true);
+      setOffset((prev) => prev - currentItemHeight);
+      setCurrentIndex(nextIndex);
+
+      
+      if (nextIndex === originalLength) {
+        setTimeout(() => {
+          setIsTransitioning(false);
+          setOffset(0);
+          setCurrentIndex(0);
+        }, 600); 
+      }
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, [currentIndex, isPaused, originalLength]);
+
   return (
-    <section className={styles.section}>
+    <section className={sectionStyles}>
       <SectionTitle text="За нас" className={styles.title} />
 
       <div className={styles.content}>
@@ -34,14 +73,29 @@ export const AboutSection = () => {
             <p>Очакваме ви на обяд и вечеря с вкусно домашно меню, приготвено с внимание и любов, в уютна атмосфера.</p>
           </div>
         </div>
-        <ul className={styles.rightList}>
-          {REVIEWS.map((review) => (
-            <li key={review.id} className={styles.reviewItem}>
-              <ReviewCard {...review} />
-            </li>
-          ))}
-        </ul>
+        <div
+          className={styles.rightListWrapper}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          <ul
+            ref={listRef}
+            className={styles.rightList}
+            style={{
+              transform: `translateY(${offset}px)`,
+              transition: isTransitioning ? "transform 0.6s ease-in-out" : "none",
+            }}
+          >
+            {[...REVIEWS, ...REVIEWS].map((review, index) => (
+              <li key={`${review.id}-${index}`} className={styles.reviewItem}>
+                <ReviewCard {...review} />
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );
 };
+
+const sectionStyles = styles.section;
