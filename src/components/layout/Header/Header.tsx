@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styles from "./Header.module.scss";
 import Image from "next/image";
 import cart from "@/assets/images/Vectors/cart.svg";
@@ -8,14 +8,20 @@ import phone from "@/assets/images/Vectors/phone.svg";
 import burger from "@/assets/images/Vectors/burger.svg";
 import Link from "next/link";
 import logo from "@/assets/images/logo.png";
+import { useCart } from "@/hooks/useCart";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const burgerRef = useRef<HTMLDivElement>(null);
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const { cartCount } = useCart();
 
+  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+
+  // Hide on scroll down, show on scroll up
   useEffect(() => {
     const handleScroll = () => {
       if (isMenuOpen) {
@@ -27,11 +33,7 @@ export const Header = () => {
       if (currentScrollPos <= 50) {
         setIsVisible(true);
       } else {
-        if (prevScrollPos < currentScrollPos) {
-          setIsVisible(true);
-        } else {
-          setIsVisible(false);
-        }
+        setIsVisible(prevScrollPos > currentScrollPos);
       }
 
       setPrevScrollPos(currentScrollPos);
@@ -39,8 +41,25 @@ export const Header = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [prevScrollPos]);
+  }, [prevScrollPos, isMenuOpen]);
 
+  // Close mobile menu on outside click
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        isMenuOpen &&
+        menuRef.current &&
+        !menuRef.current.contains(e.target as Node) &&
+        burgerRef.current &&
+        !burgerRef.current.contains(e.target as Node)
+      ) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isMenuOpen]);
 
   return (
     <header className={`${styles.header} ${!isVisible ? styles.headerHidden : ""}`}>
@@ -70,7 +89,9 @@ export const Header = () => {
       <div className={styles.userBlock}>
         <div className={`${styles.userItem} ${styles.bgUserBlock} ${styles.cartBlock}`}>
           <Link href="/cart">
-            <span className={styles.cartBadge}>?</span>
+            {cartCount > 0 && (
+              <span className={styles.cartBadge}>{cartCount > 99 ? "99+" : cartCount}</span>
+            )}
             <Image src={cart} alt="Cart Icon" width={44} height={44} className={styles.icon} />
           </Link>
         </div>
@@ -79,13 +100,17 @@ export const Header = () => {
           <Image src={phone} alt="Phone Icon" width={44} height={44} className={styles.icon} />
         </div>
 
-        <div className={`${styles.burgerIcon} ${styles.bgUserBlock}`} onClick={toggleMenu}>
+        <div
+          ref={burgerRef}
+          className={`${styles.burgerIcon} ${styles.bgUserBlock} ${isMenuOpen ? styles.burgerActive : ""}`}
+          onClick={toggleMenu}
+        >
           <Image src={burger} alt="Burger Menu" width={44} height={44} className={styles.icon} />
         </div>
       </div>
 
       {isMenuOpen && (
-        <div className={`${styles.mobileMenu} ${styles.bgUserBlock}`}>
+        <div ref={menuRef} className={styles.mobileMenu}>
           <ul className={styles.mobileNavList}>
             <li className={styles.navItem} onClick={() => setIsMenuOpen(false)}>
               <Link href="/#menu">Меню</Link>

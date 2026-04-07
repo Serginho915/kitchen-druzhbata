@@ -124,3 +124,46 @@
     transform: scale(0.95);
   }
 }
+
+.quantityControl {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: $bg-green;
+  border-radius: 24px;
+  padding: 8px 12px;
+}
+
+.qtyBtn {
+  background: none;
+  border: none;
+  color: $text-green;
+  font-size: 22px;
+  font-weight: 700;
+  font-family: $font-primary;
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.08);
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
+}
+
+.qtyCount {
+  font-size: 20px;
+  font-weight: 700;
+  color: $text-green;
+  font-family: $font-primary;
+  min-width: 24px;
+  text-align: center;
+}
