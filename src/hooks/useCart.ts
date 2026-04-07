@@ -25,19 +25,14 @@ function readCart(): CartItem[] {
 
 function writeCart(items: CartItem[]) {
   localStorage.setItem(CART_KEY, JSON.stringify(items));
-  // Dispatch a custom event so other components on the same tab can react
   window.dispatchEvent(new Event("cart-updated"));
 }
 
 export function useCart() {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  
+  const [cartItems, setCartItems] = useState<CartItem[]>(() => readCart());
 
-  // Load cart on mount
-  useEffect(() => {
-    setCartItems(readCart());
-  }, []);
-
-  // Listen for cart updates (same tab via custom event, cross-tab via storage)
+  
   useEffect(() => {
     const onUpdate = () => setCartItems(readCart());
     window.addEventListener("cart-updated", onUpdate);
