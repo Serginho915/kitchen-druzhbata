@@ -3,6 +3,8 @@
 
 .section {
   width: 100%;
+  max-width: 1158px;
+  margin: 0 auto;
 }
 
 .title {
@@ -19,7 +21,9 @@
 
 .content {
   display: grid;
-  grid-template-columns: 616px 500px;
+  grid-template-columns: 1fr 1fr;
+  max-width: 1158px;
+  gap: 42px;
   justify-content: space-between;
   align-items: stretch;
 
