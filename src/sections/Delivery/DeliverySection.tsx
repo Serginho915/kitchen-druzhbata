@@ -2,12 +2,13 @@ import React from "react";
 import styles from "./DeliverySection.module.scss";
 import { SectionTitle } from "@/components/ui/SectionTitle/SectionTitle";
 import Image from "next/image";
+import deliveryImg from "@/assets/images/deliveryImg.jpg";
 import { DISTRICTS } from "./DeliveryDistrictData";
-import Button from "@/components/ui/Button/Button";
+import { Button } from "@/components/ui/Button/Button";
 
 export const DeliverySection = () => {
   return (
-    <section>
+    <section className={styles.section}>
       <div className={styles.titleContent}>
         <SectionTitle text="Доставка" />
         <h3 className={styles.subTitle}>
@@ -17,18 +18,19 @@ export const DeliverySection = () => {
 
       <div className={styles.deliveryContent}>
         <Image
-          src="/delivery.png"
+          src={deliveryImg}
           alt="Доставка"
           width={504}
           height={378}
           className={styles.deliveryImage}
         />
         <div className={styles.deliveryZone}>
-          <div>
-            <h4>Зона на покритие:</h4>
-            <p>Доставяме поръчки във всички райони на София, включително:</p>
-          </div>
-          <ul>
+          <h4 className={styles.zoneTitle}>Зона на покритие:</h4>
+          <p className={styles.zoneDescription}>
+            Доставяме поръчки във всички райони на София, включително:
+          </p>
+
+          <ul className={styles.districtList}>
             {DISTRICTS.map((district) => (
               <li key={district.id}>{district.name}</li>
             ))}
@@ -36,7 +38,7 @@ export const DeliverySection = () => {
         </div>
       </div>
       <div className={styles.btnBlock}>
-            <Button>Поръчай</Button>
+        <Button text="Поръчай" type="button" className={styles.orderBtn} />
       </div>
     </section>
   );
