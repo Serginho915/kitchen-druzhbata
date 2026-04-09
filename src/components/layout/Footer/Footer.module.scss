@@ -70,6 +70,14 @@
   font-size: 38px;
   font-weight: 700;
   font-family: $font-primary;
+
+  @include tablet{
+    font-size: 32px;
+  }
+
+  @include mobile{
+    font-size: 28px;
+  }
 }
 
 .brand{
@@ -91,10 +99,26 @@
   font-weight: 500;
   font-family: $font-secondary;
   font-style: normal;
+
+  @include tablet{
+    font-size: 22px;
+  }
+
+  @include mobile{
+    font-size: 20px;
+  }
 }
 .addressText{
   width: 314px;
   margin: 0;
+  @include tablet{
+    width: 100%;
+  }
+
+  @include mobile{
+    width: 100%;
+  }
+
 }
 .hours{
   color: #fff;
@@ -117,8 +141,8 @@
 
 .socialLabel {
   margin: 0;
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 16px;
+  color: #fff;
+  font-size: 22px;
   font-weight: 400;
   text-align: center;
 }
@@ -195,8 +219,13 @@
   gap: 8px;
   align-items: flex-end;
 
-  @include tablet { align-items: center; }
-  @include mobile { align-items: center; }
+  @include tablet { align-items: center; width: 100%; }
+  @include mobile { align-items: stretch; width: 100%; }
+
+  li {
+    @include tablet { width: 100%; }
+    @include mobile { width: 100%; }
+  }
 
   li a {
     width: 216px;
