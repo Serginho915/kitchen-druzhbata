@@ -1,0 +1,261 @@
+@use "@/styles/mixins" as *;
+@use "@/styles/variables" as *;
+
+// ─── Outer footer wrapper ────────────────────────────────────────────────────
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+// ─── Main dark card ──────────────────────────────────────────────────────────
+// Figma desktop: display:flex; padding:32px 24px; justify-content:space-between;
+//               align-items:flex-end; border-radius:48px; background:#3B3A3A;
+.footerCard {
+  background: #3b3a3a;
+  border-radius: 48px;
+  padding: 32px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  align-self: stretch;
+
+  // Tablet: column layout, centered, gap 44px
+  @include tablet {
+    flex-direction: column;
+    align-items: center;
+    gap: 44px;
+    padding: 24px;
+  }
+
+  // Mobile: column layout, centered, gap 32px, border-radius 32px
+  @include mobile {
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    border-radius: 32px;
+    padding: 24px 8px 16px;
+  }
+}
+
+// ─── Column 1: Brand block ───────────────────────────────────────────────────
+.brandBlock{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-self: stretch;
+  //align-items: center;
+
+  @include tablet {
+    flex-direction: column;
+    //align-items: center;
+    gap: 47px;
+  }
+
+  @include mobile {
+    flex-direction: column;
+    //align-items: center;
+    gap: 32px;
+  }
+}
+
+.logoRow{
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.brandName{
+  color: #fff;
+  font-size: 38px;
+  font-weight: 700;
+  font-family: $font-primary;
+}
+
+.brand{
+  display: flex;
+  
+  gap: 40px;
+  //padding: 0 13px;
+}
+
+.brandText{
+  display: flex;
+  flex-direction: column;
+  gap: 29px;
+}
+
+.address {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 500;
+  font-family: $font-secondary;
+  font-style: normal;
+}
+.addressText{
+  width: 314px;
+  margin: 0;
+}
+.hours{
+  color: #fff;
+  font-size: 22px;
+  font-weight: 500;
+  font-family: $font-secondary;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// ─── Column 2: Social block ──────────────────────────────────────────────────
+.socialBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.socialLabel {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 16px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.socialIcons {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: $prim-yellow;
+  color: #fff;
+  font-size: 20px;
+  text-decoration: none;
+  transition: opacity 0.2s ease, transform 0.15s ease;
+
+  &:hover {
+    opacity: 0.85;
+    transform: scale(1.08);
+  }
+
+  &.facebook {
+    background: #1877f2;
+  }
+
+  &.instagram {
+    background: radial-gradient(
+      circle at 30% 107%,
+      #fdf497 0%,
+      #fd5949 45%,
+      #d6249f 60%,
+      #285aeb 90%
+    );
+  }
+
+  @include mobile {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+}
+
+// ─── Column 3: Nav links ─────────────────────────────────────────────────────
+.footerNav {
+  display: flex;
+  align-items: flex-end;
+
+  @include tablet {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @include mobile {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.navList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+
+  @include tablet { align-items: center; }
+  @include mobile { align-items: center; }
+
+  li a {
+    width: 216px;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: #fffcfc;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: $font-primary;
+    background: transparent;
+    border: 1px solid #FFFCFC;
+    border-radius: 48px;
+    padding: 20px;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    @include tablet { width: 100%; }
+    @include mobile { width: 100%; font-size: 20px; padding: 15px 8px; }
+  }
+}
+
+// ─── Bottom bar ───────────────────────────────────────────────────────────────
+.footerBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 0 4px;
+
+  @include mobile {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+.copyright {
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 14px;
+  font-style: normal;
+}
+
+.legalNav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+
+  a {
+    color: rgba(0, 0, 0, 0.45);
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    &:hover { color: rgba(0, 0, 0, 0.8); }
+  }
+
+  @include mobile { gap: 6px 16px; }
+}
