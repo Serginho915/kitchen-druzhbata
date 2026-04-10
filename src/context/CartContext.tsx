@@ -25,10 +25,9 @@ type CartState = CartItem[];
 type CartAction =
   | { type: "ADD_ITEM"; item: Omit<CartItem, "quantity"> }
   | { type: "REMOVE_ITEM"; id: number }
+  | { type: "DELETE_ITEM"; id: number }
   | { type: "CLEAR_CART" }
   | { type: "LOAD_CART"; items: CartItem[] };
-
-
 
 const cartReducer = (state: CartState, action: CartAction): CartState => {
   switch (action.type) {
@@ -53,6 +52,9 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
       return state.filter((i) => i.id !== action.id);
     }
 
+    case "DELETE_ITEM":
+      return state.filter((i) => i.id !== action.id);
+
     case "CLEAR_CART":
       return [];
 
@@ -64,8 +66,6 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
   }
 };
 
-
-
 const CART_KEY = "kitchen-cart";
 
 interface CartContextValue {
@@ -76,13 +76,12 @@ interface CartContextValue {
   toggleCart: () => void;
   addToCart: (dish: Omit<CartItem, "quantity">) => void;
   removeFromCart: (id: number) => void;
+  removeItemCompletely: (id: number) => void;
   clearCart: () => void;
   getItemQuantity: (id: number) => number;
 }
 
 const CartContext = createContext<CartContextValue | null>(null);
-
-
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [cartItems, dispatch] = useReducer(cartReducer, []);
@@ -109,6 +108,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const removeFromCart = useCallback((id: number) => {
     dispatch({ type: "REMOVE_ITEM", id });
+  }, []);
+
+  const removeItemCompletely = useCallback((id: number) => {
+    dispatch({ type: "DELETE_ITEM", id });
   }, []);
 
   const clearCart = useCallback(() => {
@@ -141,10 +144,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       toggleCart,
       addToCart,
       removeFromCart,
+      removeItemCompletely,
       clearCart,
       getItemQuantity,
     }),
-    [cartItems, cartCount, isCartOpen, toggleCart, addToCart, removeFromCart, clearCart, getItemQuantity]
+    [cartItems, cartCount, isCartOpen, toggleCart, addToCart, removeFromCart, removeItemCompletely, clearCart, getItemQuantity]
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

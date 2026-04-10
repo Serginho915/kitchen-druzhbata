@@ -8,12 +8,9 @@ import { IoClose } from "react-icons/io5";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 
 export const CartDrawer: React.FC = () => {
-  const { cartItems, cartCount, isCartOpen, setIsCartOpen, addToCart, removeFromCart } = useCart();
+  const { cartItems, isCartOpen, setIsCartOpen, addToCart, removeFromCart, removeItemCompletely } = useCart();
 
   const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-
-  if (!isCartOpen && typeof window !== "undefined") {
-  }
 
   return (
     <>
@@ -29,12 +26,18 @@ export const CartDrawer: React.FC = () => {
           {cartItems.length > 0 ? (
             cartItems.map((item) => (
               <div key={item.id} className={styles.cartItem}>
-                <div className={styles.itemImage}>
+                <div 
+                  className={styles.itemImage}
+                  onClick={() => removeItemCompletely(item.id)}
+                >
                   {item.image ? (
-                    <Image src={item.image} alt={item.title} fill />
+                    <Image src={item.image} alt={item.title} fill className={styles.img} />
                   ) : (
                     <div className={styles.placeholder} />
                   )}
+                  <div className={styles.deleteOverlay}>
+                    <IoClose size={24} color="#fff" />
+                  </div>
                 </div>
                 <div className={styles.itemInfo}>
                   <h4>{item.title}</h4>

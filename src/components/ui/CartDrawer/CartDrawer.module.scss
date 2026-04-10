@@ -111,10 +111,33 @@
   justify-content: center;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 
-  img {
-    object-fit: cover;
+  .img {
+    transition: filter 0.3s ease;
   }
+
+  &:hover {
+    .img {
+      filter: blur(2px);
+    }
+
+    .deleteOverlay {
+      opacity: 1;
+    }
+  }
+}
+
+.deleteOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
 }
 
 .itemInfo {
