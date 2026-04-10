@@ -147,20 +147,25 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    width: 49px;
+    height: 49px;
+    box-sizing: border-box;
+    flex-shrink: 0;
 
     @include mobile {
         border-radius: 12px;
+        width: 36px;
+        height: 36px;
     }
 }
 
 .icon {
-    width: 29px;
-    height: 29px;
+    width: 22px !important;
+    height: 22px !important;
 
     @include mobile {
-        width: 16px;
-        height: 16px;
+        width: 16px !important;
+        height: 16px !important;
     }
 }
 

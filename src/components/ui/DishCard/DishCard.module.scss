@@ -79,10 +79,10 @@
 }
 
 .description {
-  font-size: 12px;
-  line-height: 1.4;
-  color: #6c757d;
-  min-height: 50px;
+  font-size: 20px;
+  line-height: 1.2;
+  color: $prim-black;
+  //min-height: 50px;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;

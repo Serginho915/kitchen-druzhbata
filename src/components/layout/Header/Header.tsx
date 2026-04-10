@@ -17,7 +17,7 @@ export const Header = () => {
   const menuRef = useRef<HTMLDivElement>(null);
   const burgerRef = useRef<HTMLDivElement>(null);
 
-  const { cartCount } = useCart();
+  const { cartCount, toggleCart } = useCart();
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
@@ -87,13 +87,14 @@ export const Header = () => {
       </nav>
 
       <div className={styles.userBlock}>
-        <div className={`${styles.userItem} ${styles.bgUserBlock} ${styles.cartBlock}`}>
-          <Link href="/cart">
-            {cartCount > 0 && (
-              <span className={styles.cartBadge}>{cartCount > 99 ? "99+" : cartCount}</span>
-            )}
-            <Image src={cart} alt="Cart Icon" width={44} height={44} className={styles.icon} />
-          </Link>
+        <div 
+          className={`${styles.userItem} ${styles.bgUserBlock} ${styles.cartBlock}`}
+          onClick={toggleCart}
+        >
+          {cartCount > 0 && (
+            <span className={styles.cartBadge}>{cartCount > 99 ? "99+" : cartCount}</span>
+          )}
+          <Image src={cart} alt="Cart Icon" width={44} height={44} className={styles.icon} />
         </div>
 
         <div className={`${styles.phoneIcon} ${styles.bgUserBlock}`}>

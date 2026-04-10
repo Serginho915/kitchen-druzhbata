@@ -19,6 +19,9 @@ export const metadata: Metadata = {
   description: "Food ordering made easy",
 };
 
+import { CartProvider } from "@/context/CartContext";
+import { CartDrawer } from "@/components/ui/CartDrawer/CartDrawer";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -27,11 +30,14 @@ export default function RootLayout({
   return (
     <html lang="bg" className={`${comfortaa.variable} ${inter.variable}`}>
       <body>
-        <Header />
-        <main>
-          {children}
-        </main>
-        <Footer />
+        <CartProvider>
+          <Header />
+          <main>
+            {children}
+          </main>
+          <Footer />
+          <CartDrawer />
+        </CartProvider>
       </body>
     </html>
   );
