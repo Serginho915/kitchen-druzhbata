@@ -188,11 +188,11 @@
     cursor: pointer;
 
     @include tablet {
-        display: block;
+        display: flex;
     }
 
     @include mobile {
-        display: block;
+        display: flex;
     }
 }
 

@@ -4,11 +4,14 @@ import React, { useState, useRef, useEffect } from "react";
 import styles from "./CarouselInfo.module.scss";
 import { CarouselMockData } from "./CarouselMockData";
 import Image from "next/image";
+import { HiOutlineShoppingBag } from "react-icons/hi2";
+import { useCart } from "@/hooks/useCart";
 
 export const CarouselInfo = () => {
   const [currSlide, setCurrSlide] = useState(0);
   const slideRef = useRef<HTMLDivElement | null>(null);
   const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const { addToCart } = useCart();
 
   const carouselData = CarouselMockData;
 
@@ -35,6 +38,17 @@ export const CarouselInfo = () => {
 
     return () => observer.disconnect();
   }, []);
+
+  const addPromoToCart = () => {
+    const currentDeal = carouselData[currSlide];
+    addToCart({
+      id: currentDeal.content.id,
+      title: currentDeal.content.title,
+      weight: currentDeal.content.weight,
+      price: currentDeal.content.price,
+      image: currentDeal.content.image.src
+    });
+  };
 
   const dotWindowSize = 3;
   const dotSize = 12;
@@ -65,6 +79,10 @@ export const CarouselInfo = () => {
           </div>
         ))}
       </div>
+
+      <button className={styles.promoCartBtn} onClick={addPromoToCart}>
+        <HiOutlineShoppingBag size={24} />
+      </button>
 
       <div className={styles.buttons}>
         <div className={styles.dots}>
