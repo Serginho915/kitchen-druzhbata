@@ -94,11 +94,11 @@ export const Header = () => {
           {cartCount > 0 && (
             <span className={styles.cartBadge}>{cartCount > 99 ? "99+" : cartCount}</span>
           )}
-          <Image src={cart} alt="Cart Icon" width={44} height={44} className={styles.icon} />
+          <Image src={cart} alt="Cart Icon" width={64} height={64} className={styles.icon} />
         </div>
 
         <div className={`${styles.phoneIcon} ${styles.bgUserBlock}`}>
-          <Image src={phone} alt="Phone Icon" width={44} height={44} className={styles.icon} />
+          <Image src={phone} alt="Phone Icon" width={64} height={64} className={styles.icon} />
         </div>
 
         <div
@@ -106,7 +106,7 @@ export const Header = () => {
           className={`${styles.burgerIcon} ${styles.bgUserBlock} ${isMenuOpen ? styles.burgerActive : ""}`}
           onClick={toggleMenu}
         >
-          <Image src={burger} alt="Burger Menu" width={44} height={44} className={styles.icon} />
+          <Image src={burger} alt="Burger Menu" width={64} height={64} className={styles.icon} />
         </div>
       </div>
 
