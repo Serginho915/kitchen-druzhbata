@@ -40,6 +40,7 @@ export const Menu: React.FC<MenuProps> = ({ data }) => {
               />
             </div>
             <h2 className={styles.title}>{category.title}</h2>
+            <div className={styles.arrow}></div>
           </div>
 
           <div

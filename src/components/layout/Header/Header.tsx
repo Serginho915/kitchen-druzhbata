@@ -65,7 +65,13 @@ export const Header = () => {
     <header className={`${styles.header} ${!isVisible ? styles.headerHidden : ""}`}>
       <div className={styles.logoBlock}>
         <Link href="/">
-          <Image src={logo} alt="Kitchen Druzhbata Logo" priority />
+          <Image
+           src={logo} 
+           alt="Kitchen Druzhbata Logo"  
+           className={styles.logo} 
+           width={80}
+           height={80}
+           />
         </Link>
       </div>
 
