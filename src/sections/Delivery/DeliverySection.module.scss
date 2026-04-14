@@ -130,8 +130,8 @@
 
 .orderBtn {
   display: flex;
-  max-width: 428px;
-  width: 100%;
+  width: 428px;
+  //width: 100%;
   padding: 16px 24px;
   justify-content: center;
   align-items: center;
@@ -153,7 +153,14 @@
     text-decoration: none;
     color: $text-green;
   }
+
+  @include tablet {
+    //width: 100%;
+    font-size: 20px;
+    padding: 12px 20px;
+  }
   @include mobile {
+    //width: 100%;
     font-size: 20px;
     padding: 12px 20px;
   }

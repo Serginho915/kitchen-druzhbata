@@ -17,8 +17,8 @@ export const Footer = () => {
             <Image
               src={logo}
               alt="Кухня на Дружбата"
-              width={64}
-              height={64}
+              width={80}
+              height={80}
               className={styles.logo}
             />
             <span className={styles.brandName}>
