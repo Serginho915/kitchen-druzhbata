@@ -5,6 +5,7 @@ import Image from "next/image";
 import deliveryImg from "@/assets/images/deliveryImg.jpg";
 import { DISTRICTS } from "./DeliveryDistrictData";
 import { Button } from "@/components/ui/Button/Button";
+import Link from "next/link";
 
 export const DeliverySection = () => {
   return (
@@ -38,7 +39,9 @@ export const DeliverySection = () => {
         </div>
       </div>
       <div className={styles.btnBlock}>
-        <Button text="Поръчай" type="button" className={styles.orderBtn} />
+        <Link href="/checkout" className={styles.orderLink}>
+          <Button text="Поръчай" type="button" className={styles.orderBtn} />
+        </Link>
       </div>
     </section>
   );

@@ -124,6 +124,10 @@
   align-items: center;
 }
 
+.orderLink {
+  text-decoration: none;
+}
+
 .orderBtn {
   display: flex;
   max-width: 428px;
@@ -145,6 +149,10 @@
     background: darken($bg-green, 10%);
   }
 
+  a{
+    text-decoration: none;
+    color: $text-green;
+  }
   @include mobile {
     font-size: 20px;
     padding: 12px 20px;

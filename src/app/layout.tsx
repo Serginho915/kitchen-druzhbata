@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
 import { Comfortaa, Inter } from "next/font/google";
 import { Header } from "@/components/layout/Header/Header";
-import { Footer } from "@/components/layout/Footer/Footer";
 import "@/styles/globals.scss";
 
 const comfortaa = Comfortaa({
   variable: "--font-comfortaa",
-  subsets: ["cyrillic"],
+  subsets: ["latin", "cyrillic"],
 });
 
 const inter = Inter({
   variable: "--font-inter",
-  subsets: ["latin"],
+  subsets: ["latin", "cyrillic"],
 });
 
 export const metadata: Metadata = {
@@ -31,12 +30,13 @@ export default function RootLayout({
     <html lang="bg" className={`${comfortaa.variable} ${inter.variable}`}>
       <body>
         <CartProvider>
-          <Header />
-          <main>
-            {children}
-          </main>
-          <Footer />
-          <CartDrawer />
+          <div className="layoutWrapper">
+            <Header />
+            <main>
+              {children}
+            </main>
+            <CartDrawer />
+          </div>
         </CartProvider>
       </body>
     </html>

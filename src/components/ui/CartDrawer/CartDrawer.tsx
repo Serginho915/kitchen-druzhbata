@@ -96,7 +96,7 @@ export const CartDrawer: React.FC = () => {
           </div>
 
           <Link
-            href="/Checkout"
+            href="/checkout"
             className={styles.orderLink}
             onClick={() => setIsCartOpen(false)}
           >
