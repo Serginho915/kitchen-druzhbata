@@ -8,6 +8,7 @@ import phone from "@/assets/images/Vectors/phone.svg";
 import burger from "@/assets/images/Vectors/burger.svg";
 import Link from "next/link";
 import logo from "@/assets/images/logo.png";
+import navigate from '@/assets/images/Vectors/navigate.svg'
 import { useCart } from "@/hooks/useCart";
 
 export const Header = () => {
@@ -132,6 +133,31 @@ export const Header = () => {
               <Link href="/subscriptions">Подписки</Link>
             </li>
           </ul>
+          <div className={styles.mobileInfo}>
+              <div>
+              <Link
+                href={'phone:+359 8899999'}
+              >
+                <Image
+                src={phone}
+                alt="call"
+                >
+                </Image>
+              </Link>
+            </div>
+            <div className={styles.mobileInfo}>
+              <Link
+                href={'https://maps.app.goo.gl/4W58KxWc4GTXwJPRA'}
+              >
+                <Image
+                src={navigate}
+                alt="navigate"
+                >
+                </Image>
+              </Link>
+
+            </div>
+          </div>
         </div>
       )}
     </header>

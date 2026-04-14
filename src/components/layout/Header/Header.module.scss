@@ -2,260 +2,263 @@
 @use "@/styles/variables.scss" as *;
 
 .header {
-    padding: 0 60px;
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    box-sizing: border-box;
-    z-index: 1001;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition:
-        transform 0.4s ease-in-out,
-        opacity 0.4s ease-in-out;
-    background: transparent;
-    max-width: 1440px;
-    // Needed so the absolute-positioned mobileMenu is anchored to the header
-    isolation: isolate;
+  padding: 0 60px;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 1001;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition:
+    transform 0.4s ease-in-out,
+    opacity 0.4s ease-in-out;
+  background: transparent;
+  max-width: 1440px;
+  isolation: isolate;
 
-    &.headerHidden {
-        transform: translateX(-50%) translateY(-101%);
-        opacity: 0;
-        pointer-events: none;
-    }
+  &.headerHidden {
+    transform: translateX(-50%) translateY(-101%);
+    opacity: 0;
+    pointer-events: none;
+  }
 
-    @include desktop-sm {
-        padding: 0 40px;
-        top: 24px;
-    }
+  @include desktop-sm {
+    padding: 0 40px;
+    top: 24px;
+  }
 
-    @include tablet {
-        padding: 0 40px;
-        top: 22px;
-    }
+  @include tablet {
+    padding: 0 40px;
+    top: 22px;
+  }
 
-    @include mobile {
-        padding: 0 24px;
-        top: 22px;
-    }
+  @include mobile {
+    padding: 0 24px;
+    top: 22px;
+  }
 }
 
 .logoBlock {
+  display: flex;
+  align-items: center;
+
+  a {
     display: flex;
     align-items: center;
+    height: 80px;
 
-    a {
-        display: flex;
-        align-items: center;
-        height: 80px;
-
-        @include mobile {
-            height: 56px;
-        }
+    @include mobile {
+      height: 56px;
     }
+  }
 }
 
 .logoBlock img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    display: block;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  display: block;
 
-    @include mobile {
-        width: 56px;
-        height: 56px;
-    }
+  @include mobile {
+    width: 56px;
+    height: 56px;
+  }
 }
 
 .navBlock {
-    @include tablet {
-        display: none;
-    }
+  @include tablet {
+    display: none;
+  }
 
-    @include mobile {
-        display: none;
-    }
+  @include mobile {
+    display: none;
+  }
 }
 
 .navList {
-    display: flex;
-    padding: 20px 0;
-    border-radius: 64px;
-    background: #fff;
-    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25);
-    list-style: none;
-    gap: 8px;
-
+  display: flex;
+  padding: 20px 0;
+  border-radius: 64px;
+  background: #fff;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25);
+  list-style: none;
+  gap: 8px;
 }
 
 .navItem a {
-    text-decoration: none;
-    color: $prim-black;
-    font-size: 20px;
-    font-weight: 500;
-    padding: 20px 16px;
-    
+  text-decoration: none;
+  color: $prim-black;
+  font-size: 20px;
+  font-weight: 500;
+  padding: 20px 16px;
 }
 
 .userBlock {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 
-    @include mobile {
-        gap: 8px;
-    }
+  @include mobile {
+    gap: 8px;
+  }
 }
 
 .cartBlock {
-    position: relative;
+  position: relative;
 }
 
 .cartBadge {
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    background: #ff8a00; // Sample orange
-    color: #fff;
-    font-size: 12px;
-    font-weight: 700;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid #fff;
-    z-index: 2;
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #ff8a00; // Sample orange
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #fff;
+  z-index: 2;
 
-    @include mobile {
-        width: 18px;
-        height: 18px;
-        font-size: 10px;
-        top: -6px;
-        right: -6px;
-    }
+  @include mobile {
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+    top: -6px;
+    right: -6px;
+  }
 }
 
 .bgUserBlock {
-    border-radius: 20px;
-    border: 2px solid #c6c6c6;
-    background: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 64px;
-    height: 64px;
-    box-sizing: border-box;
-    flex-shrink: 0;
+  border-radius: 20px;
+  border: 2px solid #c6c6c6;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 64px;
+  height: 64px;
+  box-sizing: border-box;
+  flex-shrink: 0;
 
-    @include mobile {
-        border-radius: 12px;
-        width: 44px;
-        height: 44px;
-    }
+  @include mobile {
+    border-radius: 12px;
+    width: 44px;
+    height: 44px;
+  }
 }
 
 .icon {
-    width: 38px ;
-    height: 38px ;
+  width: 38px;
+  height: 38px;
 
-    @include mobile {
-        width: 24px ;
-        height: 24px ;
-    }
+  @include mobile {
+    width: 24px;
+    height: 24px;
+  }
 }
 
 .userItem {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .phoneIcon {
-    @include tablet {
-        display: none;
-    }
+  @include tablet {
+    display: none;
+  }
 
-    @include mobile {
-        display: none;
-    }
+  @include mobile {
+    display: none;
+  }
 }
 
 .burgerIcon {
-    display: none;
-    cursor: pointer;
+  display: none;
+  cursor: pointer;
 
-    @include tablet {
-        display: flex;
-    }
+  @include tablet {
+    display: flex;
+  }
 
-    @include mobile {
-        display: flex;
-    }
+  @include mobile {
+    display: flex;
+  }
 }
 
 .mobileMenu {
-    position: absolute;
-    top: calc(100% + 12px);
-    left: 24px;
-    right: 24px;
-    background: #ffffff;
-    z-index: 1000;
-    padding: 20px 16px;
-    display: flex;
-    border-radius: 20px;
-    border: 2px solid #c6c6c6;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-    animation: dropIn 0.2s ease;
+  position: absolute;
+  top: 0;
+  left: 24px;
+  right: 24px;
+  background: #ffffff;
+  z-index: 1000;
+  padding: 20px 16px;
+  display: flex;
+  border-radius: 20px;
+  border: 2px solid #c6c6c6;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  animation: dropIn 0.2s ease;
 
-    @include mobile {
-        left: 16px;
-        right: 16px;
-    }
+  @include mobile {
+    left: 16px;
+    right: 16px;
+  }
 }
 
 @keyframes dropIn {
-    from {
-        opacity: 0;
-        transform: translateY(-8px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .mobileNavList {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    align-items: stretch;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: stretch;
+  width: 100%;
+  background: #fff;
+
+  .navItem {
     width: 100%;
+    text-align: center;
+    padding: 12px 20px;
+    border-radius: 48px;
+    background: #fff;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
 
-    .navItem {
-        width: 100%;
-        text-align: center;
+    a {
+      display: block;
+      padding: 14px 20px;
+      font-family: $font-primary;
+      font-size: 20px;
+      font-weight: 500;
+      color: $prim-black;
+      text-decoration: none;
+      border-radius: 12px;
+      transition: background 0.15s ease;
 
-        a {
-            display: block;
-            padding: 14px 20px;
-            font-size: 20px;
-            font-weight: 500;
-            color: $prim-black;
-            text-decoration: none;
-            border-radius: 12px;
-            transition: background 0.15s ease;
-
-            &:hover {
-                background: #f5f5f5;
-            }
-        }
+      &:hover {
+        background: #f5f5f5;
+      }
     }
+  }
 }
 
 .burgerActive {
-    background: #f0f0f0;
+  background: #f0f0f0;
 }
