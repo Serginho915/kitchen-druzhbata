@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kitchen Druzhbata
 
-## Getting Started
+Web application with two parts:
 
-First, run the development server:
+- frontend: Next.js (React, TypeScript, Sass)
+- backend: Django REST Framework (basic initialization)
+
+## Project Structure
+
+- [frontend](frontend) - client application
+- [backend](backend) - server application (DRF)
+- [docker-compose.dev.yml](docker-compose.dev.yml) - Docker setup for development
+- [docker-compose.prod.yml](docker-compose.prod.yml) - Docker setup for production
+
+## Run with Docker
+
+Requirements:
+
+- Docker Desktop (or Docker Engine + Compose plugin)
+
+Start development environment (frontend + backend):
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+docker compose -f docker-compose.dev.yml up --build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Start production environment (frontend + backend):
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+docker compose -f docker-compose.prod.yml up --build -d
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Stop containers:
 
-## Learn More
+```bash
+docker compose -f docker-compose.dev.yml down
+docker compose -f docker-compose.prod.yml down
+```
 
-To learn more about Next.js, take a look at the following resources:
+Available services:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- frontend: http://localhost:3000
+- backend: http://localhost:8000
+- backend admin: http://localhost:8000/admin
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Local Development Without Docker
 
-## Deploy on Vercel
+### Frontend (Next.js)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Requirements:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Node.js 20+
+- npm
+
+Commands:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Frontend will be available at http://localhost:3000.
+
+### Backend (Django DRF)
+
+Requirements:
+
+- Python 3.12+
+- pip
+
+Commands (Windows PowerShell):
+
+```bash
+cd backend
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
+```
+
+Backend will be available at http://localhost:8000.
+
+## Before Production
+
+- Replace `SECRET_KEY` in [docker-compose.prod.yml](docker-compose.prod.yml)
+- Restrict `ALLOWED_HOSTS` to your real domain/host
