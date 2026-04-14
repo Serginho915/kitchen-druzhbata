@@ -1,10 +1,29 @@
 services:
+  backend:
+    container_name: kitchen-backend-dev
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      target: dev
+    ports:
+      - "8000:8000"
+    environment:
+      DEBUG: "1"
+      SECRET_KEY: dev-secret-key-change-me
+      ALLOWED_HOSTS: localhost,127.0.0.1,backend
+    volumes:
+      - ./backend:/app
+    stdin_open: true
+    tty: true
+
   frontend:
     container_name: kitchen-frontend-dev
     build:
       context: ./frontend
       dockerfile: Dockerfile
       target: dev
+    depends_on:
+      - backend
     ports:
       - "3000:3000"
     environment:

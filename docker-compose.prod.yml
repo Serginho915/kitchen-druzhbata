@@ -1,10 +1,26 @@
 services:
+  backend:
+    container_name: kitchen-backend-prod
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      target: prod
+    ports:
+      - "8000:8000"
+    environment:
+      DEBUG: "0"
+      SECRET_KEY: prod-secret-key-change-me
+      ALLOWED_HOSTS: localhost,127.0.0.1,backend
+    restart: unless-stopped
+
   frontend:
     container_name: kitchen-frontend-prod
     build:
       context: ./frontend
       dockerfile: Dockerfile
       target: runner
+    depends_on:
+      - backend
     ports:
       - "3000:3000"
     environment:
