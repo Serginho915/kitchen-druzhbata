@@ -1,5 +1,5 @@
-@use "@/styles/mixins" as *;
-@use "@/styles/variables" as *;
+@use "@/styles/mixins.scss" as *;
+@use "@/styles/variables.scss" as *;
 
 .card {
   border-radius: 24px 24px 24px 0;
