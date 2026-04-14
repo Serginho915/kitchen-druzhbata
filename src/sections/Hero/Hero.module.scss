@@ -129,7 +129,7 @@
   flex-direction: column;
   gap: 8px;
   padding-right: 16px;
-  width: 100%;
+  flex: 1;
 }
 
 .infoItem {
@@ -177,18 +177,17 @@
   }
 }
 .hotSales {
-  //width: 586px;
   position: relative;
   border-radius: 32px;
   overflow: hidden;
-  min-width: 586px;
+  flex: 0 0 586px;
 
   @include tablet {
-    min-width: 0;
+    flex: 1 1 auto;
   }
 
   @include mobile {
-    min-width: 0;
+    flex: 1 1 auto;
   }
 
   img {

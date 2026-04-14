@@ -40,12 +40,10 @@
 
     @include tablet {
       min-height: 256px;
-      ;
     }
 
     @include mobile {
       min-height: 256px;
-      ;
     }
   }
 }
