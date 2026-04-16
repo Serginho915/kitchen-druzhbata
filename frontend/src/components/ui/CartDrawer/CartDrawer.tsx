@@ -8,7 +8,11 @@ import { IoClose } from "react-icons/io5";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import Link from "next/link";
 
-export const CartDrawer: React.FC = () => {
+interface CartDrawerProps {
+  isEmbedded?: boolean;
+}
+
+export const CartDrawer: React.FC<CartDrawerProps> = ({ isEmbedded = false }) => {
   const {
     cartItems,
     isCartOpen,
@@ -25,16 +29,18 @@ export const CartDrawer: React.FC = () => {
 
   return (
     <>
-      <div className={`${styles.drawer} ${isCartOpen ? styles.open : ""}`}>
-        <div className={styles.header}>
-          <h2 className={styles.headTitle}>Вашата количка</h2>
-          <button
-            className={styles.closeBtn}
-            onClick={() => setIsCartOpen(false)}
-          >
-            <IoClose size={24} />
-          </button>
-        </div>
+        <div className={`${isEmbedded ? styles.embedded : styles.drawer} ${isCartOpen || isEmbedded ? styles.open : ""}`}>
+        {!isEmbedded && (
+          <div className={styles.header}>
+            <h2 className={styles.headTitle}>Вашата количка</h2>
+            <button
+              className={styles.closeBtn}
+              onClick={() => setIsCartOpen(false)}
+            >
+              <IoClose size={24} />
+            </button>
+          </div>
+        )}
 
         <div className={styles.itemsList}>
           {cartItems.length > 0 ? (
@@ -95,15 +101,21 @@ export const CartDrawer: React.FC = () => {
             <span className={styles.value}>€ {totalPrice.toFixed(2)}</span>
           </div>
 
-          <Link
-            href="/checkout"
-            className={styles.orderLink}
-            onClick={() => setIsCartOpen(false)}
-          >
-            <button className={styles.orderBtn}>
+          {isEmbedded ? (
+            <button type="submit" className={styles.orderBtn}>
               Поръчай <HiOutlineShoppingBag size={28} />
             </button>
-          </Link>
+          ) : (
+            <Link
+              href="/checkout"
+              className={styles.orderLink}
+              onClick={() => setIsCartOpen(false)}
+            >
+              <button className={styles.orderBtn}>
+                Поръчай <HiOutlineShoppingBag size={28} />
+              </button>
+            </Link>
+          )}
         </div>
       </div>
     </>
