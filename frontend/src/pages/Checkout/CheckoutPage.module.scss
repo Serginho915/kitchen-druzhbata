@@ -84,6 +84,11 @@
   @include tablet {
     grid-template-columns: 1fr;
   }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
 }
 
 .leftColumn {
@@ -248,6 +253,10 @@
   top: 100px;
 
   @include tablet {
+    position: static;
+  }
+
+  @include mobile {
     position: static;
   }
 }
