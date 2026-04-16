@@ -10,6 +10,7 @@ import Link from "next/link";
 import logo from "@/assets/images/logo.png";
 import navigate from "@/assets/images/Vectors/navigate.svg";
 import { useCart } from "@/hooks/useCart";
+import { IoClose } from "react-icons/io5";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -141,6 +142,13 @@ export const Header = () => {
 
       {isMenuOpen && (
         <div ref={menuRef} className={styles.mobileMenu}>
+          <button
+            className={styles.closeButton}
+            onClick={() => setIsMenuOpen(false)}
+            aria-label="Close menu"
+          >
+            <IoClose size={32} />
+          </button>
           <ul className={styles.mobileNavList}>
             <li className={styles.navItem} onClick={() => setIsMenuOpen(false)}>
               <Link href="/#menu">Меню</Link>
@@ -156,25 +164,30 @@ export const Header = () => {
             </li>
           </ul>
 
-          <ul className={styles.mobileInfo}>
-            <li className={styles.mobileItem}>
-              <div className={styles.linkWrapper}>
-                <p className={styles.mobileInfoText}>Контакт</p>
-                <Link href={"phone:+359 8899999"}>
-                  <Image src={phone} alt="call"></Image>
+          <div className={styles.mobileInfo}>
+            <div className={styles.mobileInfoBlock}>
+              <p className={styles.mobileInfoText}>Связаться</p>
+              <div className={styles.iconCircle}>
+                <Link href={"tel:+359 8899999"}>
+                  <Image src={phone} alt="call" width={24} height={24}></Image>
                 </Link>
               </div>
-            </li>
+            </div>
 
-            <li className={styles.mobileItem}>
-              <p className={styles.mobileInfoText}>Контакт</p>
-              <div className={styles.linkWrapper}>
+            <div className={styles.mobileInfoBlock}>
+              <p className={styles.mobileInfoText}>Visit Us</p>
+              <div className={styles.iconCircle}>
                 <Link href={"https://maps.app.goo.gl/4W58KxWc4GTXwJPRA"}>
-                  <Image src={navigate} alt="navigate"></Image>
+                  <Image src={navigate} alt="navigate" width={24} height={24}></Image>
                 </Link>
               </div>
-            </li>
-          </ul>
+            </div>
+          </div>
+
+          <div className={styles.mobileFooter}>
+            <p>Отворени сме Пон-Пет:</p>
+            <p>10:00 - 21:00</p>
+          </div>
         </div>
       )}
     </header>
