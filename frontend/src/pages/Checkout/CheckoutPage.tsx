@@ -7,8 +7,8 @@ import { Footer } from "@/components/layout/Footer/Footer";
 import { Header } from "@/components/layout/Header/Header";
 import Link from "next/link";
 import Image from "next/image";
-import arrow from "@/assets/images/Vectors/arrow.svg";
-import truck from "@/assets/images/Vectors/deliveryIcon.svg";
+import bike from "@/assets/images/Vectors/bike.svg";
+import { DISTRICTS } from "@/data/districts";
 
 export default function CheckoutPage() {
   const [deliveryMethod, setDeliveryMethod] = useState("delivery"); // delivery | pickup
@@ -26,13 +26,7 @@ export default function CheckoutPage() {
         <div className={styles.topNavigation}>
           <Link href="/#menu" className={styles.backLink}>
             <div className={styles.arrowCircle}>
-              <Image
-                src={arrow}
-                alt="back"
-                width={20}
-                height={20}
-                className={styles.backArrow}
-              />
+              <div className={styles.backArrow}></div>
             </div>
             Продолжить покупки
           </Link>
@@ -41,11 +35,11 @@ export default function CheckoutPage() {
         <h1 className={styles.mainTitle}>
           Направи поръчка
           <Image
-            src={truck}
-            alt="truck"
-            width={48}
-            height={48}
-            className={styles.truckIcon}
+            src={bike}
+            alt="bike"
+            width={28}
+            height={28}
+            className={styles.bikeIcon}
           />
         </h1>
 
@@ -85,7 +79,10 @@ export default function CheckoutPage() {
                   </div>
                 </div>
               </div>
-              <div className={styles.deliveryTabs}>
+              
+            </section>
+
+            <div className={styles.deliveryTabs}>
               <button
                 type="button"
                 className={`${styles.tab} ${deliveryMethod === "delivery" ? styles.active : ""}`}
@@ -101,9 +98,6 @@ export default function CheckoutPage() {
                 Вземи на място
               </button>
             </div>
-            </section>
-
-            
 
             {/* Address Details */}
             {deliveryMethod === "delivery" && (
@@ -120,8 +114,11 @@ export default function CheckoutPage() {
                       <option value="" disabled>
                         Изберете...
                       </option>
-                      <option value="druzhba1">Дружба 1</option>
-                      <option value="druzhba2">Дружба 2</option>
+                      {DISTRICTS.map((district) => (
+                        <option key={district.id} value={district.name}>
+                          {district.name}
+                        </option>
+                      ))}
                     </select>
                   </div>
                   <div className={styles.field}>

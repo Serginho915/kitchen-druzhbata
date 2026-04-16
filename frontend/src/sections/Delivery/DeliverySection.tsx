@@ -3,7 +3,7 @@ import styles from "./DeliverySection.module.scss";
 import { SectionTitle } from "@/components/ui/SectionTitle/SectionTitle";
 import Image from "next/image";
 import deliveryImg from "@/assets/images/deliveryImg.jpg";
-import { DISTRICTS } from "./DeliveryDistrictData";
+import { DISTRICTS } from "@/data/districts";
 import { Button } from "@/components/ui/Button/Button";
 import Link from "next/link";
 
