@@ -8,6 +8,7 @@ import infoSoup from "@/assets/images/Vectors/infoSoup.svg";
 
 import { CarouselInfo } from "@/components/ui/CarouselInfo/CarouselInfo";
 import { TouristCTA } from "@/components/ui/TouristCTA/TouristCTA";
+import { InfoCard } from "@/components/ui/InfoCard/InfoCard";
 
 export const Hero = () => {
   return (
@@ -29,44 +30,21 @@ export const Hero = () => {
       </div>
       <div className={styles.infoSection}>
         <ul className={styles.infoList}>
-          <li className={styles.infoItem}>
-            <div className={styles.imgWrapper}>
-              <Image
-                src={infoSoup}
-                alt="Info Icon"
-                width={28}
-                height={28}
-                className={styles.icon}
-              />
-            </div>
-            <span className={styles.infoText}>
-              Истинска храна, приготвена днес
-            </span>
-          </li>
-          <li className={styles.infoItem}>
-            <div className={styles.imgWrapper}>
-              <Image
-                src={deliveryIcon}
-                alt="Delivery Icon"
-                width={28}
-                height={28}
-                className={styles.icon}
-              />
-            </div>
-            <span className={styles.infoText}>Безплатна доставка в София</span>
-          </li>
-          <li className={styles.infoItem}>
-            <div className={styles.imgWrapper}>
-              <Image
-                src={calendarInfo}
-                alt="Calendar Icon"
-                width={28}
-                height={28}
-                className={styles.icon}
-              />
-            </div>
-            <span className={styles.infoText}>Всеки делник (Пон-Пет)</span>
-          </li>
+          <InfoCard
+            icon={infoSoup}
+            alt="Info Icon"
+            text="Истинска храна, приготвена днес"
+          />
+          <InfoCard
+            icon={deliveryIcon}
+            alt="Delivery Icon"
+            text="Безплатна доставка в София"
+          />
+          <InfoCard
+            icon={calendarInfo}
+            alt="Calendar Icon"
+            text="Всеки делник (Пон-Пет)"
+          />
         </ul>
         <div className={styles.hotSales}>
           <CarouselInfo />

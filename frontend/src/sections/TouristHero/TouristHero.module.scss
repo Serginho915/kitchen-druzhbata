@@ -1,0 +1,93 @@
+@use "@/styles/mixins.scss" as *;
+@use "@/styles/variables.scss" as *;
+
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 100svh;
+  background: $bg-color;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+
+
+.bgPath {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  width: 95%;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  opacity: 0.8;
+
+  @include tablet {
+    width: 100%;
+  }
+
+  @include mobile {
+    display: none;
+  }
+}
+
+// ─── Main Content ─────────────────────────────────────────────────────────
+
+.content {
+  position: relative;
+  z-index: 1;
+
+  
+  padding-top: 160px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 48px;
+  padding-right: 60px;
+  padding-left: 60px;
+  padding-bottom: 80px;
+
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+
+  @include desktop-sm {
+    padding-right: 40px;
+    padding-left: 40px;
+    padding-top: 140px;
+    gap: 32px;
+  }
+
+  @include tablet {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-right: 32px;
+    padding-left: 32px;
+    padding-top: 130px;
+    gap: 48px;
+  }
+
+  @include mobile {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 110px;
+    gap: 36px;
+  }
+}
+
+
+.lasagne{
+  position:absolute;
+  bottom: 200px;
+  left: 90px;
+  border-radius: 27px;
+}

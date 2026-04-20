@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Comfortaa, Inter } from "next/font/google";
-import { Header } from "@/components/layout/Header/Header";
 import "@/styles/globals.scss";
+import { CartProvider } from "@/context/CartContext";
+import { CartDrawer } from "@/components/ui/CartDrawer/CartDrawer";
 
 const comfortaa = Comfortaa({
   variable: "--font-comfortaa",
@@ -18,9 +19,6 @@ export const metadata: Metadata = {
   description: "Food ordering made easy",
 };
 
-import { CartProvider } from "@/context/CartContext";
-import { CartDrawer } from "@/components/ui/CartDrawer/CartDrawer";
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -30,13 +28,8 @@ export default function RootLayout({
     <html lang="bg" className={`${comfortaa.variable} ${inter.variable}`}>
       <body>
         <CartProvider>
-          <div className="layoutWrapper">
-            <Header />
-            <main>
-              {children}
-            </main>
-            <CartDrawer />
-          </div>
+          {children}
+          <CartDrawer />
         </CartProvider>
       </body>
     </html>

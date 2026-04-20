@@ -1,0 +1,119 @@
+@use "@/styles/mixins.scss" as *;
+@use "@/styles/variables.scss" as *;
+
+.header {
+  padding: 0 60px;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1440px;
+  box-sizing: border-box;
+  z-index: 1001;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  transition:
+    transform 0.4s ease-in-out,
+    opacity 0.4s ease-in-out;
+  isolation: isolate;
+
+  &.headerHidden {
+    transform: translateX(-50%) translateY(-101%);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  @include desktop-sm {
+    padding: 0 40px;
+    top: 24px;
+  }
+
+  @include tablet {
+    padding: 0 40px;
+    top: 22px;
+  }
+
+  @include mobile {
+    padding: 0 24px;
+    top: 22px;
+  }
+}
+
+.logoBlock {
+  display: flex;
+  align-items: center;
+
+  a {
+    display: flex;
+    align-items: center;
+    height: 80px;
+
+    @include mobile {
+      height: 56px;
+    }
+  }
+}
+
+.logo {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+
+  @include mobile {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  @include mobile {
+    gap: 8px;
+  }
+}
+
+.actionBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 20px;
+  border: 2px solid #c6c6c6;
+  background: #fff;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+  text-decoration: none;
+
+  &:hover {
+    border-color: $prim-yellow;
+    transform: translateY(-2px);
+  }
+
+  @include mobile {
+    border-radius: 12px;
+    width: 44px;
+    height: 44px;
+  }
+}
+
+.icon {
+  width: 28px;
+  height: 28px;
+
+  @include mobile {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.phoneBtn .icon {
+  filter: invert(68%) sepia(65%) saturate(700%) hue-rotate(5deg) brightness(100%) contrast(95%);
+}

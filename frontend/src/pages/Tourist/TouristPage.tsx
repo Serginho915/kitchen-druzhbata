@@ -1,11 +1,12 @@
+"use client";
+
 import React from "react";
-import styles from "./TouristPage.module.scss";
+import { TouristHero } from "@/sections/TouristHero/TouristHero";
 
 export default function TouristPage() {
   return (
-    <div className={styles.page}>
-      <h1>Tourist Page</h1>
-      {/* Sections will be added here */}
-    </div>
+    <main>
+      <TouristHero />
+    </main>
   );
 }

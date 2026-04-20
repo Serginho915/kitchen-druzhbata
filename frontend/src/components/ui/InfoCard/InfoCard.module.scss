@@ -1,0 +1,50 @@
+@use "@/styles/mixins.scss" as *;
+@use "@/styles/variables.scss" as *;
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  border-radius: 48px;
+  background: #fff;
+  box-shadow: 0 1px 4px 0 rgba(240, 170, 24, 0.5);
+  padding: 8px 16px;
+
+  @include mobile {
+    gap: 16px;
+    padding: 8px 16px 8px 8px;
+  }
+}
+
+.imgWrapper {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 44px;
+  background: $prim-black;
+  flex-shrink: 0;
+
+  @include mobile {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+.icon {
+  @include mobile {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+.infoText {
+  font-size: 18px;
+  font-weight: 500;
+  color: $prim-black;
+
+  @include mobile {
+    font-size: 16px;
+  }
+}
