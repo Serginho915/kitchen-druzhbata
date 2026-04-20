@@ -14,11 +14,6 @@
     padding: 0;
     background-image: none;
   }
-
-  @include mobile {
-    padding: 0;
-    background-image: none;
-  }
 }
 
 .category {
@@ -44,8 +39,6 @@
   transition: opacity 0.2s ease;
   padding: 12px 0;
   position: relative;
-
-
 
   &:hover {
     opacity: 0.8;
@@ -155,12 +148,10 @@
 
   @include tablet {
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
   }
 
   @include mobile {
     grid-template-columns: 1fr;
-    gap: 16px;
   }
 }
 
@@ -190,9 +181,7 @@
     }
 
     @include mobile {
-      display: grid;
       grid-template-columns: 1fr;
-      flex-wrap: wrap;
     }
   }
 }

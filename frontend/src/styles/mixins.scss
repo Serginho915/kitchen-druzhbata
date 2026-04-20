@@ -9,7 +9,7 @@
 
 // 1199 - 768
 @mixin tablet {
-  @media (min-width: $tablet) and (max-width: ($desktop-small - 1)) {
+  @media (max-width: ($desktop-small - 1)) {
     @content;
   }
 }
