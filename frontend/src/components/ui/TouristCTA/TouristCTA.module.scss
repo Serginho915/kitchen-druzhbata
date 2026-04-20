@@ -1,0 +1,114 @@
+@use "@/styles/mixins.scss" as *;
+@use "@/styles/variables.scss" as *;
+
+.ctaWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 600px; // Matching the bubble width
+  z-index: 10;
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.1));
+
+  @include mobile {
+    max-width: 100%;
+  }
+}
+
+
+.bubble {
+  position: relative;
+  padding: 32px 24px 16px 24px; // More compact padding
+  width: 100%;
+  max-width: 540px; // Slightly narrower
+  min-height: 110px;
+  height: auto;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  overflow: visible;
+
+  @include mobile {
+    padding: 30px 20px 0px 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    min-height: auto;
+  }
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+
+  @include mobile {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}
+
+.text {
+  font-size: 16px; // Reduced font size
+  font-weight: 400;
+  color: #333;
+  margin: 0;
+  font-family: $font-secondary;
+  line-height: 1.4;
+  flex: 1;
+
+  strong {
+    font-weight: 700;
+  }
+
+  @include mobile {
+    font-size: 16px;
+    width: 100%;
+  }
+}
+
+.exploreBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px; // Smaller button
+  background-color: $bg-green;
+  color: $text-green;
+  font-family: $font-primary;
+  border-radius: 40px;
+  font-weight: 700;
+  font-size: 18px; // Smaller font
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    background-color: darken($bg-green, 3%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(4, 172, 42, 0.25);
+  }
+
+  @include mobile {
+    max-width: 100%;
+    width: fit-content;
+    padding: 12px 20px;
+    font-size: 18px;
+  }
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.exploreBtn:hover .icon {
+  transform: translateX(3px);
+}

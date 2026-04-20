@@ -7,6 +7,7 @@ import deliveryIcon from "@/assets/images/Vectors/deliveryIcon.svg";
 import infoSoup from "@/assets/images/Vectors/infoSoup.svg";
 
 import { CarouselInfo } from "@/components/ui/CarouselInfo/CarouselInfo";
+import { TouristCTA } from "@/components/ui/TouristCTA/TouristCTA";
 
 export const Hero = () => {
   return (
@@ -16,6 +17,9 @@ export const Hero = () => {
           <source src="/kitchenVideo.mov" />
           Your browser does not support the video tag.
         </video>
+        <div className={styles.touristCTA}>
+          <TouristCTA />
+        </div>
         <div className={styles.videoContent}>
           <h1 className={styles.title}>Кухня на Дружбата</h1>
           <p className={styles.subtitle}>
