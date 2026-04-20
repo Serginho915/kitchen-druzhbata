@@ -11,8 +11,6 @@
   overflow: hidden;
 }
 
-
-
 .bgPath {
   position: absolute;
   top: 50%;
@@ -40,7 +38,6 @@
   position: relative;
   z-index: 1;
 
-  
   padding-top: 160px;
 
   display: flex;
@@ -84,10 +81,27 @@
   }
 }
 
-
-.lasagne{
-  position:absolute;
+.lasagne {
+  position: absolute;
   bottom: 200px;
   left: 90px;
   border-radius: 27px;
+}
+
+.sarmi {
+  position: absolute;
+  top: 100px;
+  right: 150px;
+  border-radius: 27px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #747577;
+  font-family:$font-primary;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
 }

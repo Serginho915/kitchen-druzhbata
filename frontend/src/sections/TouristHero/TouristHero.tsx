@@ -42,9 +42,11 @@ export const TouristHero = () => {
         className={styles.sarmi}
         ></Image>
 
-      <h3>For visitors & tourists</h3>
-      <h1>Real Bulgarian food, made today </h1>
-      <div className={styles.content}></div>
+      <h3 className={styles.subtitle}>For visitors & tourists</h3>
+      <h1 className={styles.title}>Real Bulgarian food, made today </h1>
+      <div className={styles.content}>
+        
+      </div>
     </section>
   );
 };
