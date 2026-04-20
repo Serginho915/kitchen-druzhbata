@@ -102,16 +102,29 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isEmbedded = false }) =>
           </div>
 
           {isEmbedded ? (
-            <button type="submit" className={styles.orderBtn}>
+            <button
+              type="submit"
+              className={styles.orderBtn}
+              disabled={cartItems.length === 0}
+            >
               Поръчай <HiOutlineShoppingBag size={28} />
             </button>
           ) : (
             <Link
-              href="/checkout"
-              className={styles.orderLink}
-              onClick={() => setIsCartOpen(false)}
+              href={cartItems.length === 0 ? "#" : "/checkout"}
+              className={`${styles.orderLink} ${cartItems.length === 0 ? styles.disabledLink : ""}`}
+              onClick={(e) => {
+                if (cartItems.length === 0) {
+                  e.preventDefault();
+                } else {
+                  setIsCartOpen(false);
+                }
+              }}
             >
-              <button className={styles.orderBtn}>
+              <button
+                className={styles.orderBtn}
+                disabled={cartItems.length === 0}
+              >
                 Поръчай <HiOutlineShoppingBag size={28} />
               </button>
             </Link>

@@ -274,19 +274,21 @@
   gap: 12px;
   transition: all 0.2s ease;
 
-  &:hover {
-    background: #d1efda;
+  &:hover:not(:disabled) {
+    background: darken($bg-green, 5%);
     transform: translateY(-2px);
   }
 
-  &:active {
+  &:active:not(:disabled) {
     transform: translateY(0);
   }
 
-  a{
-    text-decoration: none;
-    color: $text-green;
-    
+  &:disabled {
+    background: #e0e0e0;
+    color: #999;
+    cursor: not-allowed;
+    opacity: 0.7;
+    transform: none;
   }
 
   @include mobile {
