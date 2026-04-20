@@ -17,11 +17,11 @@ export const Hero = () => {
           <source src="/kitchenVideo.mov" />
           Your browser does not support the video tag.
         </video>
-        <div className={styles.touristCTA}>
-          <TouristCTA />
-        </div>
         <div className={styles.videoContent}>
-          <h1 className={styles.title}>Кухня на Дружбата</h1>
+          <div className={styles.leftContent}>
+            <TouristCTA />
+            <h1 className={styles.title}>Кухня на Дружбата</h1>
+          </div>
           <p className={styles.subtitle}>
             Домашно приготвена храна с <br /> вкус на традиция.
           </p>

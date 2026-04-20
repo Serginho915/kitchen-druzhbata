@@ -37,26 +37,6 @@
   z-index: 1;
 }
 
-.touristCTA {
-  position: absolute;
-  top: 100px;
-  left: 40px;
-  z-index: 5;
-
-  @include tablet {
-    top: 80px;
-    left: 20px;
-  }
-
-  @include mobile {
-    top: 60px;
-    left: 16px;
-    right: 16px;
-    display: flex;
-    justify-content: center;
-  }
-}
-
 .videoContent {
   position: absolute;
   bottom: 0;
@@ -66,7 +46,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  padding: 0 28px 28px 28px;
+  padding: 0 40px 40px 40px;
   color: #fff;
 
   @include desktop-sm {
@@ -75,16 +55,36 @@
 
   @include tablet {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center; // Center on tablet
     padding: 0 28px 28px 28px;
-    gap: 44px;
+    gap: 32px;
+    text-align: center;
   }
 
   @include mobile {
     flex-direction: column;
-    align-items: flex-start;
-    padding: 0 28px 28px 28px;
+    align-items: center; // Center on mobile
+    padding: 0 16px 20px 16px; // Reduced padding
+    gap: 12px; // Reduced gap
+    text-align: center;
+  }
+}
+
+.leftContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: flex-start;
+
+  @include tablet {
     gap: 32px;
+    width: 100%;
+    align-items: center; // Center stack content
+  }
+
+  @include mobile {
+    gap: 16px;
+    align-items: center; // Center stack content
   }
 }
 
@@ -122,6 +122,8 @@
 
   @include mobile {
     font-size: 18px;
+    text-align: center;
+    max-width: 100%;
   }
 }
 
