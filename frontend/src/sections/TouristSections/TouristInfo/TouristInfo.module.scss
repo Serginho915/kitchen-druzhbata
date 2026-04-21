@@ -1,0 +1,154 @@
+@use "../../../styles/mixins.scss" as *;
+@use "../../../styles/variables.scss" as *;
+
+.section {
+  @include main-container;
+  padding: 0;
+  gap: 44px;
+}
+
+.content {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 12px;
+
+  @include tablet {
+    flex-wrap: wrap;
+    gap: 32px;
+  }
+
+  @include mobile {
+    flex-direction: column;
+    gap: 24px;
+  }
+}
+
+.video {
+  width: 319px;
+  height: 446px;
+  border-radius: 17.77px;
+  overflow: hidden;
+  object-fit: cover;
+
+  @include tablet{
+    max-width: 354px;
+  }
+  @include mobile {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 319 / 446;
+  }
+}
+
+.info {
+  display: flex;
+  padding: 24px 32px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex: 1 0 0;
+  border-radius: 24px;
+  background: #fff;
+
+  @include mobile {
+    width: 100%;
+    gap: 20px;
+  }
+}
+
+.title {
+  color: #161616;
+  font-family: $font-primary;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 48px;
+}
+
+.title span {
+  color: #fb8a2e;
+  font-family: $font-primary;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 48px;
+}
+
+.infoList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+
+  @include tablet {
+    width: 100%;
+    flex: unset;
+  }
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  gap: 28px;
+  max-width: 487px;
+  width: 100%;
+  flex: 1;
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04);
+
+  @include tablet {
+    max-width: none;
+  }
+
+  @include mobile {
+    min-width: unset;
+    width: 100%;
+    gap: 16px;
+  }
+}
+
+.starWrapper {
+  width: 32px;
+  height: 32px;
+  background: #000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.infoTextBlock {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.pTop {
+  color: #161616;
+  font-family: $font-primary;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+
+  @include mobile {
+    font-size: 24px;
+  }
+}
+
+.pBottom {
+  color: #161616;
+  font-family: $font-secondary;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+
+}

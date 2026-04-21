@@ -1,0 +1,17 @@
+@use "@/styles/mixins.scss" as *;
+@use "@/styles/variables.scss" as *;
+
+.subtitle {
+  color: #747577;
+  font-family: $font-primary;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+  text-align: center;
+
+  @include mobile {
+    font-size: 14px;
+  }
+}
