@@ -18,14 +18,14 @@ export const GetDirectionButton: React.FC<GetDirectionButtonProps> = ({
 }) => {
   return (
     <Link href={href} target="_blank" rel="noopener noreferrer" className={styles.btn}>
-      <Image
+      <span>{label}</span>
+            <Image
         src={navigate}
         alt="Navigate"
         width={24}
         height={24}
         className={styles.icon}
       />
-      <span>{label}</span>
     </Link>
   );
 };

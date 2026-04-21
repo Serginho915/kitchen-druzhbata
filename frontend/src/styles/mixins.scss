@@ -30,15 +30,18 @@
   gap: 58px;
 
   @include desktop-sm() {
+
     padding: 16px 24px;
     gap: 54px;
   }
 
   @include tablet() {
+    max-width: 1199px;
     gap: 44px;
   }
 
   @include mobile() {
+    max-width: 767px;
     padding: 8px 8px 16px 8px;
     gap: 32px;
   }
