@@ -6,9 +6,11 @@ import { TouristHeader } from "@/components/layout/TouristHeader/TouristHeader";
 
 export default function TouristPage() {
   return (
-    <main>
-       <TouristHeader />
-      <TouristHero />
-    </main>
+    <>
+      <TouristHeader />
+      <main>
+        <TouristHero />
+      </main>
+    </>
   );
 }
