@@ -1,0 +1,63 @@
+.formCard {
+    padding: 1em;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    h2 {
+        margin-top: 0;
+    }
+
+    .inputGroup {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+
+        select {
+            padding: 8px;
+            min-width: 150px;
+        }
+
+        .fileInputLabel {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            font-size: 0.85em;
+            color: #213547;
+
+            input {
+                padding: 4px;
+            }
+        }
+
+        .spicyToggle {
+            display: inline-flex;
+            border-radius: 999px;
+            overflow: hidden;
+            border: 1px solid #d1d5db;
+        }
+
+        .spicyOption {
+            border: 0;
+            border-radius: 0;
+            padding: 8px 12px;
+            background: #f3f4f6;
+            color: #1f2937;
+            font-size: 0.85em;
+        }
+
+        .active {
+            background: #edba87;
+            font-weight: 700;
+        }
+    }
+}
+
+.addButton {
+    background-color: #edba87;
+}
+
+.title {
+    margin: 0;
+}

@@ -1,3 +1,4 @@
+@use "sass:color";
 @use "@/styles/mixins.scss" as *;
 @use "@/styles/variables.scss" as *;
 
@@ -122,7 +123,7 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover {
-    background-color: darken($bg-green, 3%);
+    background-color: color.adjust($bg-green, $lightness: -3%);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(4, 172, 42, 0.25);
   }

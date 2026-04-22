@@ -1,0 +1,55 @@
+.header {
+    font-family: 'Comfortaa';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+
+    .logoContainer {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        text-decoration: none;
+
+        .logoWrapper {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+
+        .title {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #b90808;
+        }
+    }
+
+    .nav {
+        margin-left: auto;
+
+        .editBtn {
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+
+            &:hover {
+                background-color: #45a049;
+            }
+        }
+    }
+}

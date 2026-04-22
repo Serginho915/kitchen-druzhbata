@@ -1,0 +1,101 @@
+.menuItem {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(234, 234, 239);
+
+    .editContainer {
+        display: flex;
+        gap: 15px;
+        width: 100%;
+        align-items: flex-end;
+        flex-wrap: wrap;
+
+        .editField {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+
+            .label {
+                font-size: 0.75em;
+                font-weight: bold;
+                color: #666;
+                text-transform: uppercase;
+            }
+
+            input[type='number'] {
+                width: 70px;
+            }
+        }
+
+        .editActions {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 2px;
+        }
+    }
+
+    .actionButton {
+        padding: 7px;
+        opacity: 0.8;
+        font-size: 0.8em;
+        margin-left: 5px;
+
+        &.ok {
+            background-color: #4caf50;
+            margin-left: 0;
+        }
+
+        &.cancel {
+            background-color: #f44336;
+            margin-left: 0;
+        }
+
+        &.edit {
+            background-color: #4caf50;
+            margin-left: 10px;
+        }
+
+        &.delete {
+            background-color: #f44336;
+            margin-left: 10px;
+        }
+
+        &:hover {
+            transform: scale(1.1);
+            transition: 0.3s ease-in-out;
+        }
+    }
+
+    .inputEdit {
+        padding: 10px;
+        background-color: #ecb731;
+        opacity: 0.9;
+        border-radius: 5px;
+        border: #c7764d 1px solid;
+    }
+
+    .actions {
+        display: flex;
+        align-items: center;
+
+        .confirmDelete {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background-color: rgba(244, 67, 54, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+
+            .confirmText {
+                font-size: 0.8em;
+                font-weight: bold;
+                color: #f44336;
+                margin-right: 5px;
+            }
+        }
+    }
+}

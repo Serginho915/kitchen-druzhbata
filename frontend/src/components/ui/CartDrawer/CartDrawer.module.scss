@@ -1,3 +1,4 @@
+@use "sass:color";
 @use "@/styles/mixins.scss" as *;
 @use "@/styles/variables.scss" as *;
 
@@ -275,7 +276,7 @@
   transition: all 0.2s ease;
 
   &:hover:not(:disabled) {
-    background: darken($bg-green, 5%);
+    background: color.adjust($bg-green, $lightness: -5%);
     transform: translateY(-2px);
   }
 

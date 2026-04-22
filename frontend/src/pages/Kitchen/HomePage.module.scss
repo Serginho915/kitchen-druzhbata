@@ -1,0 +1,46 @@
+.homeContainer {
+    padding: 20px;
+
+    .controls {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 20px;
+
+        .templateBtn {
+            padding: 12px 24px;
+            background-color: #edba87;
+            color: #7a5a3a;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: 'Comfortaa', sans-serif;
+            transition: all 0.2s;
+
+            &:hover {
+                background-color: #d8a06f;
+                transform: translateY(-1px);
+            }
+        }
+    }
+
+    .categorySection {
+        margin-bottom: 40px;
+
+        .categoryTitle {
+            font-size: 1.8rem;
+            color: #b90808;
+            border-bottom: 2px solid #fec;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .dishGrid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+    }
+}

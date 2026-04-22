@@ -1,0 +1,79 @@
+.dishCard {
+    background-color: rgba(205, 128, 128, 0.2);
+    border: 2px solid transparent;
+    border-radius: 12px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    &.selected {
+        border-color: #4caf50;
+        background-color: #f1f8f1;
+
+        .checkbox {
+            background-color: #4caf50;
+            border-color: #4caf50;
+
+            &::after {
+                content: '✓';
+                color: white;
+                font-size: 12px;
+            }
+        }
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .name {
+        font-weight: bold;
+        font-size: 1.1rem;
+        color: #333;
+        margin-right: 25px;
+    }
+
+    .checkbox {
+        width: 20px;
+        height: 20px;
+        border: 2px solid #ddd;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        transition: all 0.2s;
+    }
+
+    .details {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-top: auto;
+    }
+
+    .weight {
+        font-size: 0.9rem;
+        color: #666;
+    }
+
+    .price {
+        font-weight: bold;
+        font-size: 1.2rem;
+        color: #b90808;
+    }
+}

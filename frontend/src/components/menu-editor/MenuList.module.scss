@@ -1,0 +1,16 @@
+.menuContainer {
+    text-align: left;
+    margin-top: 20px;
+
+    .categoryBlock {
+        h3 {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+    }
+}

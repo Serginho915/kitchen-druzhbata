@@ -1,0 +1,149 @@
+.page {
+  min-height: 100vh;
+  background: #f4f4f4;
+  padding-bottom: 20px;
+}
+
+.title {
+  margin: 0;
+  color: #b90808;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.loginCard {
+  max-width: 420px;
+  margin: 80px auto;
+  background: #ffffff;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  padding: 24px;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.input {
+  border: 1px solid #c7764d;
+  border-radius: 5px;
+  padding: 10px 12px;
+  background-color: #ecb731;
+  opacity: 0.9;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  margin-bottom: 12px;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.tabButton {
+  border: none;
+  background-color: #edba87;
+  color: #7a5a3a;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-weight: bold;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: #d8a06f;
+    transform: translateY(-1px);
+  }
+}
+
+.tabButtonActive {
+  background-color: #d8a06f;
+}
+
+.primaryButton {
+  border: none;
+  border-radius: 8px;
+  background-color: #edba87;
+  color: #7a5a3a;
+  padding: 12px 24px;
+  font-weight: bold;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: #d8a06f;
+    transform: translateY(-1px);
+  }
+}
+
+.logoutButton {
+  border: none;
+  border-radius: 8px;
+  background-color: #edba87;
+  color: #7a5a3a;
+  padding: 12px 24px;
+  font-weight: bold;
+
+  &:hover {
+    background-color: #d8a06f;
+    transform: translateY(-1px);
+  }
+}
+
+.todaySection {
+  padding: 0;
+  background: transparent;
+}
+
+.todayGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.todayItem {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 12px;
+  background: rgb(234, 234, 239);
+}
+
+.todayActions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.error {
+  color: #a61b1b;
+  margin: 12px 20px 0;
+}
+
+.meta {
+  color: #213547;
+  font-size: 14px;
+}
+
+@media (max-width: 900px) {
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .todayGrid {
+    grid-template-columns: 1fr;
+  }
+}

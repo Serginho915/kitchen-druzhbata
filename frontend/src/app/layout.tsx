@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Comfortaa, Inter } from "next/font/google";
 import "@/styles/globals.scss";
-import { CartProvider } from "@/context/CartContext";
-import { CartDrawer } from "@/components/ui/CartDrawer/CartDrawer";
+import { AppShell } from "@/components/layout/AppShell";
 
 const comfortaa = Comfortaa({
   variable: "--font-comfortaa",
@@ -27,10 +26,7 @@ export default function RootLayout({
   return (
     <html lang="bg" className={`${comfortaa.variable} ${inter.variable}`}>
       <body>
-        <CartProvider>
-          {children}
-          <CartDrawer />
-        </CartProvider>
+        <AppShell>{children}</AppShell>
       </body>
     </html>
   );
