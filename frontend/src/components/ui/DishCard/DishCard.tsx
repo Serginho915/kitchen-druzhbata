@@ -13,6 +13,7 @@ interface DishCardProps {
   price: number;
   image?: string;
   isHot?: boolean;
+  showAddToCart?: boolean;
 }
 
 export const DishCard: React.FC<DishCardProps> = ({
@@ -23,6 +24,7 @@ export const DishCard: React.FC<DishCardProps> = ({
   price,
   image,
   isHot,
+  showAddToCart = true,
 }) => {
   const { addToCart, removeFromCart, getItemQuantity } = useCart();
   const quantity = getItemQuantity(id);
@@ -48,29 +50,31 @@ export const DishCard: React.FC<DishCardProps> = ({
       <p className={styles.description}>{description}</p>
       <div className={styles.footer}>
         <span className={styles.price}>€ {price.toFixed(2)}</span>
-        {quantity === 0 ? (
-          <button
-            className={styles.addButton}
-            onClick={() => addToCart({ id, title, weight, price, image })}
-          >
-            Добави
-          </button>
-        ) : (
-          <div className={styles.quantityControl}>
+        {showAddToCart && (
+          quantity === 0 ? (
             <button
-              className={styles.qtyBtn}
-              onClick={() => removeFromCart(id)}
-            >
-              −
-            </button>
-            <span className={styles.qtyCount}>{quantity}</span>
-            <button
-              className={styles.qtyBtn}
+              className={styles.addButton}
               onClick={() => addToCart({ id, title, weight, price, image })}
             >
-              +
+              Добави
             </button>
-          </div>
+          ) : (
+            <div className={styles.quantityControl}>
+              <button
+                className={styles.qtyBtn}
+                onClick={() => removeFromCart(id)}
+              >
+                −
+              </button>
+              <span className={styles.qtyCount}>{quantity}</span>
+              <button
+                className={styles.qtyBtn}
+                onClick={() => addToCart({ id, title, weight, price, image })}
+              >
+                +
+              </button>
+            </div>
+          )
         )}
       </div>
     </div>
