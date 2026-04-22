@@ -81,7 +81,7 @@
 .lasagne {
   position: absolute;
   top: 45%;
-  left: 40px;
+  left: calc(50% - 680px);
   transform: translateY(-50%) rotate(18deg);
   width: 120px;
   height: auto;
@@ -95,15 +95,15 @@
   }
 
   @include desktop-sm {
-    left: -20px;
+    left: calc(50% - 500px);
     width: 100px;
   }
 }
 
 .sarmi {
   position: absolute;
-  top: 300px;
-  right: 60px;
+  top: -170px;
+  right: calc(50% - 660px);
   width: 99px;
   height: auto;
   transform: rotate(10deg);
@@ -117,7 +117,7 @@
   }
 
   @include desktop-sm {
-    right: 20px;
+    right: calc(50% - 480px);
     top: 350px;
     width: 80px;
   }

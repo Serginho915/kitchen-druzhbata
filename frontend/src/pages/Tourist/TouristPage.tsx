@@ -7,6 +7,7 @@ import { TouristInfo } from "@/sections/TouristSections/TouristInfo/TouristInfo"
 import { HowToGet } from "@/sections/TouristSections/HowToGet/HowToGet";
 import { TouristMenu } from "@/sections/TouristSections/TouristMenu/TouristMenu";
 import { TouristReviews } from "@/sections/TouristSections/Reviews/TouristReviews";
+import { TouristFooter } from "@/sections/TouristSections/TouristFooter/TouristFooter";
 import styles from "./TouristPage.module.scss";
 
 export default function TouristPage() {
@@ -20,6 +21,7 @@ export default function TouristPage() {
         <TouristMenu />
         <TouristReviews />
       </main>
+      <TouristFooter />
     </div>
   );
 }

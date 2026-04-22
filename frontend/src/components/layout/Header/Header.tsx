@@ -115,7 +115,10 @@ export const Header = () => {
           />
         </div>
 
-        <div className={`${styles.phoneIcon} ${styles.bgUserBlock}`}>
+        <Link
+          href="tel:+3598899999"
+          className={`${styles.phoneIcon} ${styles.bgUserBlock}`}
+        >
           <Image
             src={phone}
             alt="Phone Icon"
@@ -123,7 +126,7 @@ export const Header = () => {
             height={64}
             className={styles.icon}
           />
-        </div>
+        </Link>
 
         <div
           ref={burgerRef}

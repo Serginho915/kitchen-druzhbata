@@ -7,7 +7,7 @@
   gap: 40px;
   width: 100%;
   margin: 0 auto;
-  padding: 40px 0;
+  padding: 0;
 
   @include mobile {
     gap: 32px;
@@ -23,7 +23,7 @@
   @include tablet {
     flex-direction: column;
     gap: 32px;
-    align-items: center; // Apply centering as baseline for all small screens
+    align-items: center;
   }
 
   @include mobile {
@@ -147,7 +147,8 @@
   }
 }
 
-.addressBox, .socialBox {
+.addressBox,
+.socialBox {
   flex: 1;
   background: #3b3a3a;
   border-radius: 32px;
@@ -226,17 +227,17 @@
   &.facebook {
     background: #1877f2;
     color: #fff;
+    border: none;
   }
 
   &.instagram {
-    background: radial-gradient(
-      circle at 30% 107%,
-      #fdf497 0%,
-      #fd5949 45%,
-      #d6249f 60%,
-      #285aeb 90%
-    );
+    background: radial-gradient(circle at 30% 107%,
+        #fdf497 0%,
+        #fd5949 45%,
+        #d6249f 60%,
+        #285aeb 90%);
     color: #fff;
+    border: none;
   }
 }
 
@@ -335,5 +336,17 @@
 
   @include mobile {
     gap: 8px 16px;
+  }
+}
+
+.contentContainer {
+  @include main-container;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+
+  @include mobile {
+    gap: 32px;
   }
 }

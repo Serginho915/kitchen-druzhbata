@@ -9,6 +9,8 @@ import styles from "./TouristReview.module.scss";
 import logo from "@/assets/images/logo.png";
 import reviewsBG from "@/assets/images/TouristBg/reviewsBG.svg";
 import likeIcon from "@/assets/images/TouristBg/like.svg";
+import Emoji1 from "@/assets/images/TouristBg/Emoji1.svg";
+import emoji2 from "@/assets/images/TouristBg/emoji2.svg";
 
 export const TouristReviews = () => {
   const [offset, setOffset] = useState(0);
@@ -57,6 +59,12 @@ export const TouristReviews = () => {
         <Subtitle text="WHAT PEOPLE SAY" className={styles.subtitle} />
 
         <div className={styles.phoneWrapper}>
+          <div className={styles.emojiLeft}>
+            <Image src={Emoji1} alt="Decorative emoji" width={80} height={80} />
+          </div>
+          <div className={styles.emojiRight}>
+            <Image src={emoji2} alt="Decorative emoji" width={80} height={80} />
+          </div>
           <div
             className={styles.phone}
             onMouseEnter={() => setIsPaused(true)}

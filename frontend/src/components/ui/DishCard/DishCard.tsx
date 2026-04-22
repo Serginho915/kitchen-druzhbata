@@ -4,6 +4,7 @@ import React from "react";
 import styles from "./DishCard.module.scss";
 import Image from "next/image";
 import { useCart } from "@/hooks/useCart";
+import hotIcon from "@/assets/images/Vectors/hot.svg";
 
 interface DishCardProps {
   id: number;
@@ -43,7 +44,11 @@ export const DishCard: React.FC<DishCardProps> = ({
         ) : (
           <div className={styles.placeholder} />
         )}
-        {isHot && <span className={styles.hotBadge}>hot</span>}
+        {isHot && (
+          <div className={styles.hotBadge}>
+            <Image src={hotIcon} alt="Hot" width={21} height={21} />
+          </div>
+        )}
       </div>
       <h3 className={styles.title}>{title}</h3>
       <span className={styles.weight}>{weight}</span>
