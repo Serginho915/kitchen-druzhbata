@@ -52,10 +52,6 @@ export const AboutSection = () => {
       <div className={styles.content}>
         <div className={styles.leftContent}>
           <div className={styles.mapContent}>
-            <div className={styles.locationInfo}>
-              бул. „проф. Цветан Лазаров“ 226<br />
-              ЖK Дружба 2
-            </div>
             <Map 
               width="616" 
               height="402" 

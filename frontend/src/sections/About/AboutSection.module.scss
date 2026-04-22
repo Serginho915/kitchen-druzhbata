@@ -20,7 +20,7 @@
 .content {
   display: grid;
   grid-template-columns: 616px 500px;
-  justify-content: space-between;
+  justify-content: center;
   align-items: stretch;
 
   @include tablet {
