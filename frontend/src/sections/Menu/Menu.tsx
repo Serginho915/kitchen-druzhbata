@@ -51,6 +51,7 @@ export const Menu: React.FC<MenuProps> = ({ data }) => {
                 <DishCard
                   key={dish.id}
                   {...dish}
+                  showAddToCart={false}
                 />
               ))}
             </div>

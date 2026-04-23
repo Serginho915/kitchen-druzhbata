@@ -79,7 +79,7 @@ export const Header = () => {
         </Link>
       </div>
 
-      <nav className={styles.navBlock}>
+      {/* <nav className={styles.navBlock}>
         <ul className={styles.navList}>
           <li className={styles.navItem}>
             <Link href="/#menu">Меню</Link>
@@ -94,26 +94,40 @@ export const Header = () => {
             <Link href="/subscriptions">Подписки</Link>
           </li>
         </ul>
-      </nav>
+      </nav> */}
 
       <div className={styles.userBlock}>
-        <div
-          className={`${styles.userItem} ${styles.bgUserBlock} ${styles.cartBlock}`}
-          onClick={toggleCart}
-        >
-          {cartCount > 0 && (
-            <span className={styles.cartBadge}>
-              {cartCount > 99 ? "99+" : cartCount}
-            </span>
-          )}
-          <Image
-            src={cart}
-            alt="Cart Icon"
-            width={64}
-            height={64}
-            className={styles.icon}
-          />
-        </div>
+          {/* <div
+            className={`${styles.userItem} ${styles.bgUserBlock} ${styles.cartBlock}`}
+            onClick={toggleCart}
+          >
+            {cartCount > 0 && (
+              <span className={styles.cartBadge}>
+                {cartCount > 99 ? "99+" : cartCount}
+              </span>
+            )}
+            <Image
+              src={cart}
+              alt="Cart Icon"
+              width={64}
+              height={64}
+              className={styles.icon}
+            />
+          </div> */}
+          <Link
+            href="https://maps.app.goo.gl/4W58KxWc4GTXwJPRA"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`${styles.userItem} ${styles.bgUserBlock}`}
+          >
+            <Image
+              src={navigate}
+              alt="Navigate"
+              width={64}
+              height={64}
+              className={styles.icon}
+            />
+          </Link>
 
         <Link
           href="tel:+3598899999"
@@ -152,7 +166,7 @@ export const Header = () => {
           >
             <IoClose size={32} />
           </button>
-          <ul className={styles.mobileNavList}>
+          {/* <ul className={styles.mobileNavList}>
             <li className={styles.navItem} onClick={() => setIsMenuOpen(false)}>
               <Link href="/#menu">Меню</Link>
             </li>
@@ -165,7 +179,7 @@ export const Header = () => {
             <li className={styles.navItem} onClick={() => setIsMenuOpen(false)}>
               <Link href="/subscriptions">Подписки</Link>
             </li>
-          </ul>
+          </ul> */}
 
           <div className={styles.mobileInfo}>
             <div className={styles.mobileInfoBlock}>

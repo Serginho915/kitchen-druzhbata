@@ -35,11 +35,11 @@ export const Hero = () => {
             alt="Info Icon"
             text="Истинска храна, приготвена днес"
           />
-          <InfoCard
+          {/* <InfoCard
             icon={deliveryIcon}
             alt="Delivery Icon"
             text="Безплатна доставка в София"
-          />
+          /> */}
           <InfoCard
             icon={calendarInfo}
             alt="Calendar Icon"

@@ -80,9 +80,9 @@ export const CarouselInfo = () => {
         ))}
       </div>
 
-      <button className={styles.promoCartBtn} onClick={addPromoToCart}>
+      {/* <button className={styles.promoCartBtn} onClick={addPromoToCart}>
         <HiOutlineShoppingBag size={24} />
-      </button>
+      </button> */}
 
       <div className={styles.buttons}>
         <div className={styles.dots}>
