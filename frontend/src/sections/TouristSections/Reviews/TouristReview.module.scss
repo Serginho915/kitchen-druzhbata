@@ -1,0 +1,221 @@
+@use "@/styles/mixins.scss" as *;
+@use "@/styles/variables.scss" as *;
+
+.section {
+  width: 100%;
+  position: relative;
+  padding-top: 0;
+  padding-bottom: 0;
+  overflow: hidden;
+}
+
+.container {
+  @include main-container;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 44px;
+  padding-top: 0;
+  padding-bottom: 0;
+
+  @include tablet {
+    gap: 32px;
+  }
+}
+
+.bgWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.bgImage {
+  object-fit: cover;
+  object-position: 20% 80%;
+  opacity: 0.5;
+}
+
+.subtitle {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+}
+
+.phoneWrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  @include mobile {
+    padding: 0;
+  }
+}
+
+.emojiLeft,
+.emojiRight {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+
+  @include mobile {
+    display: none;
+  }
+}
+
+.emojiLeft {
+  top: 33%;
+  left: calc(50% - 700px);
+
+  @include tablet {
+    left: 10px;
+  }
+}
+
+.emojiRight {
+  bottom: -5%;
+  right: calc(50% - 700px);
+
+  @include tablet {
+    right: 10px;
+  }
+}
+
+.phone {
+  width: 470px;
+  height: 100vh;
+  max-height: 800px;
+  background: #3b3a3a;
+  border-radius: 56px;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  padding: 40px 24px;
+  box-sizing: border-box;
+  overflow: hidden;
+
+  @include mobile {
+    width: 100%;
+    border-radius: 40px;
+    height: 700px;
+  }
+}
+
+.phoneHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+  padding: 0 16px;
+}
+
+.logoWrapper {
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.logo{
+    object-fit: contain
+}
+.brandName {
+  color: #ffffff;
+  font-family: "Comfortaa", cursive;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.scrollArea {
+  flex: 1;
+  overflow: hidden;
+  padding: 20px 10px;
+  margin-bottom: 24px;
+  position: relative;
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+}
+
+.reviewsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cardContainer {
+  width: 100%;
+  
+  :global(.ReviewCard-module-scss-module__card) {
+      max-width: 100% !important;
+  }
+}
+
+.phoneFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  margin-top: auto;
+}
+
+.pagination {
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background: #d9d9d9;
+  border-radius: 50%;
+  opacity: 0.8;
+
+  &:first-child {
+    opacity: 1;
+  }
+}
+
+.likeButton {
+  background: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.ctaWrapper {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 470px;
+  margin: 0 auto;
+
+  :global(.btn),
+  a {
+    width: 100% !important;
+  }
+}

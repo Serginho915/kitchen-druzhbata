@@ -38,7 +38,7 @@ export const Hero = () => {
           <InfoCard
             icon={deliveryIcon}
             alt="Delivery Icon"
-            text="Безплатна доставка в София"
+            text="Безплатна доставка чрез takeaway.com"
           />
           <InfoCard
             icon={calendarInfo}

@@ -9,35 +9,17 @@ import { useCart } from "@/hooks/useCart";
 
 export const CarouselInfo = () => {
   const [currSlide, setCurrSlide] = useState(0);
-  const slideRef = useRef<HTMLDivElement | null>(null);
-  const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
   const { addToCart } = useCart();
-
   const carouselData = CarouselMockData;
 
+  // Auto-scroll logic
   useEffect(() => {
-    const observerOptions: IntersectionObserverInit = {
-      root: slideRef.current,
-      threshold: 0.6,
-    };
+    const interval = setInterval(() => {
+      setCurrSlide((prev) => (prev + 1) % carouselData.length);
+    }, 3000);
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const index = slideRefs.current.findIndex(
-            (ref) => ref === entry.target,
-          );
-          if (index !== -1) setCurrSlide(index);
-        }
-      });
-    }, observerOptions);
-
-    slideRefs.current.forEach((slide) => {
-      if (slide) observer.observe(slide);
-    });
-
-    return () => observer.disconnect();
-  }, []);
+    return () => clearInterval(interval);
+  }, [carouselData.length]);
 
   const addPromoToCart = () => {
     const currentDeal = carouselData[currSlide];
@@ -60,29 +42,28 @@ export const CarouselInfo = () => {
 
   return (
     <div className={styles.carouselInfo}>
-      <div className={styles.imageBlock} ref={slideRef}>
-        {carouselData.map((slide, index) => (
-          <div
-            key={slide.id}
-            className={styles.slide}
-            ref={(el) => {
-              slideRefs.current[index] = el;
-            }}
-          >
-            <Image
-              src={slide.content.image}
-              alt={slide.content.title}
-              width={632}
-              height={256}
-              className={styles.image}
-            />
-          </div>
-        ))}
+      <div className={styles.imageBlock}>
+        <div 
+          className={styles.track} 
+          style={{ transform: `translateX(-${currSlide * 100}%)` }}
+        >
+          {carouselData.map((slide) => (
+            <div key={slide.id} className={styles.slide}>
+              <Image
+                src={slide.content.image}
+                alt={slide.content.title}
+                width={632}
+                height={256}
+                className={styles.image}
+              />
+            </div>
+          ))}
+        </div>
       </div>
 
-      <button className={styles.promoCartBtn} onClick={addPromoToCart}>
+      {/* <button className={styles.promoCartBtn} onClick={addPromoToCart}>
         <HiOutlineShoppingBag size={24} />
-      </button>
+      </button> */}
 
       <div className={styles.buttons}>
         <div className={styles.dots}>
@@ -98,13 +79,7 @@ export const CarouselInfo = () => {
                   <div
                     key={slide.id}
                     className={`${styles.dot} ${currSlide === index ? styles.active : ""}`}
-                    onClick={() => {
-                      slideRefs.current[index]?.scrollIntoView({
-                        behavior: "smooth",
-                        block: "nearest",
-                        inline: "start",
-                      });
-                    }}
+                    onClick={() => setCurrSlide(index)}
                   />
                 ))}
               </div>

@@ -3,7 +3,8 @@
 
 .section {
   @include main-container;
-  padding: 0;
+  padding-top: 0;
+  padding-bottom: 0;
   gap: 44px;
 }
 
@@ -56,6 +57,10 @@
   @include mobile {
     width: 100%;
     gap: 20px;
+    align-items: center;
+    text-align: center;
+    background: transparent;
+    padding: 0;
   }
 }
 
@@ -95,7 +100,6 @@
   align-items: center;
   padding: 16px;
   gap: 28px;
-  max-width: 487px;
   width: 100%;
   flex: 1;
   background: #ffffff;
@@ -140,6 +144,7 @@
 
   @include mobile {
     font-size: 24px;
+    text-align: left;
   }
 }
 
@@ -150,5 +155,4 @@
   font-weight: 400;
   line-height: normal;
   margin: 0;
-
 }

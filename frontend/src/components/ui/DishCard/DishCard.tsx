@@ -4,6 +4,7 @@ import React from "react";
 import styles from "./DishCard.module.scss";
 import Image from "next/image";
 import { useCart } from "@/hooks/useCart";
+import hotIcon from "@/assets/images/Vectors/hot.svg";
 
 interface DishCardProps {
   id: number;
@@ -13,6 +14,7 @@ interface DishCardProps {
   price: number;
   image?: string;
   isHot?: boolean;
+  showAddToCart?: boolean;
 }
 
 export const DishCard: React.FC<DishCardProps> = ({
@@ -23,6 +25,7 @@ export const DishCard: React.FC<DishCardProps> = ({
   price,
   image,
   isHot,
+  showAddToCart = true,
 }) => {
   const { addToCart, removeFromCart, getItemQuantity } = useCart();
   const quantity = getItemQuantity(id);
@@ -41,36 +44,42 @@ export const DishCard: React.FC<DishCardProps> = ({
         ) : (
           <div className={styles.placeholder} />
         )}
-        {isHot && <span className={styles.hotBadge}>hot</span>}
+        {isHot && (
+          <div className={styles.hotBadge}>
+            <Image src={hotIcon} alt="Hot" width={21} height={21} />
+          </div>
+        )}
       </div>
       <h3 className={styles.title}>{title}</h3>
       <span className={styles.weight}>{weight}</span>
       <p className={styles.description}>{description}</p>
       <div className={styles.footer}>
         <span className={styles.price}>€ {price.toFixed(2)}</span>
-        {quantity === 0 ? (
-          <button
-            className={styles.addButton}
-            onClick={() => addToCart({ id, title, weight, price, image })}
-          >
-            Добави
-          </button>
-        ) : (
-          <div className={styles.quantityControl}>
+        {showAddToCart && (
+          quantity === 0 ? (
             <button
-              className={styles.qtyBtn}
-              onClick={() => removeFromCart(id)}
-            >
-              −
-            </button>
-            <span className={styles.qtyCount}>{quantity}</span>
-            <button
-              className={styles.qtyBtn}
+              className={styles.addButton}
               onClick={() => addToCart({ id, title, weight, price, image })}
             >
-              +
+              Добави
             </button>
-          </div>
+          ) : (
+            <div className={styles.quantityControl}>
+              <button
+                className={styles.qtyBtn}
+                onClick={() => removeFromCart(id)}
+              >
+                −
+              </button>
+              <span className={styles.qtyCount}>{quantity}</span>
+              <button
+                className={styles.qtyBtn}
+                onClick={() => addToCart({ id, title, weight, price, image })}
+              >
+                +
+              </button>
+            </div>
+          )
         )}
       </div>
     </div>

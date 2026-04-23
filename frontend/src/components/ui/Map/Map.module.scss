@@ -1,0 +1,13 @@
+@use "@/styles/mixins.scss" as *;
+@use "@/styles/variables.scss" as *;
+
+.map {
+  border-radius: 40px;
+  border: 1px solid #b2b3b5;
+  width: 100%;
+  display: block;
+
+  @include mobile {
+    border-radius: 20px;
+  }
+}

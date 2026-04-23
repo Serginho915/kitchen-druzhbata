@@ -9,7 +9,6 @@
   flex-direction: column;
   gap: 12px;
   width: 100%;
-  max-width: 429px;
   position: relative;
 
   @include mobile {
@@ -43,16 +42,23 @@
 
 .hotBadge {
   position: absolute;
-  bottom: 8px;
-  right: 8px;
-  background: #ff7b7b;
-  color: #fff;
-  font-size: 10px;
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 8px;
-  text-transform: uppercase;
+  bottom: 0;
+  right: 0;
+  width: 34px;
+  height: 34px;
+  background: #ffcec8;
+  border-radius: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
   z-index: 2;
+
+  img {
+    width: 21px;
+    height: 21px;
+    object-fit: contain;
+  }
 }
 
 .title {

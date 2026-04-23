@@ -81,7 +81,7 @@ export const Footer = () => {
         </div>
 
         {/* Right Side: Full Height Nav Box */}
-        <div className={styles.navBox}>
+        {/* <div className={styles.navBox}>
           <nav className={styles.footerNav} aria-label="Footer navigation">
             <ul className={styles.navList}>
               <li>
@@ -98,7 +98,7 @@ export const Footer = () => {
               </li>
             </ul>
           </nav>
-        </div>
+        </div> */}
       </div>
 
       {/* ── Bottom Row: Legal ── */}
@@ -110,7 +110,7 @@ export const Footer = () => {
           <Link href="/terms">Общи Условия</Link>
           <Link href="/privacy">Политика за поверителност</Link>
           <Link href="/cookies">Бисквитки</Link>
-          <Link href="/delivery">Доставка и Плащане</Link>
+          {/* <Link href="/delivery">Доставка и Плащане</Link> */}
         </nav>
       </div>
     </footer>
