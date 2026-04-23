@@ -6,7 +6,16 @@ import { MenuList } from "@/components/kitchen/MenuList/MenuList";
 import { menuApi, type Product } from "@/lib/kitchenMenuApi";
 import layoutStyles from "./KitchenApp.module.scss";
 
-export default function KitchenEditingPage() {
+interface KitchenEditingPageProps {
+  apiClient?: {
+    getAll: () => Promise<Product[]>;
+    create: typeof menuApi.create;
+    update: typeof menuApi.update;
+    delete: typeof menuApi.delete;
+  };
+}
+
+export default function KitchenEditingPage({ apiClient = menuApi }: KitchenEditingPageProps) {
   const AVAILABLE_CATEGORIES = [
     "СУПИ",
     "САЛАТИ",
@@ -23,7 +32,7 @@ export default function KitchenEditingPage() {
 
   const fetchMenu = async () => {
     try {
-      const data = await menuApi.getAll();
+      const data = await apiClient.getAll();
       setMenuItems(data);
     } catch (err) {
       console.error("Error fetching menu:", err);
@@ -35,7 +44,7 @@ export default function KitchenEditingPage() {
 
     const loadData = async () => {
       try {
-        const data = await menuApi.getAll();
+        const data = await apiClient.getAll();
         if (!ignore) {
           setMenuItems(data);
         }
@@ -49,7 +58,7 @@ export default function KitchenEditingPage() {
     return () => {
       ignore = true;
     };
-  }, []);
+  }, [apiClient]);
 
   const handleEditClick = (item: Product) => {
     setEditingId(item.id);
@@ -68,7 +77,7 @@ export default function KitchenEditingPage() {
     try {
       const { id, name, weight, price, category, is_spicy } = editFormData;
 
-      await menuApi.update(id, {
+      await apiClient.update(id, {
         name,
         weight: weight !== undefined && weight !== "" ? Number(weight) : 0,
         price: Number(price),
@@ -93,7 +102,7 @@ export default function KitchenEditingPage() {
 
   const handleDeleteItem = async (id: number | string) => {
     try {
-      await menuApi.delete(id);
+      await apiClient.delete(id);
 
       await fetchMenu();
 
@@ -110,6 +119,7 @@ export default function KitchenEditingPage() {
       <DishForm
         onDishAdded={fetchMenu}
         availableCategories={AVAILABLE_CATEGORIES}
+        apiClient={apiClient}
       />
 
       <MenuList

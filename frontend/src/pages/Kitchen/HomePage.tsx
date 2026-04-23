@@ -5,8 +5,19 @@ import styles from "./HomePage.module.scss";
 import { DishCard } from "@/components/kitchen/DishCard/DishCard";
 import { MenuModal } from "@/components/kitchen/MenuModal/MenuModal";
 import { menuApi, type Product } from "@/lib/kitchenMenuApi";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { adminAuthApi } from "@/lib/adminMenuApi";
 
-export default function KitchenHomePage() {
+interface KitchenHomePageProps {
+  apiClient?: {
+    getAll: () => Promise<Product[]>;
+  };
+}
+
+export default function KitchenHomePage({ apiClient = menuApi }: KitchenHomePageProps) {
+  const pathname = usePathname();
+  const isAdminRoute = pathname?.startsWith("/admin");
   const [menuItems, setMenuItems] = useState<Product[]>([]);
   const [selectedIds, setSelectedIds] = useState<Set<number | string>>(new Set());
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,7 +37,7 @@ export default function KitchenHomePage() {
 
     const loadData = async () => {
       try {
-        const data = await menuApi.getAll();
+        const data = await apiClient.getAll();
         if (!ignore) {
           setMenuItems(data);
         }
@@ -40,7 +51,7 @@ export default function KitchenHomePage() {
     return () => {
       ignore = true;
     };
-  }, []);
+  }, [apiClient]);
 
   const toggleSelection = (id: number | string) => {
     setSelectedIds((prev) => {
@@ -55,6 +66,12 @@ export default function KitchenHomePage() {
   };
 
   const selectedItems = menuItems.filter((item) => selectedIds.has(item.id));
+
+  const handleAdminLogout = async () => {
+    await adminAuthApi.logout();
+    window.localStorage.removeItem(adminAuthApi.tokenKey);
+    window.location.reload();
+  };
 
   const groupedItems = menuItems.reduce((accumulator, item) => {
     const category = item.category || "Другое";
@@ -75,6 +92,11 @@ export default function KitchenHomePage() {
   return (
     <div className={styles.homeContainer}>
       <div className={styles.controls}>
+        {isAdminRoute ? (
+          <Link href="/admin/editing" className={styles.templateBtn}>
+            Редактирование
+          </Link>
+        ) : null}
         <button
           className={styles.templateBtn}
           onClick={() => setIsModalOpen(true)}
@@ -82,6 +104,26 @@ export default function KitchenHomePage() {
         >
           Сформировать шаблон ({selectedIds.size})
         </button>
+        {isAdminRoute ? (
+          <button
+            type="button"
+            className={styles.iconLogoutBtn}
+            onClick={() => void handleAdminLogout()}
+            aria-label="Выйти"
+            title="Выйти"
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+              <path
+                d="M10 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4M15 16l5-4-5-4M20 12H9"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        ) : null}
       </div>
 
       {categories.map((category) => (

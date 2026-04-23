@@ -1,15 +1,20 @@
 import { type DishPayload, type Product } from "@/lib/kitchenMenuApi";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000/api";
+const ADMIN_TOKEN_KEY = "kitchen-admin-token";
 
-export type TodayMenu = {
-  id: number;
-  date: string;
-  updated_at: string;
-  dishes: Product[];
+const getToken = () => {
+  if (typeof window === "undefined") return null;
+  return window.localStorage.getItem(ADMIN_TOKEN_KEY);
 };
 
-const authHeader = (token: string) => ({ Authorization: `Token ${token}` });
+const getAuthHeaders = () => {
+  const token = getToken();
+  if (!token) {
+    throw new Error("Unauthorized");
+  }
+  return { Authorization: `Token ${token}` };
+};
 
 const buildDishFormData = (data: Partial<DishPayload>) => {
   const formData = new FormData();
@@ -31,107 +36,71 @@ const buildDishFormData = (data: Partial<DishPayload>) => {
   return formData;
 };
 
-export const adminMenuApi = {
+export const adminAuthApi = {
+  tokenKey: ADMIN_TOKEN_KEY,
+
   login: async (username: string, password: string): Promise<{ token: string; username: string }> => {
-    const response = await fetch(`${API_BASE_URL}/admin/auth/login/`, {
+    const response = await fetch(`${API_BASE_URL}/auth/login/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password }),
     });
 
     if (!response.ok) {
-      throw new Error("Invalid credentials");
+      throw new Error("Failed to login");
     }
 
     return response.json();
   },
 
-  logout: async (token: string): Promise<void> => {
-    const response = await fetch(`${API_BASE_URL}/admin/auth/logout/`, {
-      method: "POST",
-      headers: authHeader(token),
-    });
-
-    if (!response.ok && response.status !== 204) {
-      throw new Error("Failed to logout");
+  logout: async (): Promise<void> => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/auth/logout/`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+      });
+      if (!response.ok && response.status !== 204) {
+        throw new Error("Failed to logout");
+      }
+    } catch {
+      // no-op: local token is removed by UI anyway
     }
   },
+};
 
-  getAllDishes: async (token: string): Promise<Product[]> => {
+export const adminMenuApi = {
+  getAll: async (): Promise<Product[]> => {
     const response = await fetch(`${API_BASE_URL}/admin/dishes/`, {
-      headers: authHeader(token),
       cache: "no-store",
+      headers: getAuthHeaders(),
     });
-
-    if (!response.ok) {
-      throw new Error("Failed to fetch dishes");
-    }
-
+    if (!response.ok) throw new Error("Failed to fetch menu");
     return response.json();
   },
 
-  createDish: async (token: string, data: DishPayload): Promise<void> => {
-    const response = await fetch(`${API_BASE_URL}/admin/dishes/`, {
-      method: "POST",
-      headers: authHeader(token),
-      body: buildDishFormData(data),
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to create dish");
-    }
-  },
-
-  updateDish: async (token: string, id: number | string, data: Partial<DishPayload>): Promise<void> => {
+  update: async (id: number | string, data: Partial<DishPayload>): Promise<void> => {
     const response = await fetch(`${API_BASE_URL}/admin/dishes/${id}/`, {
       method: "PATCH",
-      headers: authHeader(token),
+      headers: getAuthHeaders(),
       body: buildDishFormData(data),
     });
-
-    if (!response.ok) {
-      throw new Error("Failed to update dish");
-    }
+    if (!response.ok) throw new Error("Failed to update item");
   },
 
-  deleteDish: async (token: string, id: number | string): Promise<void> => {
+  delete: async (id: number | string): Promise<void> => {
     const response = await fetch(`${API_BASE_URL}/admin/dishes/${id}/`, {
       method: "DELETE",
-      headers: authHeader(token),
+      headers: getAuthHeaders(),
     });
-
-    if (!response.ok) {
-      throw new Error("Failed to delete dish");
-    }
+    if (!response.ok) throw new Error("Failed to delete item");
   },
 
-  getTodayMenu: async (token: string): Promise<TodayMenu> => {
-    const response = await fetch(`${API_BASE_URL}/admin/today-menu/`, {
-      headers: authHeader(token),
-      cache: "no-store",
+  create: async (data: DishPayload): Promise<void> => {
+    const response = await fetch(`${API_BASE_URL}/admin/dishes/`, {
+      method: "POST",
+      headers: getAuthHeaders(),
+      body: buildDishFormData(data),
     });
-
-    if (!response.ok) {
-      throw new Error("Failed to fetch today menu");
-    }
-
-    return response.json();
-  },
-
-  saveTodayMenu: async (token: string, dishIds: Array<number | string>): Promise<TodayMenu> => {
-    const response = await fetch(`${API_BASE_URL}/admin/today-menu/`, {
-      method: "PUT",
-      headers: {
-        ...authHeader(token),
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ dish_ids: dishIds.map((id) => Number(id)) }),
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to save today menu");
-    }
-
-    return response.json();
+    if (!response.ok) throw new Error("Failed to add item");
   },
 };

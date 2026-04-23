@@ -1,5 +1,5 @@
-import KitchenEditingPage from "@/pages/Kitchen/EditingPage";
+import { redirect } from "next/navigation";
 
 export default function Page() {
-  return <KitchenEditingPage />;
+  redirect("/admin/editing");
 }

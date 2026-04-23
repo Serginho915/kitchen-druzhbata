@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth import authenticate
 
-from .models import Dish, TodayMenu
+from .models import Dish
 
 
 class DishSerializer(serializers.ModelSerializer):
@@ -31,7 +31,7 @@ class DishSerializer(serializers.ModelSerializer):
         return value
 
 
-class AdminLoginSerializer(serializers.Serializer):
+class UserLoginSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField(write_only=True)
 
@@ -43,25 +43,3 @@ class AdminLoginSerializer(serializers.Serializer):
             raise serializers.ValidationError("Invalid username or password")
         attrs["user"] = user
         return attrs
-
-
-class TodayMenuSerializer(serializers.ModelSerializer):
-    dishes = DishSerializer(many=True, read_only=True)
-    dish_ids = serializers.ListField(
-        child=serializers.IntegerField(min_value=1),
-        write_only=True,
-        required=False,
-    )
-
-    class Meta:
-        model = TodayMenu
-        fields = ["id", "date", "updated_at", "dishes", "dish_ids"]
-        read_only_fields = ["id", "date", "updated_at", "dishes"]
-
-    def update(self, instance, validated_data):
-        dish_ids = validated_data.pop("dish_ids", None)
-        if dish_ids is not None:
-            dishes = Dish.objects.filter(id__in=dish_ids)
-            instance.dishes.set(dishes)
-        instance.save()
-        return instance

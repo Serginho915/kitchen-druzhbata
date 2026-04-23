@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils import timezone
 
 
 class Dish(models.Model):
@@ -17,15 +16,3 @@ class Dish(models.Model):
 
     def __str__(self) -> str:
         return f"{self.name} ({self.price})"
-
-
-class TodayMenu(models.Model):
-    date = models.DateField(default=timezone.localdate, unique=True)
-    dishes = models.ManyToManyField(Dish, related_name="today_menus", blank=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        ordering = ["-date"]
-
-    def __str__(self) -> str:
-        return f"Today menu: {self.date}"

@@ -4,6 +4,8 @@
     .controls {
         display: flex;
         justify-content: flex-end;
+        align-items: center;
+        gap: 10px;
         margin-bottom: 20px;
 
         .templateBtn {
@@ -15,6 +17,26 @@
             font-weight: bold;
             cursor: pointer;
             font-family: 'Comfortaa', sans-serif;
+            transition: all 0.2s;
+
+            &:hover {
+                background-color: #d8a06f;
+                transform: translateY(-1px);
+            }
+        }
+
+        .iconLogoutBtn {
+            width: 44px;
+            height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            border: none;
+            border-radius: 8px;
+            background-color: #edba87;
+            color: #7a5a3a;
+            cursor: pointer;
             transition: all 0.2s;
 
             &:hover {

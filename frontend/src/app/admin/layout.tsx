@@ -1,15 +1,27 @@
 import type { Metadata } from "next";
+import { KitchenHeader } from "@/components/kitchen/Header/Header";
+import { ScrollToTop } from "@/components/kitchen/ScrollToTop/ScrollToTop";
+import { AdminAuthGate } from "@/components/admin/AdminAuthGate";
+import styles from "@/pages/Kitchen/KitchenApp.module.scss";
 import "@/app/kitchen/kitchen-theme.css";
 
 export const metadata: Metadata = {
-  title: "Kitchen Admin",
-  description: "Admin constructor for menu management",
+  title: "friendkitchen",
+  icons: {
+    icon: "/kitchen-assets/vite.svg",
+  },
 };
 
 export default function AdminLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
-  return children;
+}) {
+  return (
+    <div className={`${styles.appContainer} kitchenTheme`}>
+      <KitchenHeader showEditButton={false} />
+      <AdminAuthGate>{children}</AdminAuthGate>
+      <ScrollToTop />
+    </div>
+  );
 }
