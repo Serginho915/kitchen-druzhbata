@@ -107,10 +107,10 @@ export const Footer = () => {
           © 2026 Кухня на Дружбата. Всички права запазени.
         </small>
         <nav className={styles.legalNav} aria-label="Legal links">
-          <Link href="/terms">Общи Условия</Link>
+          {/* <Link href="/terms">Общи Условия</Link>
           <Link href="/privacy">Политика за поверителност</Link>
           <Link href="/cookies">Бисквитки</Link>
-          {/* <Link href="/delivery">Доставка и Плащане</Link> */}
+          <Link href="/delivery">Доставка и Плащане</Link> */}
         </nav>
       </div>
     </footer>

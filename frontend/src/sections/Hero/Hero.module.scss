@@ -75,17 +75,21 @@
 .leftContent {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 104px;
   align-items: flex-start;
 
+  @include desktop-sm{
+    gap: 35px;
+  }
+
   @include tablet {
-    gap: 32px;
+    gap: 85px;
     width: 100%;
-    align-items: center;
+    align-items: flex-start;
   }
 
   @include mobile {
-    gap: 16px;
+    gap: 35px;
   }
 }
 

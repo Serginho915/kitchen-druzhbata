@@ -18,6 +18,8 @@ export const Header = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const menuRef = useRef<HTMLDivElement>(null);
   const burgerRef = useRef<HTMLDivElement>(null);
+  const phoneRef = useRef<HTMLAnchorElement>(null);
+  const [isPhoneExpanded, setIsPhoneExpanded] = useState(false);
 
   const { cartCount, toggleCart } = useCart();
 
@@ -62,6 +64,31 @@ export const Header = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isMenuOpen]);
+
+  // Close phone info on outside click
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        isPhoneExpanded &&
+        phoneRef.current &&
+        !phoneRef.current.contains(e.target as Node)
+      ) {
+        setIsPhoneExpanded(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isPhoneExpanded]);
+
+  const handlePhoneClick = (e: React.MouseEvent) => {
+    if (window.innerWidth >= 1200) {
+      if (!isPhoneExpanded) {
+        e.preventDefault();
+        setIsPhoneExpanded(true);
+      }
+    }
+  };
 
   return (
     <header
@@ -114,24 +141,12 @@ export const Header = () => {
               className={styles.icon}
             />
           </div> */}
-          <Link
-            href="https://maps.app.goo.gl/4W58KxWc4GTXwJPRA"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`${styles.userItem} ${styles.bgUserBlock}`}
-          >
-            <Image
-              src={navigate}
-              alt="Navigate"
-              width={64}
-              height={64}
-              className={styles.icon}
-            />
-          </Link>
-
         <Link
+          ref={phoneRef}
           href="tel:+3598899999"
-          className={`${styles.phoneIcon} ${styles.bgUserBlock}`}
+          className={`${styles.phoneIcon} ${styles.bgUserBlock} ${isPhoneExpanded ? styles.phoneExpanded : ""}`}
+          onClick={handlePhoneClick}
+          onMouseLeave={() => setIsPhoneExpanded(false)}
         >
           <Image
             src={phone}
@@ -140,9 +155,24 @@ export const Header = () => {
             height={64}
             className={styles.icon}
           />
+          <span className={styles.phoneNumber}>+359 88 999 99</span>
+        </Link>
+        <Link
+          href="https://maps.app.goo.gl/4W58KxWc4GTXwJPRA"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`${styles.userItem} ${styles.bgUserBlock}`}
+        >
+          <Image
+            src={navigate}
+            alt="Navigate"
+            width={64}
+            height={64}
+            className={styles.icon}
+          />
         </Link>
 
-        <div
+        {/* <div
           ref={burgerRef}
           className={`${styles.burgerIcon} ${styles.bgUserBlock} ${isMenuOpen ? styles.burgerActive : ""}`}
           onClick={toggleMenu}
@@ -154,7 +184,7 @@ export const Header = () => {
             height={64}
             className={styles.icon}
           />
-        </div>
+        </div> */}
       </div>
 
       {isMenuOpen && (

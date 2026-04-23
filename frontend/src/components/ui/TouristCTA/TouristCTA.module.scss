@@ -51,7 +51,7 @@
 
 .bubble {
   position: relative;
-  padding: 24px 20px 12px 20px; // More compact
+  padding: 24px 20px 12px 20px;
   width: 100%;
   max-width: 540px;
   min-height: 110px;
@@ -65,12 +65,13 @@
   overflow: visible;
 
   @include mobile {
-    padding: 20px 16px 12px 16px;
+    padding: 12px;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     text-align: center;
     gap: 8px;
-    min-height: 90px; // Shorter on mobile
+    min-height: 90px; 
   }
 }
 
@@ -82,14 +83,15 @@
   width: 100%;
 
   @include mobile {
-    flex-direction: column;
+    //flex-direction: column;
     align-items: center;
-    gap: 12px;
+    gap: 6px;
+    padding-top: 12px;
   }
 }
 
 .text {
-  font-size: 16px; // Reduced font size
+  font-size: 16px; 
   font-weight: 400;
   color: #333;
   margin: 0;
@@ -102,36 +104,18 @@
   }
 
   @include mobile {
-    font-size: 14px; // Smaller text on mobile
+    font-size: 10px; 
     width: 100%;
   }
 }
 
 .exploreBtn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 18px; // Smaller button
-  background-color: $bg-green;
-  color: $text-green;
-  font-family: $font-primary;
-  border-radius: 40px;
-  font-weight: 700;
-  font-size: 18px; // Smaller font
-  text-decoration: none;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
-  &:hover {
-    background-color: darken($bg-green, 3%);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(4, 172, 42, 0.25);
-  }
+  width: auto;
+  padding: 10px 18px;
 
   @include mobile {
-    max-width: 100%;
-    width: fit-content;
-    padding: 10px 16px;
-    font-size: 16px;
+    padding: 6px 12px;
+    width: auto;
   }
 }
 
