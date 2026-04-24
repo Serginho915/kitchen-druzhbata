@@ -1,0 +1,73 @@
+@use "@/styles/mixins.scss" as *;
+@use "@/styles/variables.scss" as *;
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #fff;
+  color: $prim-yellow;
+  font-size: 24px;
+  text-decoration: none;
+  transition: transform 0.2s ease, width 0.4s ease, border-radius 0.4s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+
+  @include mobile {
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.phoneLink {
+  padding: 0;
+  width: 52px;
+  position: relative;
+
+  @media (min-width: 1200px) {
+    &.phoneExpanded {
+      width: 220px;
+      border-radius: 26px;
+      justify-content: flex-start;
+      padding-left: 16px;
+      gap: 12px;
+    }
+  }
+
+  .phoneIcon {
+    flex-shrink: 0;
+    z-index: 2;
+  }
+}
+
+.phoneNumber {
+  white-space: nowrap;
+  font-family: $font-primary;
+  font-size: 18px;
+  font-weight: 700;
+  color: $prim-yellow;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  position: absolute;
+
+  .phoneExpanded & {
+    @media (min-width: 1200px) {
+      position: static;
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  @include mobile {
+    display: none;
+  }
+}

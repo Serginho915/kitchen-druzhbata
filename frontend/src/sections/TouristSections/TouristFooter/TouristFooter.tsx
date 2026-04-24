@@ -1,9 +1,13 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import styles from "@/components/layout/Footer/Footer.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "@/assets/images/logo.png";
 import { FaPhone, FaFacebookF, FaInstagram } from "react-icons/fa";
+
+import { PhoneButton as FooterPhoneButton } from "@/components/ui/footer/PhoneButton/PhoneButton";
 
 export const TouristFooter = () => {
   return (
@@ -50,15 +54,9 @@ export const TouristFooter = () => {
               <div className={styles.socialBox}>
                 <p className={styles.boxTitle}>Contact Us</p>
                 <div className={styles.socialIcons}>
+                  <FooterPhoneButton />
                   <a
-                    href="tel:+359000000000"
-                    className={styles.socialLink}
-                    aria-label="Phone"
-                  >
-                    <FaPhone />
-                  </a>
-                  <a
-                    href="https://facebook.com"
+                    href="https://www.facebook.com/druzhbata"
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`${styles.socialLink} ${styles.facebook}`}
@@ -67,7 +65,7 @@ export const TouristFooter = () => {
                     <FaFacebookF />
                   </a>
                   <a
-                    href="https://instagram.com"
+                    href="https://www.instagram.com/kuhnya_nadruzhbata/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`${styles.socialLink} ${styles.instagram}`}
