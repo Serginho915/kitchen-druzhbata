@@ -8,9 +8,19 @@ import logo from "@/assets/images/logo.png";
 import phone from "@/assets/images/Vectors/phone.svg";
 import navigate from "@/assets/images/Vectors/navigate.svg";
 
+import { PhoneButton } from "@/components/ui/header/PhoneButton/PhoneButton";
+
 export const TouristHeader = () => {
+  const [isMobile, setIsMobile] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1200);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,20 +56,7 @@ export const TouristHeader = () => {
       </div>
 
       <div className={styles.actions}>
-        <Link
-          href="tel:+35988999999"
-          className={`${styles.actionBtn} ${styles.phoneBtn}`}
-          aria-label="Call us"
-        >
-          <Image
-            src={phone}
-            alt="Phone"
-            width={28}
-            height={28}
-            className={styles.icon}
-          />
-        </Link>
-
+        <PhoneButton />
         <Link
           href="https://maps.app.goo.gl/4W58KxWc4GTXwJPRA"
           target="_blank"
