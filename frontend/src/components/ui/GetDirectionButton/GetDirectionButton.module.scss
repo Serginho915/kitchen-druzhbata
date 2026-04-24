@@ -17,7 +17,6 @@
   text-decoration: none;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15);
-  min-width: 283px;
   border: 2px solid #04AC2A;
   
 
@@ -39,8 +38,23 @@
   @include mobile {
     font-size: 16px;
     padding: 12px 20px;
-    width: 100%;
     justify-content: center;
+  }
+}
+
+.minWidth {
+  min-width: 283px;
+}
+
+.fullWidthMobile {
+  @include mobile {
+    width: 100%;
+  }
+}
+
+.hideLabelMobile {
+  @include mobile {
+    display: none;
   }
 }
 

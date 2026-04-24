@@ -10,9 +10,9 @@ export const TouristFooter = () => {
     <footer className={styles.footer} style={{ paddingTop: "60px" }}>
       <div className={styles.contentContainer}>
         <div className={styles.footerContent}>
-          {/* Left Side: Branding and Info Boxes */}
+
           <div className={styles.mainInfo}>
-            {/* Top Row: Brand & Hours */}
+
             <div className={styles.headerRow}>
               <div className={styles.logoArea}>
                 <Image
@@ -37,7 +37,6 @@ export const TouristFooter = () => {
               </div>
             </div>
 
-            {/* Middle Row: Address & Socials */}
             <div className={styles.gridRow}>
               <div className={styles.addressBox}>
                 <p className={styles.boxTitle}>Find Us</p>
@@ -81,8 +80,8 @@ export const TouristFooter = () => {
             </div>
           </div>
 
-          {/* Right Side: Full Height Nav Box */}
-          <div className={styles.navBox}>
+
+          {/* <div className={styles.navBox}>
             <nav className={styles.footerNav} aria-label="Footer navigation">
               <ul className={styles.navList}>
                 <li>
@@ -99,19 +98,18 @@ export const TouristFooter = () => {
                 </li>
               </ul>
             </nav>
-          </div>
+          </div> */}
         </div>
 
-        {/* ── Bottom Row: Legal ── */}
         <div className={styles.footerBottom}>
           <small className={styles.copyright}>
             © 2026 Kitchen on Druzhba. All rights reserved.
           </small>
           <nav className={styles.legalNav} aria-label="Legal links">
-            <Link href="/terms">Terms of Service</Link>
+            {/* <Link href="/terms">Terms of Service</Link>
             <Link href="/privacy">Privacy Policy</Link>
             <Link href="/cookies">Cookies</Link>
-            <Link href="/delivery">Delivery & Payment</Link>
+            <Link href="/delivery">Delivery & Payment</Link> */}
           </nav>
         </div>
       </div>

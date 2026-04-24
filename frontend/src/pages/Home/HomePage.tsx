@@ -5,8 +5,7 @@ import { Title } from "@/sections/Title/Title";
 import { Menu } from "@/sections/Menu/Menu";
 import { MenuData } from "@/sections/Menu/MenuData";
 import { AboutSection } from "@/sections/About/AboutSection";
-// import { DeliverySection } from "@/sections/Delivery/DeliverySection";
-import { TakeawayBanner } from "@/components/ui/TakeawayBanner/TakeawayBanner";
+import { DeliverySection } from "@/sections/Delivery/DeliverySection";
 
 export default function HomePage() {
   return (
@@ -15,8 +14,7 @@ export default function HomePage() {
       <Title />
       <Menu data={MenuData} />
       <AboutSection />
-      {/* <DeliverySection /> */}
-      <TakeawayBanner />
+      <DeliverySection />
     </div>
   );
 }

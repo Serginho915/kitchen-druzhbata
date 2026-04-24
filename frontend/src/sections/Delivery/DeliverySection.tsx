@@ -4,8 +4,7 @@ import { SectionTitle } from "@/components/ui/SectionTitle/SectionTitle";
 import Image from "next/image";
 import deliveryImg from "@/assets/images/deliveryImg.jpg";
 import { DISTRICTS } from "@/data/districts";
-import { Button } from "@/components/ui/Button/Button";
-import Link from "next/link";
+import { TakeawayBanner } from "@/components/ui/TakeawayBanner/TakeawayBanner";
 
 export const DeliverySection = () => {
   return (
@@ -38,11 +37,7 @@ export const DeliverySection = () => {
           </ul>
         </div>
       </div>
-      <div className={styles.btnBlock}>
-        <Link href="/checkout" className={styles.orderLink}>
-          <Button text="Поръчай" type="button" className={styles.orderBtn} />
-        </Link>
-      </div>
+      <TakeawayBanner />
     </section>
   );
 };
