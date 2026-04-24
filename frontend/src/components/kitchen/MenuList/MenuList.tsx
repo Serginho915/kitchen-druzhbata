@@ -46,8 +46,6 @@ export function MenuList({
 
   return (
     <div id="menuContainer" className={styles.menuContainer}>
-      {items.length === 0 ? <p>Loading menu...</p> : null}
-
       {categories.map((category) => (
         <div key={category} className={styles.categorySection}>
           <h3>{category}</h3>

@@ -17,7 +17,6 @@ interface KitchenEditingPageProps {
 
 type EditProduct = Product & {
   image?: string | File | null;
-  special_offer_image?: string | File | null;
 };
 
 export default function KitchenEditingPage({ apiClient = menuApi }: KitchenEditingPageProps) {
@@ -80,7 +79,7 @@ export default function KitchenEditingPage({ apiClient = menuApi }: KitchenEditi
     if (!editFormData) return;
 
     try {
-      const { id, name, description, weight, price, category, is_spicy, image, special_offer_image } = editFormData;
+      const { id, name, description, weight, price, category, is_spicy, image } = editFormData;
 
       await apiClient.update(id, {
         name,
@@ -90,7 +89,6 @@ export default function KitchenEditingPage({ apiClient = menuApi }: KitchenEditi
         category,
         is_spicy: Boolean(is_spicy),
         ...(image instanceof File ? { image } : {}),
-        ...(special_offer_image instanceof File ? { special_offer_image } : {}),
       });
 
       await fetchMenu();

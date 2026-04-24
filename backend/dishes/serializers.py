@@ -15,11 +15,19 @@ class DishSerializer(serializers.ModelSerializer):
             "price",
             "category",
             "image",
-            "special_offer_image",
             "is_spicy",
             "created_at",
         ]
         read_only_fields = ["id", "created_at"]
+        extra_kwargs = {
+            "name": {"required": True, "allow_blank": False},
+            "description": {"required": True, "allow_blank": False},
+            "weight": {"required": True},
+            "price": {"required": True},
+            "category": {"required": True, "allow_blank": False},
+            "image": {"required": True, "allow_null": False},
+            "is_spicy": {"required": True},
+        }
 
     def validate_weight(self, value: int) -> int:
         if value < 0:

@@ -20,12 +20,11 @@ export function DishForm({ onDishAdded, availableCategories, apiClient = menuApi
   const [dishWeight, setDishWeight] = useState("");
   const [dishCategory, setDishCategory] = useState("");
   const [dishImage, setDishImage] = useState<File | null>(null);
-  const [specialOfferImage, setSpecialOfferImage] = useState<File | null>(null);
   const [isSpicy, setIsSpicy] = useState(false);
 
   const handleAddDish = async () => {
-    if (!dishName || !dishPrice || !dishCategory) {
-      alert("Заполните обязательные поля (Название, Цена, Категория)!");
+    if (!dishName || !dishDescription || !dishPrice || !dishWeight || !dishCategory || !dishImage) {
+      alert("Заполните обязательные поля!");
       return;
     }
 
@@ -49,7 +48,6 @@ export function DishForm({ onDishAdded, availableCategories, apiClient = menuApi
         weight,
         category: dishCategory,
         image: dishImage,
-        special_offer_image: specialOfferImage,
         is_spicy: isSpicy,
       });
 
@@ -61,7 +59,6 @@ export function DishForm({ onDishAdded, availableCategories, apiClient = menuApi
       setDishWeight("");
       setDishCategory("");
       setDishImage(null);
-      setSpecialOfferImage(null);
       setIsSpicy(false);
     } catch (error) {
       console.error("Error adding dish:", error);
@@ -81,6 +78,7 @@ export function DishForm({ onDishAdded, availableCategories, apiClient = menuApi
         <input
           type="text"
           placeholder="Название"
+          required
           value={dishName}
           onChange={(event) => setDishName(event.target.value)}
           onKeyDown={handleKeyDown}
@@ -88,6 +86,7 @@ export function DishForm({ onDishAdded, availableCategories, apiClient = menuApi
         <input
           type="text"
           placeholder="Описание"
+          required
           value={dishDescription}
           onChange={(event) => setDishDescription(event.target.value)}
           onKeyDown={handleKeyDown}
@@ -96,6 +95,7 @@ export function DishForm({ onDishAdded, availableCategories, apiClient = menuApi
           type="number"
           placeholder="Вес"
           min="0"
+          required
           value={dishWeight}
           onChange={(event) => setDishWeight(event.target.value)}
           onKeyDown={handleKeyDown}
@@ -105,11 +105,13 @@ export function DishForm({ onDishAdded, availableCategories, apiClient = menuApi
           placeholder="Цена"
           min="0"
           step="0.01"
+          required
           value={dishPrice}
           onChange={(event) => setDishPrice(event.target.value)}
           onKeyDown={handleKeyDown}
         />
         <select
+          required
           value={dishCategory}
           onChange={(event) => setDishCategory(event.target.value)}
           onKeyDown={handleKeyDown}
@@ -128,15 +130,8 @@ export function DishForm({ onDishAdded, availableCategories, apiClient = menuApi
           <input
             type="file"
             accept="image/*"
+            required
             onChange={(event) => setDishImage(event.target.files?.[0] ?? null)}
-          />
-        </label>
-        <label className={styles.fileInputLabel}>
-          Спецпредложение
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(event) => setSpecialOfferImage(event.target.files?.[0] ?? null)}
           />
         </label>
         <label className={styles.spicyCheckboxLabel}>
@@ -145,7 +140,7 @@ export function DishForm({ onDishAdded, availableCategories, apiClient = menuApi
             checked={isSpicy}
             onChange={(event) => setIsSpicy(event.target.checked)}
           />
-          <span>{isSpicy ? "Острое" : "Неострое"}</span>
+          <span>Острое</span>
         </label>
       </div>
       <button onClick={() => void handleAddDish()} className={styles.addButton}>Добавить</button>

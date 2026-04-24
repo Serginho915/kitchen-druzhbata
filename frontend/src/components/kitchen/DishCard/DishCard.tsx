@@ -6,9 +6,22 @@ interface DishCardProps {
   item: Product;
   isSelected: boolean;
   onToggle: (id: number | string) => void;
+  showFullDetails?: boolean;
 }
 
-export function DishCard({ item, isSelected, onToggle }: DishCardProps) {
+const resolveImageSrc = (image?: string | null) => {
+  if (!image) return null;
+  if (image.startsWith("http://") || image.startsWith("https://")) return image;
+
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000/api";
+  const backendBaseUrl = apiBaseUrl.replace(/\/api\/?$/, "");
+
+  return `${backendBaseUrl}${image.startsWith("/") ? "" : "/"}${image}`;
+};
+
+export function DishCard({ item, isSelected, onToggle, showFullDetails = false }: DishCardProps) {
+  const dishImageSrc = resolveImageSrc(item.image);
+
   return (
     <div
       className={`${styles.dishCard} ${isSelected ? styles.selected : ""}`}
@@ -22,6 +35,23 @@ export function DishCard({ item, isSelected, onToggle }: DishCardProps) {
         <span className={styles.weight}>{item.weight && item.weight > 0 ? `${item.weight}г` : ""}</span>
         <span className={styles.price}>{Number(item.price).toFixed(2)}€</span>
       </div>
+
+      {showFullDetails ? (
+        <div className={styles.meta}>
+          <span className={styles.metaRow}>{item.description?.trim() || "-"}</span>
+          {item.is_spicy ? <span className={styles.spicyBadge}>Острое</span> : null}
+
+          <div className={styles.imagesRow}>
+            <div className={styles.imageBlock}>
+              {dishImageSrc ? (
+                <img src={dishImageSrc} alt={item.name} className={styles.previewImage} loading="lazy" />
+              ) : (
+                <div className={styles.imagePlaceholder} aria-label="Нет изображения">✕</div>
+              )}
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

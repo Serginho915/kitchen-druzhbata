@@ -115,17 +115,6 @@ export function MenuItem({
             </select>
           </div>
           <div className={styles.editField}>
-            <span className={styles.label}>Острота</span>
-            <label className={styles.checkboxLabel}>
-              <input
-                type="checkbox"
-                checked={Boolean(editFormData?.is_spicy)}
-                onChange={(event) => onEditChange("is_spicy", event.target.checked)}
-              />
-              <span>{editFormData?.is_spicy ? "Острое" : "Неострое"}</span>
-            </label>
-          </div>
-          <div className={styles.editField}>
             <span className={styles.label}>Блюдо</span>
             <label className={styles.fileInputLabel}>
               <input
@@ -136,13 +125,14 @@ export function MenuItem({
             </label>
           </div>
           <div className={styles.editField}>
-            <span className={styles.label}>Спецпредложение</span>
-            <label className={styles.fileInputLabel}>
+            <span className={styles.label}>Острота</span>
+            <label className={styles.checkboxLabel}>
               <input
-                type="file"
-                accept="image/*"
-                onChange={(event) => onEditChange("special_offer_image", event.target.files?.[0] ?? null)}
+                type="checkbox"
+                checked={Boolean(editFormData?.is_spicy)}
+                onChange={(event) => onEditChange("is_spicy", event.target.checked)}
               />
+              <span>Острое</span>
             </label>
           </div>
           <div className={styles.editActions}>

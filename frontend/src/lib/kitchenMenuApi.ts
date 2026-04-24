@@ -6,7 +6,6 @@ export type Product = {
   price: number | string;
   category?: string;
   image?: string | null;
-  special_offer_image?: string | null;
   is_spicy?: boolean;
 };
 
@@ -17,7 +16,6 @@ export type DishPayload = {
   price: number;
   category?: string;
   image?: File | null;
-  special_offer_image?: File | null;
   is_spicy?: boolean;
 };
 
@@ -35,10 +33,6 @@ const buildDishFormData = (data: Partial<DishPayload>) => {
 
   if (data.image instanceof File) {
     formData.append("image", data.image);
-  }
-
-  if (data.special_offer_image instanceof File) {
-    formData.append("special_offer_image", data.special_offer_image);
   }
 
   return formData;

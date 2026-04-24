@@ -6,10 +6,7 @@ import styles from "@/pages/Kitchen/KitchenApp.module.scss";
 import "@/app/kitchen/kitchen-theme.css";
 
 export const metadata: Metadata = {
-  title: "friendkitchen",
-  icons: {
-    icon: "/kitchen-assets/vite.svg",
-  },
+  title: "Kitchen Druzhbata",
 };
 
 export default function AdminLayout({

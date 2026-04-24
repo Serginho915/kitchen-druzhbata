@@ -20,6 +20,7 @@ const buildDishFormData = (data: Partial<DishPayload>) => {
   const formData = new FormData();
 
   if (data.name !== undefined) formData.append("name", data.name);
+  if (data.description !== undefined) formData.append("description", data.description);
   if (data.weight !== undefined) formData.append("weight", String(data.weight));
   if (data.price !== undefined) formData.append("price", String(data.price));
   if (data.category !== undefined) formData.append("category", data.category);
@@ -27,10 +28,6 @@ const buildDishFormData = (data: Partial<DishPayload>) => {
 
   if (data.image instanceof File) {
     formData.append("image", data.image);
-  }
-
-  if (data.special_offer_image instanceof File) {
-    formData.append("special_offer_image", data.special_offer_image);
   }
 
   return formData;

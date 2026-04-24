@@ -136,6 +136,7 @@ export default function KitchenHomePage({ apiClient = menuApi }: KitchenHomePage
                 item={item}
                 isSelected={selectedIds.has(item.id)}
                 onToggle={toggleSelection}
+                showFullDetails={Boolean(isAdminRoute)}
               />
             ))}
           </div>

@@ -5,7 +5,7 @@ import styles from "@/pages/Kitchen/KitchenApp.module.scss";
 import "./kitchen-theme.css";
 
 export const metadata: Metadata = {
-  title: "friendkitchen",
+  title: "Kitchen Druzhbata",
   icons: {
     icon: "/kitchen-assets/vite.svg",
   },
