@@ -15,6 +15,11 @@ interface KitchenEditingPageProps {
   };
 }
 
+type EditProduct = Product & {
+  image?: string | File | null;
+  special_offer_image?: string | File | null;
+};
+
 export default function KitchenEditingPage({ apiClient = menuApi }: KitchenEditingPageProps) {
   const AVAILABLE_CATEGORIES = [
     "СУПИ",
@@ -28,7 +33,7 @@ export default function KitchenEditingPage({ apiClient = menuApi }: KitchenEditi
 
   const [menuItems, setMenuItems] = useState<Product[]>([]);
   const [editingId, setEditingId] = useState<number | string | null>(null);
-  const [editFormData, setEditFormData] = useState<Product | null>(null);
+  const [editFormData, setEditFormData] = useState<EditProduct | null>(null);
 
   const fetchMenu = async () => {
     try {
@@ -65,7 +70,7 @@ export default function KitchenEditingPage({ apiClient = menuApi }: KitchenEditi
     setEditFormData({ ...item, is_spicy: Boolean(item.is_spicy) });
   };
 
-  const handleEditChange = (field: keyof Product, value: string | number | boolean) => {
+  const handleEditChange = (field: keyof EditProduct, value: string | number | boolean | File | null) => {
     if (editFormData) {
       setEditFormData({ ...editFormData, [field]: value });
     }
@@ -75,14 +80,17 @@ export default function KitchenEditingPage({ apiClient = menuApi }: KitchenEditi
     if (!editFormData) return;
 
     try {
-      const { id, name, weight, price, category, is_spicy } = editFormData;
+      const { id, name, description, weight, price, category, is_spicy, image, special_offer_image } = editFormData;
 
       await apiClient.update(id, {
         name,
+        description,
         weight: weight !== undefined && weight !== "" ? Number(weight) : 0,
         price: Number(price),
         category,
         is_spicy: Boolean(is_spicy),
+        ...(image instanceof File ? { image } : {}),
+        ...(special_offer_image instanceof File ? { special_offer_image } : {}),
       });
 
       await fetchMenu();

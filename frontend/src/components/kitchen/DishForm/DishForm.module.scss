@@ -2,54 +2,130 @@
     padding: 1em;
     display: flex;
     gap: 10px;
-    align-items: center;
+    align-items: flex-end;
+    flex-wrap: wrap;
 
     h2 {
         margin-top: 0;
     }
 
     .inputGroup {
-        display: flex;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 10px;
-        flex-wrap: wrap;
-        align-items: center;
+        align-items: end;
+        flex: 1;
+
+        input[type='text'] {
+            width: 100%;
+            min-height: 42px;
+            padding: 10px;
+            background-color: #ecb731;
+            opacity: 0.9;
+            border-radius: 5px;
+            border: #c7764d 1px solid;
+        }
+
+        input[type='number'] {
+            width: 100%;
+            min-height: 42px;
+            padding: 10px;
+            background-color: #ecb731;
+            opacity: 0.9;
+            border-radius: 5px;
+            border: #c7764d 1px solid;
+        }
 
         select {
-            padding: 8px;
-            min-width: 150px;
+            padding: 10px;
+            width: 100%;
+            min-width: 0;
+            min-height: 42px;
+            background-color: #ecb731;
+            opacity: 0.9;
+            border-radius: 5px;
+            border: #c7764d 1px solid;
         }
 
         .fileInputLabel {
             display: flex;
             flex-direction: column;
             gap: 4px;
-            font-size: 0.85em;
+            font-size: 0.9em;
             color: #213547;
+            min-width: 0;
+            width: 100%;
 
             input {
-                padding: 4px;
+                padding: 5px;
+                max-width: 100%;
+                width: 100%;
+                min-height: 42px;
+                background-color: #ecb731;
+                opacity: 0.9;
+                border-radius: 5px;
+                border: #c7764d 1px solid;
             }
         }
 
-        .spicyToggle {
+        .spicyCheckboxLabel {
             display: inline-flex;
-            border-radius: 999px;
-            overflow: hidden;
-            border: 1px solid #d1d5db;
-        }
-
-        .spicyOption {
-            border: 0;
-            border-radius: 0;
-            padding: 8px 12px;
-            background: #f3f4f6;
-            color: #1f2937;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 10px;
+            border: #c7764d 1px solid;
+            border-radius: 5px;
+            background-color: #ecb731;
+            opacity: 0.9;
             font-size: 0.85em;
-        }
+            min-height: 42px;
+            width: 100%;
 
-        .active {
-            background: #edba87;
-            font-weight: 700;
+            input {
+                margin: 0;
+            }
+        }
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1440px) {
+    .formCard {
+        .inputGroup {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 8px;
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    .formCard {
+        .inputGroup {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+            align-items: end;
+
+            input[type='text'],
+            input[type='number'],
+            select,
+            .fileInputLabel,
+            .spicyCheckboxLabel {
+                width: 100%;
+                min-width: 0;
+            }
+
+            .fileInputLabel {
+                input {
+                    max-width: 100%;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .formCard {
+        .inputGroup {
+            grid-template-columns: 1fr;
         }
     }
 }

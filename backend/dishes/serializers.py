@@ -10,6 +10,7 @@ class DishSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "name",
+            "description",
             "weight",
             "price",
             "category",

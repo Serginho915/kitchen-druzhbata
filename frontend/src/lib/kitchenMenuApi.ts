@@ -1,6 +1,7 @@
 export type Product = {
   id: number | string;
   name: string;
+  description?: string;
   weight?: number;
   price: number | string;
   category?: string;
@@ -11,6 +12,7 @@ export type Product = {
 
 export type DishPayload = {
   name: string;
+  description?: string;
   weight?: number;
   price: number;
   category?: string;
@@ -25,6 +27,7 @@ const buildDishFormData = (data: Partial<DishPayload>) => {
   const formData = new FormData();
 
   if (data.name !== undefined) formData.append("name", data.name);
+  if (data.description !== undefined) formData.append("description", data.description);
   if (data.weight !== undefined) formData.append("weight", String(data.weight));
   if (data.price !== undefined) formData.append("price", String(data.price));
   if (data.category !== undefined) formData.append("category", data.category);

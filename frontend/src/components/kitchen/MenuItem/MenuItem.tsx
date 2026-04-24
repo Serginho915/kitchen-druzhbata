@@ -11,7 +11,7 @@ interface MenuItemProps {
   editFormData: Product | null;
   availableCategories: string[];
   onEditClick: (item: Product) => void;
-  onEditChange: (field: keyof Product, value: string | number | boolean) => void;
+  onEditChange: (field: keyof Product, value: string | number | boolean | File | null) => void;
   onSave: () => void;
   onCancel: () => void;
   onDelete: (id: number | string) => void;
@@ -67,6 +67,16 @@ export function MenuItem({
             />
           </div>
           <div className={styles.editField}>
+            <span className={styles.label}>Описание</span>
+            <input
+              className={styles.inputEdit}
+              value={editFormData?.description || ""}
+              onChange={(event) => onEditChange("description", event.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="Описание"
+            />
+          </div>
+          <div className={styles.editField}>
             <span className={styles.label}>Вес (г)</span>
             <input
               className={styles.inputEdit}
@@ -106,15 +116,34 @@ export function MenuItem({
           </div>
           <div className={styles.editField}>
             <span className={styles.label}>Острота</span>
-            <select
-              className={styles.inputEdit}
-              value={editFormData?.is_spicy ? "spicy" : "not_spicy"}
-              onChange={(event) => onEditChange("is_spicy", event.target.value === "spicy")}
-              onKeyDown={handleKeyDown}
-            >
-              <option value="not_spicy">Неострое</option>
-              <option value="spicy">Острое</option>
-            </select>
+            <label className={styles.checkboxLabel}>
+              <input
+                type="checkbox"
+                checked={Boolean(editFormData?.is_spicy)}
+                onChange={(event) => onEditChange("is_spicy", event.target.checked)}
+              />
+              <span>{editFormData?.is_spicy ? "Острое" : "Неострое"}</span>
+            </label>
+          </div>
+          <div className={styles.editField}>
+            <span className={styles.label}>Блюдо</span>
+            <label className={styles.fileInputLabel}>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(event) => onEditChange("image", event.target.files?.[0] ?? null)}
+              />
+            </label>
+          </div>
+          <div className={styles.editField}>
+            <span className={styles.label}>Спецпредложение</span>
+            <label className={styles.fileInputLabel}>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(event) => onEditChange("special_offer_image", event.target.files?.[0] ?? null)}
+              />
+            </label>
           </div>
           <div className={styles.editActions}>
             <button onClick={onSave} className={`${styles.actionButton} ${styles.ok}`}>OK</button>

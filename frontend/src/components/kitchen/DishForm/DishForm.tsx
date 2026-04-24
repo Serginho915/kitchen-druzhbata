@@ -15,6 +15,7 @@ interface DishFormProps {
 
 export function DishForm({ onDishAdded, availableCategories, apiClient = menuApi }: DishFormProps) {
   const [dishName, setDishName] = useState("");
+  const [dishDescription, setDishDescription] = useState("");
   const [dishPrice, setDishPrice] = useState("");
   const [dishWeight, setDishWeight] = useState("");
   const [dishCategory, setDishCategory] = useState("");
@@ -43,6 +44,7 @@ export function DishForm({ onDishAdded, availableCategories, apiClient = menuApi
     try {
       await apiClient.create({
         name: dishName,
+        description: dishDescription,
         price,
         weight,
         category: dishCategory,
@@ -54,6 +56,7 @@ export function DishForm({ onDishAdded, availableCategories, apiClient = menuApi
       onDishAdded();
 
       setDishName("");
+      setDishDescription("");
       setDishPrice("");
       setDishWeight("");
       setDishCategory("");
@@ -74,13 +77,19 @@ export function DishForm({ onDishAdded, availableCategories, apiClient = menuApi
 
   return (
     <div className={styles.formCard}>
-      <h2 className={styles.title}>Добавить позицию в меню</h2>
       <div className={styles.inputGroup}>
         <input
           type="text"
           placeholder="Название"
           value={dishName}
           onChange={(event) => setDishName(event.target.value)}
+          onKeyDown={handleKeyDown}
+        />
+        <input
+          type="text"
+          placeholder="Описание"
+          value={dishDescription}
+          onChange={(event) => setDishDescription(event.target.value)}
           onKeyDown={handleKeyDown}
         />
         <input
@@ -115,7 +124,7 @@ export function DishForm({ onDishAdded, availableCategories, apiClient = menuApi
           ))}
         </select>
         <label className={styles.fileInputLabel}>
-          Фото блюда
+          Блюдо
           <input
             type="file"
             accept="image/*"
@@ -123,29 +132,21 @@ export function DishForm({ onDishAdded, availableCategories, apiClient = menuApi
           />
         </label>
         <label className={styles.fileInputLabel}>
-          Фото спецпредложения
+          Спецпредложение
           <input
             type="file"
             accept="image/*"
             onChange={(event) => setSpecialOfferImage(event.target.files?.[0] ?? null)}
           />
         </label>
-        <div className={styles.spicyToggle} role="group" aria-label="Острота блюда">
-          <button
-            type="button"
-            className={`${styles.spicyOption} ${isSpicy ? "" : styles.active}`}
-            onClick={() => setIsSpicy(false)}
-          >
-            Неострое
-          </button>
-          <button
-            type="button"
-            className={`${styles.spicyOption} ${isSpicy ? styles.active : ""}`}
-            onClick={() => setIsSpicy(true)}
-          >
-            Острое
-          </button>
-        </div>
+        <label className={styles.spicyCheckboxLabel}>
+          <input
+            type="checkbox"
+            checked={isSpicy}
+            onChange={(event) => setIsSpicy(event.target.checked)}
+          />
+          <span>{isSpicy ? "Острое" : "Неострое"}</span>
+        </label>
       </div>
       <button onClick={() => void handleAddDish()} className={styles.addButton}>Добавить</button>
     </div>

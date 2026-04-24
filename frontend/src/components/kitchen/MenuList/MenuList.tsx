@@ -9,7 +9,7 @@ interface MenuListProps {
   editFormData: Product | null;
   availableCategories: string[];
   onEditClick: (item: Product) => void;
-  onEditChange: (field: keyof Product, value: string | number | boolean) => void;
+  onEditChange: (field: keyof Product, value: string | number | boolean | File | null) => void;
   onSave: () => void;
   onCancel: () => void;
   onDelete: (id: number | string) => void;
