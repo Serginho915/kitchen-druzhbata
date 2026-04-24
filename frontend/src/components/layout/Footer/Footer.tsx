@@ -65,7 +65,7 @@ export const Footer = () => {
                   <FaFacebookF />
                 </a>
                 <a
-                  href="https://www.instagram.com/kuhnya_nadruzhbata/"
+                  href="https://www.instagram.com/kuhnya_nadruzhbata"
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`${styles.socialLink} ${styles.instagram}`}
