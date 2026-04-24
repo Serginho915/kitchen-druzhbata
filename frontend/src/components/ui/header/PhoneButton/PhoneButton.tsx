@@ -39,8 +39,8 @@ export const PhoneButton: React.FC<PhoneButtonProps> = ({ className }) => {
 
   const handlePhoneClick = (e: React.MouseEvent) => {
     if (!isMobile) {
+      e.preventDefault();
       if (!isPhoneExpanded) {
-        e.preventDefault();
         setIsPhoneExpanded(true);
       }
     }
