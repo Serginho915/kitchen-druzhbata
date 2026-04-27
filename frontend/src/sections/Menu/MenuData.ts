@@ -24,6 +24,23 @@ export interface Category {
   dishes: Dish[];
 }
 
+export interface CategoryMetadata {
+  id: string;
+  title: string;
+  icon: any;
+}
+
+export const Categories: CategoryMetadata[] = [
+  // { id: "favorites", title: "Любими Предложения", icon: HotSalesIcon },
+  { id: "salads", title: "Салати", icon: SaladIcon },
+  { id: "soups", title: "Супи", icon: SoupIcon },
+  { id: "cold-dishes", title: "Студени Ястия / Разядки", icon: ColdDishesIcon },
+  { id: "main-dishes", title: "Основни Ястия", icon: MainDishIcon },
+  { id: "meat-fish", title: "Месо и Риба", icon: MeatFishIcon },
+  { id: "sides", title: "Гарнитури", icon: SideIcon },
+  { id: "desserts", title: "Десерти", icon: DessertIcon },
+];
+
 export const MenuData: Category[] = [
   {
     id: "favorites",

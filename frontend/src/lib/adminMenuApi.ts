@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "./api";
 import { type DishPayload, type Product } from "@/lib/kitchenMenuApi";
 
 type DailyMenuResponse = {
@@ -26,7 +27,6 @@ type DailySelectionMeta = {
   updated_at: string;
 };
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000/api";
 const ADMIN_TOKEN_KEY = "kitchen-admin-token";
 
 const getToken = () => {

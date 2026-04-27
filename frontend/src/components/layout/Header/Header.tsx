@@ -12,14 +12,14 @@ import navigate from "@/assets/images/Vectors/navigate.svg";
 import { useCart } from "@/hooks/useCart";
 import { IoClose } from "react-icons/io5";
 
-import { PhoneButton } from "@/components/ui/header/PhoneButton/PhoneButton";
-
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const menuRef = useRef<HTMLDivElement>(null);
   const burgerRef = useRef<HTMLDivElement>(null);
+  const phoneRef = useRef<HTMLAnchorElement>(null);
+  const [isPhoneExpanded, setIsPhoneExpanded] = useState(false);
 
   const [isMobile, setIsMobile] = useState(false);
 
@@ -34,7 +34,6 @@ export const Header = () => {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Hide on scroll down, show on scroll up
   useEffect(() => {
     const handleScroll = () => {
       if (isMenuOpen) {
@@ -74,6 +73,31 @@ export const Header = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isMenuOpen]);
 
+  // Close phone info on outside click
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        isPhoneExpanded &&
+        phoneRef.current &&
+        !phoneRef.current.contains(e.target as Node)
+      ) {
+        setIsPhoneExpanded(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isPhoneExpanded]);
+
+  const handlePhoneClick = (e: React.MouseEvent) => {
+    if (window.innerWidth >= 1200) {
+      if (!isPhoneExpanded) {
+        e.preventDefault();
+        setIsPhoneExpanded(true);
+      }
+    }
+  };
+
   return (
     <header
       className={`${styles.header} ${!isVisible ? styles.headerHidden : ""}`}
@@ -91,12 +115,56 @@ export const Header = () => {
       </div>
 
       {/* <nav className={styles.navBlock}>
-        ...
+        <ul className={styles.navList}>
+          <li className={styles.navItem}>
+            <Link href="/#menu">Меню</Link>
+          </li>
+          <li className={styles.navItem}>
+            <Link href="/#about">За нас</Link>
+          </li>
+          <li className={styles.navItem}>
+            <Link href="/preorder">Предзаказ</Link>
+          </li>
+          <li className={styles.navItem}>
+            <Link href="/subscriptions">Подписки</Link>
+          </li>
+        </ul>
       </nav> */}
 
       <div className={styles.userBlock}>
-          {/* ... */}
-        <PhoneButton />
+        {/* <div
+            className={`${styles.userItem} ${styles.bgUserBlock} ${styles.cartBlock}`}
+            onClick={toggleCart}
+          >
+            {cartCount > 0 && (
+              <span className={styles.cartBadge}>
+                {cartCount > 99 ? "99+" : cartCount}
+              </span>
+            )}
+            <Image
+              src={cart}
+              alt="Cart Icon"
+              width={64}
+              height={64}
+              className={styles.icon}
+            />
+          </div> */}
+        <Link
+          ref={phoneRef}
+          href={isMobile ? "tel:+3598899999" : "#"}
+          className={`${styles.phoneIcon} ${styles.bgUserBlock} ${isPhoneExpanded ? styles.phoneExpanded : ""}`}
+          onClick={handlePhoneClick}
+          onMouseLeave={() => setIsPhoneExpanded(false)}
+        >
+          <Image
+            src={phone}
+            alt="Phone Icon"
+            width={64}
+            height={64}
+            className={styles.icon}
+          />
+          <span className={styles.phoneNumber}>+359 88 999 99</span>
+        </Link>
         <Link
           href="https://maps.app.goo.gl/4W58KxWc4GTXwJPRA"
           target="_blank"

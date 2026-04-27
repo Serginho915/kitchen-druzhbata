@@ -1,3 +1,5 @@
+import { API_BASE_URL } from "./api";
+
 export type Product = {
   id: number | string;
   name: string;
@@ -19,7 +21,13 @@ export type DishPayload = {
   is_spicy?: boolean;
 };
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000/api";
+export type SpecialOffer = {
+  id: number;
+  text: string;
+  banner: string | null;
+  updated_at: string;
+};
+
 
 const buildDishFormData = (data: Partial<DishPayload>) => {
   const formData = new FormData();
@@ -67,4 +75,19 @@ export const menuApi = {
     });
     if (!response.ok) throw new Error("Failed to add item");
   },
+
+  getToday: async (): Promise<Product[]> => {
+    const response = await fetch(`${API_BASE_URL}/menu/today/`, { cache: "no-store" });
+    if (!response.ok) throw new Error("Failed to fetch daily menu");
+    const data = await response.json();
+    return data.dishes;
+  },
+
+  getSpecialOffer: async (): Promise<SpecialOffer[]> => {
+    const response = await fetch(`${API_BASE_URL}/special-offer/`, { cache: "no-store" });
+    if (!response.ok) throw new Error("Failed to fetch special offers");
+    const data = await response.json();
+    return data.offers;
+  },
 };
+

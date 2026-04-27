@@ -5,6 +5,7 @@ import styles from "./DishCard.module.scss";
 import Image from "next/image";
 import { useCart } from "@/hooks/useCart";
 import hotIcon from "@/assets/images/Vectors/hot.svg";
+import { resolveApiImage } from "@/lib/api";
 
 interface DishCardProps {
   id: number;
@@ -35,11 +36,12 @@ export const DishCard: React.FC<DishCardProps> = ({
       <div className={styles.imageWrapper}>
         {image ? (
           <Image
-            src={image}
+            src={resolveApiImage(image) || ""}
             alt={title}
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: "cover" }}
             className={styles.image}
+            unoptimized
           />
         ) : (
           <div className={styles.placeholder} />

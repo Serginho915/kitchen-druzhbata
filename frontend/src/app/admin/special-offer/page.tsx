@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { adminMenuApi } from "@/lib/adminMenuApi";
+import { resolveApiImage } from "@/lib/api";
 import layoutStyles from "@/pages/Kitchen/KitchenApp.module.scss";
 import styles from "./offer-editing.module.scss";
 
@@ -53,15 +54,6 @@ export default function OfferEditingPage() {
       ignore = true;
     };
   }, []);
-
-  const resolveImageSrc = (image?: string | null) => {
-    if (!image) return null;
-    if (image.startsWith("http://") || image.startsWith("https://")) return image;
-
-    const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000/api";
-    const backendBaseUrl = apiBaseUrl.replace(/\/api\/?$/, "");
-    return `${backendBaseUrl}${image.startsWith("/") ? "" : "/"}${image}`;
-  };
 
   const toggleSelectedOffer = (id: number | string) => {
     setSelectedIds((prev) => {
@@ -117,7 +109,7 @@ export default function OfferEditingPage() {
 
       <div className={styles.grid}>
         {offers.map((offer) => {
-          const imageSrc = resolveImageSrc(offer.banner);
+          const imageSrc = resolveApiImage(offer.banner);
           const isSelected = selectedIds.has(offer.id);
 
           return (

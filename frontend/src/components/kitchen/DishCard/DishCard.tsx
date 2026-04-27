@@ -1,6 +1,7 @@
 import styles from "./DishCard.module.scss";
 
 import { type Product } from "@/lib/kitchenMenuApi";
+import { resolveApiImage } from "@/lib/api";
 
 interface DishCardProps {
   item: Product;
@@ -11,16 +12,6 @@ interface DishCardProps {
   showImage?: boolean;
 }
 
-const resolveImageSrc = (image?: string | null) => {
-  if (!image) return null;
-  if (image.startsWith("http://") || image.startsWith("https://")) return image;
-
-  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000/api";
-  const backendBaseUrl = apiBaseUrl.replace(/\/api\/?$/, "");
-
-  return `${backendBaseUrl}${image.startsWith("/") ? "" : "/"}${image}`;
-};
-
 export function DishCard({
   item,
   isSelected,
@@ -29,7 +20,7 @@ export function DishCard({
   showDescription = true,
   showImage = true,
 }: DishCardProps) {
-  const dishImageSrc = resolveImageSrc(item.image);
+  const dishImageSrc = resolveApiImage(item.image);
 
   return (
     <div

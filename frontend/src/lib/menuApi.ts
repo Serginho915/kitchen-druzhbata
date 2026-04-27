@@ -1,3 +1,5 @@
+import { API_BASE_URL } from "./api";
+
 export type Dish = {
   id: number;
   name: string;
@@ -14,7 +16,6 @@ export type DishPayload = {
   category: string;
 };
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000/api";
 const DISHES_ENDPOINT = `${API_BASE_URL}/dishes/`;
 
 const parseError = async (response: Response): Promise<string> => {

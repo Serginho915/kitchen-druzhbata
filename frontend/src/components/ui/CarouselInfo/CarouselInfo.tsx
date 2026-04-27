@@ -2,18 +2,32 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./CarouselInfo.module.scss";
-import { CarouselMockData } from "./CarouselMockData";
+import { menuApi, SpecialOffer } from "@/lib/kitchenMenuApi";
+import { resolveApiImage } from "@/lib/api";
 import Image from "next/image";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { useCart } from "@/hooks/useCart";
 
 export const CarouselInfo = () => {
   const [currSlide, setCurrSlide] = useState(0);
+  const [carouselData, setCarouselData] = useState<SpecialOffer[]>([]);
   const { addToCart } = useCart();
-  const carouselData = CarouselMockData;
+
+  useEffect(() => {
+    const fetchOffers = async () => {
+      try {
+        const offers = await menuApi.getSpecialOffer();
+        setCarouselData(offers);
+      } catch (error) {
+        console.error("Failed to fetch special offers:", error);
+      }
+    };
+    fetchOffers();
+  }, []);
 
   // Auto-scroll logic
   useEffect(() => {
+    if (carouselData.length === 0) return;
     const interval = setInterval(() => {
       setCurrSlide((prev) => (prev + 1) % carouselData.length);
     }, 3000);
@@ -21,16 +35,8 @@ export const CarouselInfo = () => {
     return () => clearInterval(interval);
   }, [carouselData.length]);
 
-  const addPromoToCart = () => {
-    const currentDeal = carouselData[currSlide];
-    addToCart({
-      id: currentDeal.content.id,
-      title: currentDeal.content.title,
-      weight: currentDeal.content.weight,
-      price: currentDeal.content.price,
-      image: currentDeal.content.image.src
-    });
-  };
+
+
 
   const dotWindowSize = 3;
   const dotSize = 12;
@@ -43,19 +49,26 @@ export const CarouselInfo = () => {
   return (
     <div className={styles.carouselInfo}>
       <div className={styles.imageBlock}>
-        <div 
-          className={styles.track} 
+        <div
+          className={styles.track}
           style={{ transform: `translateX(-${currSlide * 100}%)` }}
         >
           {carouselData.map((slide) => (
             <div key={slide.id} className={styles.slide}>
-              <Image
-                src={slide.content.image}
-                alt={slide.content.title}
-                width={632}
-                height={256}
-                className={styles.image}
-              />
+              {slide.banner ? (
+                <Image
+                  src={resolveApiImage(slide.banner) || ""}
+                  alt={slide.text}
+                  width={632}
+                  height={256}
+                  className={styles.image}
+                  unoptimized // Added because backend images might not be on the same domain or for simplicity with dynamic URLs
+                />
+              ) : (
+                <div className={styles.imagePlaceholder}>
+                  <span>{slide.text}</span>
+                </div>
+              )}
             </div>
           ))}
         </div>

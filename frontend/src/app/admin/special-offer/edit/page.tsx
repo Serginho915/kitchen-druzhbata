@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { adminMenuApi } from "@/lib/adminMenuApi";
+import { resolveApiImage } from "@/lib/api";
 import layoutStyles from "@/pages/Kitchen/KitchenApp.module.scss";
 import Link from "next/link";
 import styles from "./edit-offer.module.scss";
@@ -35,15 +36,6 @@ export default function OfferEditingManagePage() {
   useEffect(() => {
     void loadOffers();
   }, []);
-
-  const resolveImageSrc = (image?: string | null) => {
-    if (!image) return null;
-    if (image.startsWith("http://") || image.startsWith("https://")) return image;
-
-    const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000/api";
-    const backendBaseUrl = apiBaseUrl.replace(/\/api\/?$/, "");
-    return `${backendBaseUrl}${image.startsWith("/") ? "" : "/"}${image}`;
-  };
 
   const handleCreate = async () => {
     if (!newText.trim()) {
@@ -148,7 +140,7 @@ export default function OfferEditingManagePage() {
         <h3>Все спецпредложения</h3>
         <ul className={styles.offerList}>
           {offers.map((offer) => {
-            const imageSrc = resolveImageSrc(offer.banner);
+            const imageSrc = resolveApiImage(offer.banner);
             const isEditing = editingId === offer.id;
 
             return (
