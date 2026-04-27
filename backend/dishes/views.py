@@ -1,4 +1,5 @@
 from django.utils import timezone
+from drf_spectacular.utils import extend_schema, OpenApiResponse
 from rest_framework import permissions, status, viewsets
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.models import Token
@@ -17,7 +18,7 @@ from .serializers import (
 )
 
 
-class DishViewSet(viewsets.ModelViewSet):
+class DishViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = DishSerializer
     permission_classes = [permissions.AllowAny]
 
@@ -29,9 +30,17 @@ class DishViewSet(viewsets.ModelViewSet):
         return queryset
 
 
-class AdminDishViewSet(DishViewSet):
+class AdminDishViewSet(viewsets.ModelViewSet):
+    serializer_class = DishSerializer
     authentication_classes = [TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        queryset = Dish.objects.all()
+        category = self.request.query_params.get("category")
+        if category:
+            queryset = queryset.filter(category=category)
+        return queryset
 
 
 class AdminSpecialOfferViewSet(viewsets.ModelViewSet):
@@ -44,6 +53,7 @@ class AdminSpecialOfferViewSet(viewsets.ModelViewSet):
 class CurrentDailyMenuView(APIView):
     permission_classes = [permissions.AllowAny]
 
+    @extend_schema(responses=DailyMenuSerializer)
     def get(self, request):
         menu, _ = DailyMenu.objects.get_or_create(date=timezone.localdate())
         serializer = DailyMenuSerializer(menu)
@@ -54,11 +64,13 @@ class AdminCurrentDailyMenuView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
+    @extend_schema(responses=DailyMenuSerializer)
     def get(self, request):
         menu, _ = DailyMenu.objects.get_or_create(date=timezone.localdate())
         serializer = DailyMenuSerializer(menu)
         return Response(serializer.data)
 
+    @extend_schema(request=DailyMenuUpdateSerializer, responses=DailyMenuSerializer)
     def put(self, request):
         update_serializer = DailyMenuUpdateSerializer(data=request.data)
         update_serializer.is_valid(raise_exception=True)
@@ -76,6 +88,7 @@ class AdminCurrentDailyMenuView(APIView):
 class UserLoginView(APIView):
     permission_classes = [permissions.AllowAny]
 
+    @extend_schema(request=UserLoginSerializer, responses={200: OpenApiResponse(description='Token and username')})
     def post(self, request):
         serializer = UserLoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -88,6 +101,7 @@ class UserLogoutView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
+    @extend_schema(responses={204: OpenApiResponse(description='Logged out')})
     def post(self, request):
         Token.objects.filter(user=request.user).delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -96,6 +110,7 @@ class UserLogoutView(APIView):
 class CurrentSpecialOfferView(APIView):
     permission_classes = [permissions.AllowAny]
 
+    @extend_schema(responses=DailySpecialOffersSerializer)
     def get(self, request):
         daily_offers, _ = DailySpecialOffers.objects.get_or_create(date=timezone.localdate())
         serializer = DailySpecialOffersSerializer(daily_offers)
@@ -110,10 +125,12 @@ class AdminCurrentSpecialOfferView(APIView):
         daily_offers, _ = DailySpecialOffers.objects.get_or_create(date=timezone.localdate())
         return daily_offers
 
+    @extend_schema(responses=DailySpecialOffersSerializer)
     def get(self, request):
         serializer = DailySpecialOffersSerializer(self.get_object())
         return Response(serializer.data)
 
+    @extend_schema(request=DailySpecialOffersUpdateSerializer, responses=DailySpecialOffersSerializer)
     def put(self, request):
         update_serializer = DailySpecialOffersUpdateSerializer(data=request.data)
         update_serializer.is_valid(raise_exception=True)

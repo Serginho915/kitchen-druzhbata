@@ -48,13 +48,17 @@ class UserLoginSerializer(serializers.Serializer):
 class DailyMenuSerializer(serializers.ModelSerializer):
     dishes = DishSerializer(many=True, read_only=True)
     dish_ids = serializers.SerializerMethodField()
+    dishes_count = serializers.SerializerMethodField()
 
     class Meta:
         model = DailyMenu
-        fields = ["date", "updated_at", "dish_ids", "dishes"]
+        fields = ["date", "updated_at", "dishes_count", "dish_ids", "dishes"]
 
     def get_dish_ids(self, obj: DailyMenu):
         return list(obj.dishes.values_list("id", flat=True))
+
+    def get_dishes_count(self, obj: DailyMenu) -> int:
+        return obj.dishes.count()
 
 
 class DailyMenuUpdateSerializer(serializers.Serializer):
@@ -67,8 +71,8 @@ class DailyMenuUpdateSerializer(serializers.Serializer):
 class SpecialOfferSerializer(serializers.ModelSerializer):
     class Meta:
         model = SpecialOffer
-        fields = ["id", "text", "banner", "updated_at"]
-        read_only_fields = ["id", "updated_at"]
+        fields = ["id", "text", "banner", "created_at", "updated_at"]
+        read_only_fields = ["id", "created_at", "updated_at"]
 
     def validate_banner(self, value):
         if not value:
@@ -79,13 +83,17 @@ class SpecialOfferSerializer(serializers.ModelSerializer):
 class DailySpecialOffersSerializer(serializers.ModelSerializer):
     offers = SpecialOfferSerializer(many=True, read_only=True)
     offer_ids = serializers.SerializerMethodField()
+    offers_count = serializers.SerializerMethodField()
 
     class Meta:
         model = DailySpecialOffers
-        fields = ["date", "updated_at", "offer_ids", "offers"]
+        fields = ["date", "updated_at", "offers_count", "offer_ids", "offers"]
 
     def get_offer_ids(self, obj: DailySpecialOffers):
         return list(obj.offers.values_list("id", flat=True))
+
+    def get_offers_count(self, obj: DailySpecialOffers) -> int:
+        return obj.offers.count()
 
 
 class DailySpecialOffersUpdateSerializer(serializers.Serializer):

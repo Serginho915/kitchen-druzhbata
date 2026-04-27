@@ -3,3 +3,4 @@ djangorestframework==3.16.0
 gunicorn==23.0.0
 django-cors-headers==4.4.0
 Pillow==11.2.1
+drf-spectacular==0.28.0
