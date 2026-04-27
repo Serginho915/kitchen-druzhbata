@@ -7,11 +7,13 @@ import { MenuModal } from "@/components/kitchen/MenuModal/MenuModal";
 import { menuApi, type Product } from "@/lib/kitchenMenuApi";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { adminAuthApi } from "@/lib/adminMenuApi";
 
 interface KitchenHomePageProps {
   apiClient?: {
     getAll: () => Promise<Product[]>;
+    getTodaySelection?: () => Promise<Array<number | string>>;
+    getTodaySelectionData?: () => Promise<{ ids: number[]; updated_at: string }>;
+    saveTodaySelection?: (dishIds: Array<number | string>) => Promise<void>;
   };
 }
 
@@ -21,6 +23,23 @@ export default function KitchenHomePage({ apiClient = menuApi }: KitchenHomePage
   const [menuItems, setMenuItems] = useState<Product[]>([]);
   const [selectedIds, setSelectedIds] = useState<Set<number | string>>(new Set());
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSavingDailyMenu, setIsSavingDailyMenu] = useState(false);
+  const [lastUpdated, setLastUpdated] = useState<string | null>(null);
+
+  const formatLastUpdated = (value: string | null) => {
+    if (!value) return "Еще не обновлялось";
+
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return "Еще не обновлялось";
+
+    return date.toLocaleString("ru-RU", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
 
   const CATEGORY_ORDER = [
     "СУПИ",
@@ -53,6 +72,38 @@ export default function KitchenHomePage({ apiClient = menuApi }: KitchenHomePage
     };
   }, [apiClient]);
 
+  useEffect(() => {
+    if (!isAdminRoute || !apiClient.getTodaySelection) return;
+
+    let ignore = false;
+
+    const loadTodaySelection = async () => {
+      try {
+        if (apiClient.getTodaySelectionData) {
+          const data = await apiClient.getTodaySelectionData();
+          if (!ignore) {
+            setSelectedIds(new Set(data.ids));
+            setLastUpdated(data.updated_at);
+          }
+          return;
+        }
+
+        const savedIds = await apiClient.getTodaySelection?.();
+        if (!ignore && savedIds) {
+          setSelectedIds(new Set(savedIds));
+        }
+      } catch (err) {
+        console.error("Error fetching daily menu selection:", err);
+      }
+    };
+
+    void loadTodaySelection();
+
+    return () => {
+      ignore = true;
+    };
+  }, [apiClient, isAdminRoute]);
+
   const toggleSelection = (id: number | string) => {
     setSelectedIds((prev) => {
       const next = new Set(prev);
@@ -67,10 +118,25 @@ export default function KitchenHomePage({ apiClient = menuApi }: KitchenHomePage
 
   const selectedItems = menuItems.filter((item) => selectedIds.has(item.id));
 
-  const handleAdminLogout = async () => {
-    await adminAuthApi.logout();
-    window.localStorage.removeItem(adminAuthApi.tokenKey);
-    window.location.reload();
+  const handleSaveTodayMenu = async () => {
+    if (!apiClient.saveTodaySelection) return;
+
+    try {
+      setIsSavingDailyMenu(true);
+      await apiClient.saveTodaySelection(Array.from(selectedIds));
+
+      if (apiClient.getTodaySelectionData) {
+        const data = await apiClient.getTodaySelectionData();
+        setLastUpdated(data.updated_at);
+      }
+
+      alert("Меню на сегодня сохранено");
+    } catch (err) {
+      console.error("Error saving daily menu:", err);
+      alert("Не удалось сохранить меню на сегодня");
+    } finally {
+      setIsSavingDailyMenu(false);
+    }
   };
 
   const groupedItems = menuItems.reduce((accumulator, item) => {
@@ -91,40 +157,45 @@ export default function KitchenHomePage({ apiClient = menuApi }: KitchenHomePage
 
   return (
     <div className={styles.homeContainer}>
-      <div className={styles.controls}>
-        {isAdminRoute ? (
-          <Link href="/admin/editing" className={styles.templateBtn}>
-            Редактирование
-          </Link>
-        ) : null}
-        <button
-          className={styles.templateBtn}
-          onClick={() => setIsModalOpen(true)}
-          disabled={selectedIds.size === 0}
-        >
-          Сформировать шаблон ({selectedIds.size})
-        </button>
-        {isAdminRoute ? (
+      {isAdminRoute ? (
+        <div className={styles.adminTopRow}>
+          <div className={styles.adminHeader}>
+            <h2 className={styles.adminTitle}>Меню на сегодня</h2>
+            <p className={styles.hint}>Выберите позиции меню для текущего дня.</p>
+            <p className={styles.updatedAt}>Обновлено: {formatLastUpdated(lastUpdated)}</p>
+          </div>
+
+          <div className={styles.controls}>
+            <Link href="/admin/menu-editing" className={`${styles.templateBtn} ${styles.secondaryBtn}`}>
+              Редактировать
+            </Link>
+            <button
+              className={styles.templateBtn}
+              onClick={() => setIsModalOpen(true)}
+              disabled={selectedIds.size === 0}
+            >
+              Сформировать шаблон ({selectedIds.size})
+            </button>
+            <button
+              className={styles.templateBtn}
+              onClick={() => void handleSaveTodayMenu()}
+              disabled={selectedIds.size === 0 || isSavingDailyMenu}
+            >
+              {isSavingDailyMenu ? "Сохранение..." : `Сохранить меню на сегодня (${selectedIds.size})`}
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div className={styles.controls}>
           <button
-            type="button"
-            className={styles.iconLogoutBtn}
-            onClick={() => void handleAdminLogout()}
-            aria-label="Выйти"
-            title="Выйти"
+            className={styles.templateBtn}
+            onClick={() => setIsModalOpen(true)}
+            disabled={selectedIds.size === 0}
           >
-            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-              <path
-                d="M10 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4M15 16l5-4-5-4M20 12H9"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            Сформировать шаблон ({selectedIds.size})
           </button>
-        ) : null}
-      </div>
+        </div>
+      )}
 
       {categories.map((category) => (
         <section key={category} className={styles.categorySection}>
@@ -137,6 +208,8 @@ export default function KitchenHomePage({ apiClient = menuApi }: KitchenHomePage
                 isSelected={selectedIds.has(item.id)}
                 onToggle={toggleSelection}
                 showFullDetails={Boolean(isAdminRoute)}
+                showDescription={!isAdminRoute}
+                showImage={!isAdminRoute}
               />
             ))}
           </div>

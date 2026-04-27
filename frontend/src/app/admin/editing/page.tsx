@@ -1,8 +1,5 @@
-"use client";
-
-import KitchenEditingPage from "@/pages/Kitchen/EditingPage";
-import { adminMenuApi } from "@/lib/adminMenuApi";
+import { redirect } from "next/navigation";
 
 export default function Page() {
-  return <KitchenEditingPage apiClient={adminMenuApi} />;
+  redirect("/admin/menu-editing");
 }

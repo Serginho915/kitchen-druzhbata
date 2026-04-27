@@ -7,6 +7,8 @@ interface DishCardProps {
   isSelected: boolean;
   onToggle: (id: number | string) => void;
   showFullDetails?: boolean;
+  showDescription?: boolean;
+  showImage?: boolean;
 }
 
 const resolveImageSrc = (image?: string | null) => {
@@ -19,7 +21,14 @@ const resolveImageSrc = (image?: string | null) => {
   return `${backendBaseUrl}${image.startsWith("/") ? "" : "/"}${image}`;
 };
 
-export function DishCard({ item, isSelected, onToggle, showFullDetails = false }: DishCardProps) {
+export function DishCard({
+  item,
+  isSelected,
+  onToggle,
+  showFullDetails = false,
+  showDescription = true,
+  showImage = true,
+}: DishCardProps) {
   const dishImageSrc = resolveImageSrc(item.image);
 
   return (
@@ -38,18 +47,20 @@ export function DishCard({ item, isSelected, onToggle, showFullDetails = false }
 
       {showFullDetails ? (
         <div className={styles.meta}>
-          <span className={styles.metaRow}>{item.description?.trim() || "-"}</span>
+          {showDescription ? <span className={styles.metaRow}>{item.description?.trim() || "-"}</span> : null}
           {item.is_spicy ? <span className={styles.spicyBadge}>Острое</span> : null}
 
-          <div className={styles.imagesRow}>
-            <div className={styles.imageBlock}>
-              {dishImageSrc ? (
-                <img src={dishImageSrc} alt={item.name} className={styles.previewImage} loading="lazy" />
-              ) : (
-                <div className={styles.imagePlaceholder} aria-label="Нет изображения">✕</div>
-              )}
+          {showImage ? (
+            <div className={styles.imagesRow}>
+              <div className={styles.imageBlock}>
+                {dishImageSrc ? (
+                  <img src={dishImageSrc} alt={item.name} className={styles.previewImage} loading="lazy" />
+                ) : (
+                  <div className={styles.imagePlaceholder} aria-label="Нет изображения">✕</div>
+                )}
+              </div>
             </div>
-          </div>
+          ) : null}
         </div>
       ) : null}
     </div>

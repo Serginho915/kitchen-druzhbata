@@ -1,0 +1,132 @@
+.sidebar {
+    width: 236px;
+    min-width: 236px;
+    align-self: stretch;
+    background: #ffffff;
+    border-right: 1px solid #edb987;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 12px 14px;
+    gap: 16px;
+    box-sizing: border-box;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 8px 14px;
+    border-bottom: 1px solid #f1dfc8;
+    text-decoration: none;
+}
+
+.logoWrapper {
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+}
+
+.brandText {
+    min-width: 0;
+}
+
+.brandTitle {
+    margin: 0;
+    color: #b90808;
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.brandSubtitle {
+    margin: 4px 0 0;
+    color: #7a5a3a;
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 0.75rem;
+    opacity: 0.8;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.navItem {
+    display: block;
+    padding: 11px 14px;
+    border-radius: 8px;
+    font-weight: bold;
+    color: #7a5a3a !important;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.55);
+    transition: none;
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 0.86rem;
+    cursor: pointer;
+    border: 1px solid transparent;
+    text-align: left;
+    width: 100%;
+    line-height: 1.3;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.55);
+        border-color: transparent;
+        color: #7a5a3a !important;
+    }
+
+    &.active {
+        background: rgba(255, 255, 255, 0.55);
+        border-color: #d8a06f;
+        color: #7a5a3a !important;
+    }
+}
+
+.navItem:visited,
+.navItem:active,
+.navItem:focus {
+    color: #7a5a3a !important;
+}
+
+.logoutBtn {
+    display: block;
+    padding: 11px 14px;
+    border-radius: 8px;
+    font-weight: bold;
+    color: #7a5a3a !important;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.55);
+    transition: none;
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 0.86rem;
+    cursor: pointer;
+    border: 1px solid transparent;
+    text-align: left;
+    width: 100%;
+    line-height: 1.3;
+    margin-top: auto;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.55);
+        border-color: transparent;
+        color: #7a5a3a;
+    }
+}
+
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 216px;
+        min-width: 216px;
+    }
+}

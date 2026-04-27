@@ -20,13 +20,13 @@
             width: 100%;
             min-height: 42px;
             padding: 10px;
-            background-color: #fff;
+            background-color: #ffffff;
             border-radius: 5px;
             border: #edb987 1px solid;
+            color: #213547;
 
             &::placeholder {
-                color: #5e4634;
-                opacity: 1;
+                color: #aaa;
             }
         }
 
@@ -34,13 +34,13 @@
             width: 100%;
             min-height: 42px;
             padding: 10px;
-            background-color: #fff;
+            background-color: #ffffff;
             border-radius: 5px;
             border: #edb987 1px solid;
+            color: #213547;
 
             &::placeholder {
-                color: #5e4634;
-                opacity: 1;
+                color: #aaa;
             }
         }
 
@@ -49,10 +49,10 @@
             width: 100%;
             min-width: 0;
             min-height: 42px;
-            background-color: #fff;
+            background-color: #ffffff;
             border-radius: 5px;
             border: #edb987 1px solid;
-            color: #3b2e24;
+            color: #213547;
         }
 
         .fileInputLabel {
@@ -60,31 +60,41 @@
             flex-direction: column;
             gap: 4px;
             font-size: 0.9em;
-            color: #3b2e24;
+            color: #213547;
             min-width: 0;
             width: 100%;
-            justify-content: flex-end;
+        }
 
-            input {
-                padding: 5px 8px;
-                max-width: 100%;
+        .fileInputWrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            min-height: 42px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            border: #edb987 1px solid;
+            cursor: pointer;
+            overflow: hidden;
+
+            input[type='file'] {
+                position: absolute;
+                inset: 0;
                 width: 100%;
-                min-height: 42px;
-                background-color: #fff;
-                border-radius: 5px;
-                border: #edb987 1px solid;
-                color: #3b2e24;
+                height: 100%;
+                opacity: 0;
+                cursor: pointer;
+            }
 
-                &::file-selector-button {
-                    min-width: 120px;
-                    height: 30px;
-                    margin-right: 10px;
-                    border: #edb987 1px solid;
-                    border-radius: 4px;
-                    background-color: #fff;
-                    color: #3b2e24;
-                    cursor: pointer;
-                }
+            .fileButtonText {
+                font-size: 0.85em;
+                color: #aaa;
+                pointer-events: none;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                padding: 0 8px;
             }
         }
 
@@ -95,10 +105,11 @@
             padding: 8px 10px;
             border: #edb987 1px solid;
             border-radius: 5px;
-            background-color: #fff;
+            background-color: #ffffff;
             font-size: 0.85em;
             min-height: 42px;
             width: 100%;
+            color: #213547;
 
             input {
                 margin: 0;

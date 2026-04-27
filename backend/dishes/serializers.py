@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth import authenticate
 
-from .models import Dish
+from .models import DailyMenu, DailySpecialOffers, Dish, SpecialOffer
 
 
 class DishSerializer(serializers.ModelSerializer):
@@ -19,15 +19,6 @@ class DishSerializer(serializers.ModelSerializer):
             "created_at",
         ]
         read_only_fields = ["id", "created_at"]
-        extra_kwargs = {
-            "name": {"required": True, "allow_blank": False},
-            "description": {"required": True, "allow_blank": False},
-            "weight": {"required": True},
-            "price": {"required": True},
-            "category": {"required": True, "allow_blank": False},
-            "image": {"required": True, "allow_null": False},
-            "is_spicy": {"required": True},
-        }
 
     def validate_weight(self, value: int) -> int:
         if value < 0:
@@ -52,3 +43,59 @@ class UserLoginSerializer(serializers.Serializer):
             raise serializers.ValidationError("Invalid username or password")
         attrs["user"] = user
         return attrs
+
+
+class DailyMenuSerializer(serializers.ModelSerializer):
+    dishes = DishSerializer(many=True, read_only=True)
+    dish_ids = serializers.SerializerMethodField()
+
+    class Meta:
+        model = DailyMenu
+        fields = ["date", "updated_at", "dish_ids", "dishes"]
+
+    def get_dish_ids(self, obj: DailyMenu):
+        return list(obj.dishes.values_list("id", flat=True))
+
+
+class DailyMenuUpdateSerializer(serializers.Serializer):
+    dish_ids = serializers.ListField(
+        child=serializers.IntegerField(min_value=1),
+        allow_empty=True,
+    )
+
+
+class SpecialOfferSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SpecialOffer
+        fields = ["id", "text", "banner", "updated_at"]
+        read_only_fields = ["id", "updated_at"]
+
+    def validate_banner(self, value):
+        if not value:
+            raise serializers.ValidationError("Banner image is required")
+        return value
+
+
+class DailySpecialOffersSerializer(serializers.ModelSerializer):
+    offers = SpecialOfferSerializer(many=True, read_only=True)
+    offer_ids = serializers.SerializerMethodField()
+
+    class Meta:
+        model = DailySpecialOffers
+        fields = ["date", "updated_at", "offer_ids", "offers"]
+
+    def get_offer_ids(self, obj: DailySpecialOffers):
+        return list(obj.offers.values_list("id", flat=True))
+
+
+class DailySpecialOffersUpdateSerializer(serializers.Serializer):
+    offer_ids = serializers.ListField(
+        child=serializers.IntegerField(min_value=1),
+        allow_empty=True,
+    )
+
+    def validate_offer_ids(self, value):
+        unique_ids = list(dict.fromkeys(value))
+        if len(unique_ids) > 3:
+            raise serializers.ValidationError("You can select up to 3 special offers")
+        return unique_ids

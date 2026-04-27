@@ -1,6 +1,38 @@
 .homeContainer {
     padding: 20px;
 
+    .adminTopRow {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+
+    .adminHeader {
+        margin-bottom: 0;
+
+        .adminTitle {
+            margin: 0;
+            color: #b90808;
+            font-family: 'Comfortaa', sans-serif;
+            font-size: 1.6rem;
+        }
+
+        .hint {
+            margin: 8px 0 0;
+            color: #7a5a3a;
+            font-size: 0.9rem;
+        }
+
+        .updatedAt {
+            margin: 6px 0 0;
+            color: #b1844f;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+    }
+
     .controls {
         display: flex;
         justify-content: flex-end;
@@ -9,6 +41,9 @@
         margin-bottom: 20px;
 
         .templateBtn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             padding: 12px 24px;
             background-color: #edba87;
             color: #7a5a3a;
@@ -17,11 +52,23 @@
             font-weight: bold;
             cursor: pointer;
             font-family: 'Comfortaa', sans-serif;
+            text-decoration: none;
             transition: all 0.2s;
 
             &:hover {
                 background-color: #d8a06f;
                 transform: translateY(-1px);
+            }
+
+            &.secondaryBtn {
+                padding: 10px 16px;
+                background: #fff;
+                border: 1px solid #edb987;
+            }
+
+            &.secondaryBtn:hover {
+                background: #fff;
+                transform: none;
             }
         }
 
@@ -63,6 +110,20 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 20px;
+        }
+    }
+}
+
+@media (max-width: 1100px) {
+    .homeContainer {
+        .adminTopRow {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .controls {
+            justify-content: flex-start;
+            flex-wrap: wrap;
         }
     }
 }

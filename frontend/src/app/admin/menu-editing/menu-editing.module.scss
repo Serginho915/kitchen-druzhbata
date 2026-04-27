@@ -1,0 +1,32 @@
+.headerWrap {
+    padding-top: 20px;
+    padding-bottom: 0;
+}
+
+.headerRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.title {
+    margin: 0;
+    color: #b90808;
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 1.6rem;
+}
+
+.backBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    border: 1px solid #edb987;
+    color: #7a5a3a;
+    background: #fff;
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: 700;
+}

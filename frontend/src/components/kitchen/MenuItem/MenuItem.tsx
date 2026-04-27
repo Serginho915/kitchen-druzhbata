@@ -29,6 +29,7 @@ export function MenuItem({
   onDelete,
 }: MenuItemProps) {
   const [isConfirmingDelete, setIsConfirmingDelete] = useState(false);
+  const [imageFileName, setImageFileName] = useState<string | null>(null);
 
   const handleDeleteClick = () => {
     setIsConfirmingDelete(true);
@@ -54,6 +55,7 @@ export function MenuItem({
   return (
     <li className={styles.menuItem}>
       {isEditing ? (
+        <div className={styles.editWrapper}>
         <div className={styles.editContainer}>
           <div className={styles.editField}>
             <span className={styles.label}>Название</span>
@@ -115,16 +117,6 @@ export function MenuItem({
             </select>
           </div>
           <div className={styles.editField}>
-            <span className={styles.label}>Блюдо</span>
-            <label className={styles.fileInputLabel}>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(event) => onEditChange("image", event.target.files?.[0] ?? null)}
-              />
-            </label>
-          </div>
-          <div className={styles.editField}>
             <span className={styles.label}>Острота</span>
             <label className={styles.checkboxLabel}>
               <input
@@ -135,10 +127,30 @@ export function MenuItem({
               <span>Острое</span>
             </label>
           </div>
-          <div className={styles.editActions}>
-            <button onClick={onSave} className={`${styles.actionButton} ${styles.ok}`}>OK</button>
-            <button onClick={onCancel} className={`${styles.actionButton} ${styles.cancel}`}>X</button>
+          <div className={styles.editField}>
+            <span className={styles.label}>Блюдо</span>
+            <label className={styles.fileInputLabel}>
+              <div className={styles.fileInputWrapper}>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(event) => {
+                    const file = event.target.files?.[0] ?? null;
+                    onEditChange("image", file);
+                    setImageFileName(file?.name ?? null);
+                  }}
+                />
+                <span className={styles.fileButtonText}>
+                  {imageFileName ?? "Фото блюда"}
+                </span>
+              </div>
+            </label>
           </div>
+        </div>
+        <div className={styles.editActions}>
+            <button onClick={onSave} className={`${styles.actionButton} ${styles.ok}`}>OK</button>
+            <button onClick={onCancel} className={`${styles.actionButton} ${styles.cancel}`}>Отмена</button>
+        </div>
         </div>
       ) : (
         <>

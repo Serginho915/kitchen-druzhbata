@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { KitchenHeader } from "@/components/kitchen/Header/Header";
 import { ScrollToTop } from "@/components/kitchen/ScrollToTop/ScrollToTop";
 import { AdminAuthGate } from "@/components/admin/AdminAuthGate";
+import { AdminSidebar } from "@/components/admin/AdminSidebar/AdminSidebar";
 import styles from "@/pages/Kitchen/KitchenApp.module.scss";
+import adminStyles from "./admin-layout.module.scss";
 import "@/app/kitchen/kitchen-theme.css";
 
 export const metadata: Metadata = {
@@ -16,8 +17,12 @@ export default function AdminLayout({
 }) {
   return (
     <div className={`${styles.appContainer} kitchenTheme`}>
-      <KitchenHeader showEditButton={false} />
-      <AdminAuthGate>{children}</AdminAuthGate>
+      <AdminAuthGate>
+        <div className={adminStyles.body}>
+          <AdminSidebar />
+          <main className={adminStyles.content}>{children}</main>
+        </div>
+      </AdminAuthGate>
       <ScrollToTop />
     </div>
   );

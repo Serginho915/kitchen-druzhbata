@@ -1,0 +1,270 @@
+.page {
+    padding: 20px;
+}
+
+.headerRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.title {
+    margin: 0;
+    color: #b90808;
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 1.6rem;
+}
+
+.backBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    border: 1px solid #edb987;
+    color: #7a5a3a;
+    background: #fff;
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: 700;
+}
+
+.formCard {
+    padding: 1em;
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.inputGroup {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 10px;
+    align-items: end;
+    flex: 1;
+}
+
+.textArea {
+    width: 100%;
+    min-height: 42px;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: #edb987 1px solid;
+    color: #213547;
+    resize: vertical;
+}
+
+.textArea::placeholder {
+    color: #aaa;
+}
+
+.titleInput {
+    width: 100%;
+    height: 42px;
+    min-height: 42px;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: #edb987 1px solid;
+    color: #213547;
+}
+
+.titleInput::placeholder {
+    color: #aaa;
+}
+
+.fileInputLabel {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 0.9em;
+    color: #213547;
+    min-width: 0;
+    width: 100%;
+}
+
+.fileInputWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 42px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: #edb987 1px solid;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.fileInputWrapper input[type='file'] {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.fileButtonText {
+    font-size: 0.85em;
+    color: #aaa;
+    pointer-events: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 8px;
+}
+
+.addButton {
+    padding: 12px 24px;
+    background-color: #edba87;
+    color: #7a5a3a;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Comfortaa', sans-serif;
+}
+
+.addButton:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.menuContainer {
+    text-align: left;
+    margin-top: 20px;
+}
+
+.menuContainer h3 {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+    color: #7a5a3a;
+}
+
+.offerList {
+    list-style: none;
+    padding: 0;
+}
+
+.menuItem {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(234, 234, 239);
+    gap: 10px;
+}
+
+.itemText {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #213547;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+}
+
+.confirmDelete {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: rgba(244, 67, 54, 0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.confirmText {
+    font-size: 0.8em;
+    font-weight: bold;
+    color: #f44336;
+    margin-right: 5px;
+}
+
+.actionButton {
+    padding: 7px;
+    opacity: 0.85;
+    font-size: 0.8em;
+    margin-left: 5px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.actionButton.ok {
+    background-color: #4caf50;
+    margin-left: 0;
+}
+
+.actionButton.cancel {
+    background-color: #f44336;
+    margin-left: 0;
+}
+
+.actionButton.edit {
+    background-color: #4caf50;
+    margin-left: 10px;
+}
+
+.actionButton.delete {
+    background-color: #f44336;
+    margin-left: 10px;
+}
+
+.editContainer {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr auto;
+    gap: 10px;
+    width: 100%;
+    align-items: end;
+}
+
+.editField {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.label {
+    font-size: 0.75em;
+    font-weight: bold;
+    color: #666;
+    text-transform: uppercase;
+}
+
+.editActions {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 2px;
+    align-self: end;
+}
+
+.previewImage {
+    width: 120px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    background: #fff;
+}
+
+@media (max-width: 1024px) {
+    .inputGroup {
+        grid-template-columns: 1fr;
+    }
+
+    .editContainer {
+        grid-template-columns: 1fr;
+    }
+}
