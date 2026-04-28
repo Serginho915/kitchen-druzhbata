@@ -5,8 +5,8 @@ import styles from "./CarouselInfo.module.scss";
 import { menuApi, SpecialOffer } from "@/lib/kitchenMenuApi";
 import { resolveApiImage } from "@/lib/api";
 import Image from "next/image";
-import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { useCart } from "@/hooks/useCart";
+import defaultBanner from "@/assets/images/DefaultBanner.png";
 
 export const CarouselInfo = () => {
   const [currSlide, setCurrSlide] = useState(0);
@@ -27,7 +27,7 @@ export const CarouselInfo = () => {
 
   // Auto-scroll logic
   useEffect(() => {
-    if (carouselData.length === 0) return;
+    if (carouselData.length <= 1) return;
     const interval = setInterval(() => {
       setCurrSlide((prev) => (prev + 1) % carouselData.length);
     }, 3000);
@@ -53,24 +53,37 @@ export const CarouselInfo = () => {
           className={styles.track}
           style={{ transform: `translateX(-${currSlide * 100}%)` }}
         >
-          {carouselData.map((slide) => (
-            <div key={slide.id} className={styles.slide}>
-              {slide.banner ? (
-                <Image
-                  src={resolveApiImage(slide.banner) || ""}
-                  alt={slide.text}
-                  width={632}
-                  height={256}
-                  className={styles.image}
-                  unoptimized // Added because backend images might not be on the same domain or for simplicity with dynamic URLs
-                />
-              ) : (
-                <div className={styles.imagePlaceholder}>
-                  <span>{slide.text}</span>
-                </div>
-              )}
+          {carouselData.length > 0 ? (
+            carouselData.map((slide) => (
+              <div key={slide.id} className={styles.slide}>
+                {slide.banner ? (
+                  <Image
+                    src={resolveApiImage(slide.banner) || ""}
+                    alt={slide.text}
+                    width={632}
+                    height={256}
+                    className={styles.image}
+                    unoptimized
+                  />
+                ) : (
+                  <div className={styles.imagePlaceholder}>
+                    <span>{slide.text}</span>
+                  </div>
+                )}
+              </div>
+            ))
+          ) : (
+            <div className={styles.slide}>
+              <Image
+                src={defaultBanner}
+                alt="Default Banner"
+                width={632}
+                height={256}
+                className={styles.image}
+                priority
+              />
             </div>
-          ))}
+          )}
         </div>
       </div>
 
