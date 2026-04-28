@@ -138,11 +138,12 @@
 
 .dishesGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 24px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
   padding: 12px 0;
 
   @include desktop-sm {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 16px;
   }
 
@@ -170,14 +171,16 @@
   }
 
   .dishesGrid {
-    display: flex;
-    flex-wrap: nowrap;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 16px;
 
+    @include desktop-sm {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
     @include tablet {
-      display: grid;
       grid-template-columns: 1fr 1fr;
-      flex-wrap: wrap;
     }
 
     @include mobile {

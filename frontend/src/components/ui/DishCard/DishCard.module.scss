@@ -4,11 +4,12 @@
 .card {
   background: #ffffff;
   border-radius: 20px;
-  padding: 16px 24px;
+  padding: 14px 18px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   width: 100%;
+  min-width: 0;
   position: relative;
 
   @include mobile {
@@ -27,11 +28,14 @@
 
 .imageWrapper {
   width: 100%;
-  height: 180px;
-  background: #d9d9d9;
+  aspect-ratio: 1 / 1;
   border-radius: 12px;
   overflow: hidden;
   position: relative;
+}
+
+.image {
+  padding: 0;
 }
 
 .placeholder {
@@ -63,7 +67,7 @@
 
 .title {
   margin: 0;
-  font-size: 24px;
+  font-size: 21px;
   font-weight: 600;
   color: $prim-black;
   font-family: $font-secondary;
@@ -73,23 +77,13 @@
   }
 }
 
-.weight {
-  font-size: 20px;
-  color: #f0aa18;
-  font-weight: 400;
-  font-family: $font-secondary;
-
-  @include mobile {
-    font-size: 16px;
-  }
-}
-
 .description {
-  font-size: 20px;
+  font-size: 17px;
   line-height: 1.2;
   color: $prim-black;
   //min-height: 50px;
   display: -webkit-box;
+  line-clamp: 3;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
@@ -97,24 +91,44 @@
 
 .footer {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
   margin-top: auto;
 }
 
+.metaRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
 .price {
-  font-size: 24px;
+  font-size: 21px;
   font-weight: 600;
   color: $prim-black;
+}
+
+.weightInline {
+  font-size: 17px;
+  color: #f0aa18;
+  font-weight: 500;
+  font-family: $font-secondary;
+  text-align: right;
+
+  @include mobile {
+    font-size: 16px;
+  }
 }
 
 .addButton {
   background: $bg-green;
   color: $text-green;
   border: none;
-  padding: 16px 24px;
+  padding: 12px 18px;
   border-radius: 24px;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
   font-family: $font-primary;
   cursor: pointer;
@@ -137,14 +151,14 @@
   gap: 8px;
   background: $bg-green;
   border-radius: 24px;
-  padding: 16px 24px;
+  padding: 12px 18px;
 }
 
 .qtyBtn {
   background: none;
   border: none;
   color: $text-green;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 700;
   font-family: $font-primary;
   cursor: pointer;
@@ -166,7 +180,7 @@
 }
 
 .qtyCount {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   color: $text-green;
   font-family: $font-primary;

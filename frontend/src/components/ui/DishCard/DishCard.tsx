@@ -39,7 +39,7 @@ export const DishCard: React.FC<DishCardProps> = ({
             src={resolveApiImage(image) || ""}
             alt={title}
             fill
-            style={{ objectFit: "cover" }}
+            style={{ objectFit: "contain" }}
             className={styles.image}
             unoptimized
           />
@@ -53,10 +53,12 @@ export const DishCard: React.FC<DishCardProps> = ({
         )}
       </div>
       <h3 className={styles.title}>{title}</h3>
-      <span className={styles.weight}>{weight}</span>
       <p className={styles.description}>{description}</p>
       <div className={styles.footer}>
-        <span className={styles.price}>€ {price.toFixed(2)}</span>
+        <div className={styles.metaRow}>
+          <span className={styles.price}>€ {price.toFixed(2)}</span>
+          <span className={styles.weightInline}>{weight}</span>
+        </div>
         {showAddToCart && (
           quantity === 0 ? (
             <button
