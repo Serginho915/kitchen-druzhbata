@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { adminMenuApi } from "@/lib/adminMenuApi";
 import { resolveApiImage } from "@/lib/api";
-import layoutStyles from "@/pages/Kitchen/KitchenApp.module.scss";
+import layoutStyles from "@/views/Kitchen/KitchenApp.module.scss";
 import styles from "./offer-editing.module.scss";
 
 export default function OfferEditingPage() {

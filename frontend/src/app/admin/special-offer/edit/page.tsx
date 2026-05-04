@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { adminMenuApi } from "@/lib/adminMenuApi";
 import { resolveApiImage } from "@/lib/api";
-import layoutStyles from "@/pages/Kitchen/KitchenApp.module.scss";
+import layoutStyles from "@/views/Kitchen/KitchenApp.module.scss";
 import Link from "next/link";
 import styles from "./edit-offer.module.scss";
 

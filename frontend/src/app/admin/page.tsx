@@ -1,6 +1,6 @@
 "use client";
 
-import KitchenHomePage from "@/pages/Kitchen/HomePage";
+import KitchenHomePage from "@/views/Kitchen/HomePage";
 import { adminMenuApi } from "@/lib/adminMenuApi";
 
 export default function Page() {

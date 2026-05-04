@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ScrollToTop } from "@/components/kitchen/ScrollToTop/ScrollToTop";
 import { AdminAuthGate } from "@/components/admin/AdminAuthGate";
 import { AdminSidebar } from "@/components/admin/AdminSidebar/AdminSidebar";
-import styles from "@/pages/Kitchen/KitchenApp.module.scss";
+import styles from "@/views/Kitchen/KitchenApp.module.scss";
 import adminStyles from "./admin-layout.module.scss";
 import "@/app/kitchen/kitchen-theme.css";
 

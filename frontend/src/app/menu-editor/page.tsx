@@ -1,4 +1,4 @@
-import MenuEditorPage from "@/pages/MenuEditor/MenuEditorPage";
+import MenuEditorPage from "@/views/MenuEditor/MenuEditorPage";
 
 export default function Page() {
   return <MenuEditorPage />;

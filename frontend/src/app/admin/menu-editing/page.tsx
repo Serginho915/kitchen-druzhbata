@@ -1,9 +1,9 @@
 "use client";
 
-import KitchenEditingPage from "@/pages/Kitchen/EditingPage";
+import KitchenEditingPage from "@/views/Kitchen/EditingPage";
 import { adminMenuApi } from "@/lib/adminMenuApi";
 import Link from "next/link";
-import layoutStyles from "@/pages/Kitchen/KitchenApp.module.scss";
+import layoutStyles from "@/views/Kitchen/KitchenApp.module.scss";
 import styles from "./menu-editing.module.scss";
 
 export default function Page() {
