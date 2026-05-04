@@ -5,8 +5,10 @@ services:
       context: ./backend
       dockerfile: Dockerfile
       target: prod
+    volumes:
+      - ./backend/db.sqlite3:/app/db.sqlite3
     ports:
-      - "8000:8000"
+      - "8004:8000"
     environment:
       DEBUG: "0"
       SECRET_KEY: prod-secret-key-change-me
@@ -22,7 +24,7 @@ services:
     depends_on:
       - backend
     ports:
-      - "3000:3000"
+      - "3001:3000"
     environment:
       NODE_ENV: production
     restart: unless-stopped
