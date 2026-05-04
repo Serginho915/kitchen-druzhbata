@@ -6,7 +6,7 @@ import { menuApi, SpecialOffer } from "@/lib/kitchenMenuApi";
 import { resolveApiImage } from "@/lib/api";
 import Image from "next/image";
 import { useCart } from "@/hooks/useCart";
-import defaultBanner from "@/assets/images/DefaultBanner.png";
+import defaultBanner from "@/assets/images/defaultBanner.png";
 
 export const CarouselInfo = () => {
   const [currSlide, setCurrSlide] = useState(0);
