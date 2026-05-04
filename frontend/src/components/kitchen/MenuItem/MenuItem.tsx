@@ -3,15 +3,15 @@
 import { useState } from "react";
 import styles from "./MenuItem.module.scss";
 
-import { type Product } from "@/lib/kitchenMenuApi";
+import { type Product, type EditProduct } from "@/lib/kitchenMenuApi";
 
 interface MenuItemProps {
   item: Product;
   isEditing: boolean;
-  editFormData: Product | null;
+  editFormData: EditProduct | null;
   availableCategories: string[];
   onEditClick: (item: Product) => void;
-  onEditChange: (field: keyof Product, value: string | number | boolean | File | null) => void;
+  onEditChange: (field: keyof EditProduct, value: string | number | boolean | File | null) => void;
   onSave: () => void;
   onCancel: () => void;
   onDelete: (id: number | string) => void;

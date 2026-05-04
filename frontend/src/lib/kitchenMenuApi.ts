@@ -11,6 +11,10 @@ export type Product = {
   is_spicy?: boolean;
 };
 
+export type EditProduct = Omit<Product, "image"> & {
+  image?: string | File | null;
+};
+
 export type DishPayload = {
   name: string;
   description?: string;

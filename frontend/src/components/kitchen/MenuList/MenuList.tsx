@@ -1,15 +1,15 @@
 import { MenuItem } from "@/components/kitchen/MenuItem/MenuItem";
 import styles from "./MenuList.module.scss";
 
-import { type Product } from "@/lib/kitchenMenuApi";
+import { type Product, type EditProduct } from "@/lib/kitchenMenuApi";
 
 interface MenuListProps {
   items: Product[];
   editingId: number | string | null;
-  editFormData: Product | null;
+  editFormData: EditProduct | null;
   availableCategories: string[];
   onEditClick: (item: Product) => void;
-  onEditChange: (field: keyof Product, value: string | number | boolean | File | null) => void;
+  onEditChange: (field: keyof EditProduct, value: string | number | boolean | File | null) => void;
   onSave: () => void;
   onCancel: () => void;
   onDelete: (id: number | string) => void;

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { DishForm } from "@/components/kitchen/DishForm/DishForm";
 import { MenuList } from "@/components/kitchen/MenuList/MenuList";
-import { menuApi, type Product } from "@/lib/kitchenMenuApi";
+import { menuApi, type Product, type EditProduct } from "@/lib/kitchenMenuApi";
 import layoutStyles from "./KitchenApp.module.scss";
 
 interface KitchenEditingPageProps {
@@ -14,10 +14,6 @@ interface KitchenEditingPageProps {
     delete: typeof menuApi.delete;
   };
 }
-
-type EditProduct = Product & {
-  image?: string | File | null;
-};
 
 export default function KitchenEditingPage({ apiClient = menuApi }: KitchenEditingPageProps) {
   const AVAILABLE_CATEGORIES = [
