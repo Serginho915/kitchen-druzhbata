@@ -84,7 +84,7 @@ export default function KitchenEditingPage({ apiClient = menuApi }: KitchenEditi
       await apiClient.update(id, {
         name,
         description,
-        weight: weight !== undefined && weight !== "" ? Number(weight) : 0,
+        weight: weight != null ? Number(weight) : 0,
         price: Number(price),
         category,
         is_spicy: Boolean(is_spicy),
