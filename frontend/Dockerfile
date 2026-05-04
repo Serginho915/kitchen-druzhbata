@@ -12,6 +12,8 @@ CMD ["npm", "run", "dev", "--", "--hostname", "0.0.0.0", "--port", "3000", "--we
 
 FROM base AS builder
 ENV NODE_ENV=production
+ARG NEXT_PUBLIC_API_BASE_URL
+ENV NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL
 COPY . .
 RUN npm run build
 
