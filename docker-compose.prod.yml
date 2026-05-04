@@ -8,13 +8,13 @@ services:
     volumes:
       - ./backend/db.sqlite3:/app/db.sqlite3
     ports:
-      - "8004:8000"
+      - "8000:8000"
     environment:
       DEBUG: "0"
       SECRET_KEY: prod-secret-key-change-me
       ALLOWED_HOSTS: sofiafood.bg,www.sofiafood.bg,localhost,127.0.0.1,backend
-      CORS_ALLOWED_ORIGINS: https://sofiafood.bg,https://www.sofiafood.bg
-      CSRF_TRUSTED_ORIGINS: https://sofiafood.bg,https://www.sofiafood.bg
+      CORS_ALLOWED_ORIGINS: http://sofiafood.bg,http://www.sofiafood.bg
+      CSRF_TRUSTED_ORIGINS: http://sofiafood.bg,http://www.sofiafood.bg
     restart: unless-stopped
 
   frontend:
