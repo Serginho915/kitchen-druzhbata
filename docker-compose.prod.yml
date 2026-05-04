@@ -12,7 +12,9 @@ services:
     environment:
       DEBUG: "0"
       SECRET_KEY: prod-secret-key-change-me
-      ALLOWED_HOSTS: localhost,127.0.0.1,backend
+      ALLOWED_HOSTS: sofiafood.bg,www.sofiafood.bg,localhost,127.0.0.1,backend
+      CORS_ALLOWED_ORIGINS: https://sofiafood.bg,https://www.sofiafood.bg
+      CSRF_TRUSTED_ORIGINS: https://sofiafood.bg,https://www.sofiafood.bg
     restart: unless-stopped
 
   frontend:
@@ -27,4 +29,5 @@ services:
       - "3001:3000"
     environment:
       NODE_ENV: production
+      NEXT_PUBLIC_API_BASE_URL: https://sofiafood.bg/api
     restart: unless-stopped

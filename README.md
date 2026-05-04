@@ -39,9 +39,9 @@ docker compose -f docker-compose.prod.yml down
 
 Available services:
 
-- frontend: http://localhost:3000
-- backend: http://localhost:8000
-- backend admin: http://localhost:8000/admin
+- frontend (prod compose): http://localhost:3001
+- backend (prod compose): http://localhost:8004
+- backend admin (prod compose): http://localhost:8004/admin
 
 ## Local Development Without Docker
 
@@ -85,4 +85,8 @@ Backend will be available at http://localhost:8000.
 ## Before Production
 
 - Replace `SECRET_KEY` in [docker-compose.prod.yml](docker-compose.prod.yml)
-- Restrict `ALLOWED_HOSTS` to your real domain/host
+- Set your domain in [docker-compose.prod.yml](docker-compose.prod.yml):
+	- `ALLOWED_HOSTS=sofiafood.bg,www.sofiafood.bg,...`
+	- `CORS_ALLOWED_ORIGINS=https://sofiafood.bg,https://www.sofiafood.bg`
+	- `CSRF_TRUSTED_ORIGINS=https://sofiafood.bg,https://www.sofiafood.bg`
+	- `NEXT_PUBLIC_API_BASE_URL=https://sofiafood.bg/api`
