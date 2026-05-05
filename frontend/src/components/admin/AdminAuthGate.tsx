@@ -45,7 +45,6 @@ export function AdminAuthGate({ children }: { children: React.ReactNode }) {
     return (
       <div className={styles.gate}>
         <div className={styles.card}>
-          <h2 className={styles.title}>Вход в admin</h2>
           <form className={styles.form} onSubmit={handleLogin}>
             <input
               className={styles.input}
