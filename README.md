@@ -30,6 +30,12 @@ Start production environment (frontend + backend):
 docker compose -f docker-compose.prod.yml up --build -d
 ```
 
+Production media storage:
+
+- Django media is stored on the host in `backend/media`.
+- In the backend container this path is mounted as `/app/media`.
+- For Nginx `alias`, point to your absolute host path ending with `/backend/media/`.
+
 Stop containers:
 
 ```bash
