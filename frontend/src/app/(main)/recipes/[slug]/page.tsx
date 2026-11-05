@@ -9,7 +9,7 @@ export default function RecipePage({ params }: { params: Promise<{ slug: string 
   const { slug } = use(params);
   const [recipe, setRecipe] = useState<RecipePost | null>(null);
   const [error, setError] = useState("");
-  useEffect(() => { recipesApi.get(slug).then(setRecipe).catch((e) => setError(e.message)); }, [slug]);
+  useEffect(() => { recipesApi.get(decodeURIComponent(slug)).then(setRecipe).catch((e) => setError(e.message)); }, [slug]);
   if (error) return <main className={styles.state}><h1>{error}</h1><Link href="/">Назад към рецептите</Link></main>;
   if (!recipe) return <main className={styles.state}>Рецептата се сервира…</main>;
   return <main className={styles.page}>
