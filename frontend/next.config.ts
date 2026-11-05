@@ -3,6 +3,9 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
+  // Django/DRF routes use trailing slashes. Preserve them when proxying
+  // non-GET requests so Django does not try (and fail) to redirect POST/PUT.
+  skipTrailingSlashRedirect: true,
   images: {
     remotePatterns: [
       {

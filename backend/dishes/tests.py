@@ -1,10 +1,43 @@
 import json
 from unittest.mock import patch
 
+from django.contrib.auth import get_user_model
 from django.test import TestCase
+from rest_framework.test import APIClient
 
 from .models import RecipeAutomationSettings, RecipePost
 from .recipe_generation import generate_recipe
+
+
+class AuthenticationUrlTests(TestCase):
+    def setUp(self):
+        self.client = APIClient()
+        self.username = "admin-test"
+        self.password = "safe-test-password"
+        get_user_model().objects.create_user(
+            username=self.username,
+            password=self.password,
+        )
+
+    def test_login_accepts_url_with_trailing_slash(self):
+        response = self.client.post(
+            "/api/auth/login/",
+            {"username": self.username, "password": self.password},
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("token", response.data)
+
+    def test_login_accepts_url_without_trailing_slash(self):
+        response = self.client.post(
+            "/api/auth/login",
+            {"username": self.username, "password": self.password},
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("token", response.data)
 
 
 class RecipeGenerationTests(TestCase):
