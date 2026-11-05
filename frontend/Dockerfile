@@ -12,8 +12,7 @@ CMD ["npm", "run", "dev", "--", "--hostname", "0.0.0.0", "--port", "3000", "--we
 
 FROM base AS builder
 ENV NODE_ENV=production
-ARG NEXT_PUBLIC_API_BASE_URL
-ENV NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL
+ENV BACKEND_INTERNAL_URL=http://backend:8000
 COPY . .
 RUN npm run build
 
@@ -21,6 +20,7 @@ FROM node:20-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV BACKEND_INTERNAL_URL=http://backend:8000
 
 COPY package*.json ./
 RUN npm ci --omit=dev

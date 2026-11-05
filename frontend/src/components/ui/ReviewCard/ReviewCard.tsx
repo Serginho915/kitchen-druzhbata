@@ -4,7 +4,6 @@ import Image from "next/image";
 import star from "@/assets/images/Vectors/Star.svg";
 import google from "@/assets/images/ReviewSource/GoogleMap.svg";
 import facebook from "@/assets/images/ReviewSource/Facebook.svg";
-import logo from "@/assets/images/logo.png";
 
 interface ReviewCardProps {
   stars: number;
@@ -20,7 +19,7 @@ const getSourceImage = (source: string) => {
     case "Facebook":
       return facebook;
     default:
-      return logo;
+      return "/sofiafood-logo.png";
   }
 };
 

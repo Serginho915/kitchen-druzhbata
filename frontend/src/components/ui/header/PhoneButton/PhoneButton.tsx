@@ -49,7 +49,7 @@ export const PhoneButton: React.FC<PhoneButtonProps> = ({ className }) => {
   return (
     <Link
       ref={phoneRef}
-      href={isMobile ? "tel:+3598899999" : "#"}
+      href={isMobile ? "tel:+359885899908" : "#"}
       className={`${styles.phoneIcon} ${isPhoneExpanded ? styles.phoneExpanded : ""} ${className || ""}`}
       onClick={handlePhoneClick}
       onMouseLeave={() => setIsPhoneExpanded(false)}
@@ -61,7 +61,7 @@ export const PhoneButton: React.FC<PhoneButtonProps> = ({ className }) => {
         height={64}
         className={styles.icon}
       />
-      <span className={styles.phoneNumber}>+359 88 999 99</span>
+      <span className={styles.phoneNumber}>+359 885899908</span>
     </Link>
   );
 };

@@ -1,7 +1,15 @@
 from rest_framework import serializers
 from django.contrib.auth import authenticate
+import os
 
-from .models import DailyMenu, DailySpecialOffers, Dish, SpecialOffer
+from .models import (
+    DailyMenu,
+    DailySpecialOffers,
+    Dish,
+    RecipeAutomationSettings,
+    RecipePost,
+    SpecialOffer,
+)
 
 
 class DishSerializer(serializers.ModelSerializer):
@@ -107,3 +115,42 @@ class DailySpecialOffersUpdateSerializer(serializers.Serializer):
         if len(unique_ids) > 3:
             raise serializers.ValidationError("You can select up to 3 special offers")
         return unique_ids
+
+
+class RecipePostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RecipePost
+        fields = [
+            "id", "title", "slug", "excerpt", "content", "cover_image",
+            "is_published", "published_at", "created_at", "updated_at",
+        ]
+        read_only_fields = ["id", "created_at", "updated_at"]
+
+
+class RecipeAutomationSettingsSerializer(serializers.ModelSerializer):
+    provider = serializers.SerializerMethodField()
+    api_key_configured = serializers.SerializerMethodField()
+
+    class Meta:
+        model = RecipeAutomationSettings
+        fields = [
+            "prompt", "frequency_days", "is_enabled", "provider", "model", "temperature", "api_key_configured", "next_run_at",
+            "last_run_at", "last_error", "updated_at",
+        ]
+        read_only_fields = ["provider", "api_key_configured", "last_run_at", "last_error", "updated_at"]
+
+    def get_provider(self, obj):
+        return "OpenRouter"
+
+    def get_api_key_configured(self, obj):
+        return bool(os.getenv("OPENROUTER_API_KEY"))
+
+    def validate_frequency_days(self, value):
+        if not 1 <= value <= 365:
+            raise serializers.ValidationError("Frequency must be between 1 and 365 days")
+        return value
+
+    def validate_temperature(self, value):
+        if not 0 <= value <= 2:
+            raise serializers.ValidationError("Temperature must be between 0 and 2")
+        return value

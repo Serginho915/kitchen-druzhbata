@@ -1,250 +1,42 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-import styles from "./Header.module.scss";
+import { useState } from "react";
 import Image from "next/image";
-import cart from "@/assets/images/Vectors/cart.svg";
-import phone from "@/assets/images/Vectors/phone.svg";
-import burger from "@/assets/images/Vectors/burger.svg";
 import Link from "next/link";
-import logo from "@/assets/images/logo.png";
-import navigate from "@/assets/images/Vectors/navigate.svg";
-import { useCart } from "@/hooks/useCart";
-import { IoClose } from "react-icons/io5";
+import { usePathname } from "next/navigation";
+import { FaPhone, FaBars, FaXmark } from "react-icons/fa6";
+import styles from "./Header.module.scss";
+
+const links = [
+  { href: "/", label: "Рецепти" },
+  { href: "/subscriptions", label: "Супскрипшън" },
+  { href: "/specialties", label: "Специалитети" },
+];
 
 export const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
-  const [prevScrollPos, setPrevScrollPos] = useState(0);
-  const menuRef = useRef<HTMLDivElement>(null);
-  const burgerRef = useRef<HTMLDivElement>(null);
-  const phoneRef = useRef<HTMLAnchorElement>(null);
-  const [isPhoneExpanded, setIsPhoneExpanded] = useState(false);
-
-  const [isMobile, setIsMobile] = useState(false);
-
-  const { cartCount, toggleCart } = useCart();
-
-  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 1200);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (isMenuOpen) {
-        setIsVisible(true);
-        return;
-      }
-      const currentScrollPos = window.scrollY;
-
-      if (currentScrollPos <= 50) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(prevScrollPos > currentScrollPos);
-      }
-
-      setPrevScrollPos(currentScrollPos);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [prevScrollPos, isMenuOpen]);
-
-  // Close mobile menu on outside click
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (
-        isMenuOpen &&
-        menuRef.current &&
-        !menuRef.current.contains(e.target as Node) &&
-        burgerRef.current &&
-        !burgerRef.current.contains(e.target as Node)
-      ) {
-        setIsMenuOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [isMenuOpen]);
-
-  // Close phone info on outside click
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (
-        isPhoneExpanded &&
-        phoneRef.current &&
-        !phoneRef.current.contains(e.target as Node)
-      ) {
-        setIsPhoneExpanded(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [isPhoneExpanded]);
-
-  const handlePhoneClick = (e: React.MouseEvent) => {
-    if (window.innerWidth >= 1200) {
-      if (!isPhoneExpanded) {
-        e.preventDefault();
-        setIsPhoneExpanded(true);
-      }
-    }
-  };
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
 
   return (
-    <header
-      className={`${styles.header} ${!isVisible ? styles.headerHidden : ""}`}
-    >
-      <div className={styles.logoBlock}>
-        <Link href="/">
-          <Image
-            src={logo}
-            alt="Kitchen Druzhbata Logo"
-            className={styles.logo}
-            width={80}
-            height={80}
-          />
-        </Link>
+    <header className={styles.header}>
+      <Link href="/" className={styles.logoBlock} aria-label="SofiaFood начало">
+        <Image src="/sofiafood-logo.png" alt="SofiaFood" width={52} height={52} className={styles.logo} priority />
+      </Link>
+      <nav className={`${styles.navBlock} ${open ? styles.navOpen : ""}`} aria-label="Основна навигация">
+        {links.map((link) => (
+          <Link key={link.href} href={link.href} onClick={() => setOpen(false)} className={`${styles.navLink} ${pathname === link.href || (link.href === "/" && pathname?.startsWith("/recipes/")) ? styles.active : ""}`}>
+            {link.label}
+          </Link>
+        ))}
+      </nav>
+      <div className={styles.actions}>
+        <a className={styles.phone} href="tel:+359885899908" aria-label="Обадете се на +359 885899908">
+          <FaPhone /> <span>+359 885899908</span>
+        </a>
+        <button className={styles.menuButton} onClick={() => setOpen((value) => !value)} aria-expanded={open} aria-label="Меню">
+          {open ? <FaXmark /> : <FaBars />}
+        </button>
       </div>
-
-      {/* <nav className={styles.navBlock}>
-        <ul className={styles.navList}>
-          <li className={styles.navItem}>
-            <Link href="/#menu">Меню</Link>
-          </li>
-          <li className={styles.navItem}>
-            <Link href="/#about">За нас</Link>
-          </li>
-          <li className={styles.navItem}>
-            <Link href="/preorder">Предзаказ</Link>
-          </li>
-          <li className={styles.navItem}>
-            <Link href="/subscriptions">Подписки</Link>
-          </li>
-        </ul>
-      </nav> */}
-
-      <div className={styles.userBlock}>
-        {/* <div
-            className={`${styles.userItem} ${styles.bgUserBlock} ${styles.cartBlock}`}
-            onClick={toggleCart}
-          >
-            {cartCount > 0 && (
-              <span className={styles.cartBadge}>
-                {cartCount > 99 ? "99+" : cartCount}
-              </span>
-            )}
-            <Image
-              src={cart}
-              alt="Cart Icon"
-              width={64}
-              height={64}
-              className={styles.icon}
-            />
-          </div> */}
-        <Link
-          ref={phoneRef}
-          href={isMobile ? "tel:+3598899999" : "#"}
-          className={`${styles.phoneIcon} ${styles.bgUserBlock} ${isPhoneExpanded ? styles.phoneExpanded : ""}`}
-          onClick={handlePhoneClick}
-          onMouseLeave={() => setIsPhoneExpanded(false)}
-        >
-          <Image
-            src={phone}
-            alt="Phone Icon"
-            width={64}
-            height={64}
-            className={styles.icon}
-          />
-          <span className={styles.phoneNumber}>+359 88 999 99</span>
-        </Link>
-        <Link
-          href="https://maps.app.goo.gl/4W58KxWc4GTXwJPRA"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`${styles.userItem} ${styles.bgUserBlock}`}
-        >
-          <Image
-            src={navigate}
-            alt="Navigate"
-            width={64}
-            height={64}
-            className={styles.icon}
-          />
-        </Link>
-
-        {/* <div
-          ref={burgerRef}
-          className={`${styles.burgerIcon} ${styles.bgUserBlock} ${isMenuOpen ? styles.burgerActive : ""}`}
-          onClick={toggleMenu}
-        >
-          <Image
-            src={burger}
-            alt="Burger Menu"
-            width={64}
-            height={64}
-            className={styles.icon}
-          />
-        </div> */}
-      </div>
-
-      {isMenuOpen && (
-        <div ref={menuRef} className={styles.mobileMenu}>
-          <button
-            className={styles.closeButton}
-            onClick={() => setIsMenuOpen(false)}
-            aria-label="Close menu"
-          >
-            <IoClose size={32} />
-          </button>
-          {/* <ul className={styles.mobileNavList}>
-            <li className={styles.navItem} onClick={() => setIsMenuOpen(false)}>
-              <Link href="/#menu">Меню</Link>
-            </li>
-            <li className={styles.navItem} onClick={() => setIsMenuOpen(false)}>
-              <Link href="/#about">За нас</Link>
-            </li>
-            <li className={styles.navItem} onClick={() => setIsMenuOpen(false)}>
-              <Link href="/preorder">Предзаказ</Link>
-            </li>
-            <li className={styles.navItem} onClick={() => setIsMenuOpen(false)}>
-              <Link href="/subscriptions">Подписки</Link>
-            </li>
-          </ul> */}
-
-          <div className={styles.mobileInfo}>
-            <div className={styles.mobileInfoBlock}>
-              <p className={styles.mobileInfoText}>Связаться</p>
-              <div className={styles.iconCircle}>
-                <Link href={isMobile ? "tel:+359 8899999" : "#"}>
-                  <Image src={phone} alt="call" width={24} height={24}></Image>
-                </Link>
-              </div>
-            </div>
-
-            <div className={styles.mobileInfoBlock}>
-              <p className={styles.mobileInfoText}>Visit Us</p>
-              <div className={styles.iconCircle}>
-                <Link href={"https://maps.app.goo.gl/4W58KxWc4GTXwJPRA"}>
-                  <Image src={navigate} alt="navigate" width={24} height={24}></Image>
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.mobileFooter}>
-            <p>Отворени сме Пон-Пет:</p>
-            <p>10:00 - 21:00</p>
-          </div>
-        </div>
-      )}
     </header>
   );
 };

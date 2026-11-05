@@ -1,19 +1,21 @@
 @use "@/styles/mixins.scss" as *;
 @use "@/styles/variables.scss" as *;
 
-
-.page {
-    display: flex;
-    flex-direction: column;
-    gap: 58px;
-
-    @include desktop-sm() {
-        gap: 54px;
-    }
-    @include tablet() {
-        gap: 44px;
-    }
-    @include mobile() {
-        gap: 32px;
-    }
-}
+.page { display: flex; flex-direction: column; gap: 32px; padding-bottom: 72px; }
+.hero { min-height: 510px; padding: 54px; display: grid; grid-template-columns: 1.45fr .75fr; gap: 24px; border-radius: 36px; background: $prim-black; color: #fff; overflow: hidden; position: relative; }
+.hero::after { content: ""; position: absolute; width: 380px; height: 380px; right: -120px; top: -120px; border: 70px solid rgba(240,170,24,.16); border-radius: 50%; }
+.heroCopy { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; }
+.eyebrow { color: $prim-yellow; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; font-size: 14px; }
+.hero h1 { margin: 22px 0 20px; max-width: 850px; font-size: clamp(44px,6vw,78px); line-height: .98; letter-spacing: -.04em; color: #fff; }
+.heroCopy p { max-width: 690px; font-size: 21px; line-height: 1.55; color: rgba(255,255,255,.75); }
+.primaryButton { margin-top: 34px; padding: 16px 22px; display: inline-flex; align-items: center; gap: 12px; border-radius: 18px; background: $prim-yellow; color: $prim-black; font-weight: 800; text-decoration: none; }
+.heroAside { align-self: end; min-height: 250px; padding: 28px; position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: space-between; border-radius: 28px; background: #fff; color: $prim-black; transform: rotate(2deg); }
+.bigEmoji { font-size: 92px; }.heroAside p { font-family: $font-primary; font-size: 20px; line-height: 1.45; font-weight: 700; }
+.paths { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+.pathCard { min-height: 135px; padding: 24px; display: flex; align-items: center; gap: 20px; border-radius: 28px; color: $prim-black; text-decoration: none; transition: transform .2s ease; &:hover { transform: translateY(-4px); } svg { font-size: 34px; flex: 0 0 auto; } div { display: flex; flex-direction: column; gap: 6px; } b { font-family: $font-primary; font-size: 22px; } span { font-size: 15px; opacity: .7; } }
+.yellow { background: #ffd87f; }.green { background: $bg-green; }.dark { background: #656361; color: #fff; }
+.latest { padding: 44px 0; }.sectionHeading { margin-bottom: 26px; display: flex; justify-content: space-between; align-items: end; gap: 30px; h2 { margin-top: 5px; font-family: $font-primary; font-size: 42px; } span { color: #b87500; font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: .1em; } p { max-width: 490px; color: rgba(59,58,58,.65); line-height: 1.55; } }
+.recipeGrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }.recipeCard { min-width: 0; overflow: hidden; border-radius: 30px; background: #fff; box-shadow: 0 3px 20px rgba(59,58,58,.06); }.cardVisual { min-height: 190px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; background: #f0aa18; span { font-size: 70px; } small { width: fit-content; padding: 7px 10px; border-radius: 99px; background: rgba(255,255,255,.75); font-weight: 700; } }.cardBody { padding: 24px; h3 { font-family: $font-primary; font-size: 22px; line-height: 1.25; } p { margin: 14px 0 20px; color: rgba(59,58,58,.67); font-size: 16px; line-height: 1.55; } a { display: inline-flex; align-items: center; gap: 8px; color: $prim-black; font-weight: 800; text-decoration: none; } }
+.state,.empty { padding: 70px 30px; text-align: center; border-radius: 30px; background: #fff; }.empty span { font-size: 55px; }.empty h3 { margin: 12px 0 8px; font-family: $font-primary; }
+@include tablet { .hero { grid-template-columns: 1fr; padding: 36px; }.heroAside { min-height: 180px; }.paths,.recipeGrid { grid-template-columns: 1fr; }.sectionHeading { align-items: flex-start; flex-direction: column; }.hero h1 { font-size: 52px; } }
+@include mobile { .hero { min-height: auto; padding: 28px 22px; border-radius: 28px; }.hero h1 { font-size: 40px; }.heroCopy p { font-size: 17px; }.heroAside { margin-top: 20px; }.latest { padding-top: 20px; }.sectionHeading h2 { font-size: 34px; } }

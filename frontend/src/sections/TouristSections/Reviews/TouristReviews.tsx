@@ -8,7 +8,6 @@ import { GetDirectionButton } from "@/components/ui/GetDirectionButton/GetDirect
 import { TOURIST_REVIEWS } from "./TouristReviewsData";
 import styles from "./TouristReview.module.scss";
 
-import logo from "@/assets/images/logo.png";
 import reviewsBG from "@/assets/images/TouristBg/reviewsBG.svg";
 import likeIcon from "@/assets/images/TouristBg/like.svg";
 import Emoji1 from "@/assets/images/TouristBg/Emoji1.svg";
@@ -74,9 +73,9 @@ export const TouristReviews = () => {
           >
             <header className={styles.phoneHeader}>
               <div className={styles.logoWrapper}>
-                <Image src={logo} alt="Logo" width={44} height={44} className={styles.logo} />
+                <Image src="/sofiafood-logo.png" alt="SofiaFood" width={44} height={44} className={styles.logo} />
               </div>
-              <span className={styles.brandName}>Кухня на Дружба</span>
+              <span className={styles.brandName}>SofiaFood</span>
             </header>
 
             <div className={styles.scrollArea}>

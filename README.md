@@ -1,4 +1,4 @@
-# Kitchen Druzhbata
+# SofiaFood
 
 Web application with two parts:
 
@@ -49,6 +49,30 @@ Available services:
 - backend (prod compose): http://localhost:8004
 - backend admin (prod compose): http://localhost:8004/admin
 
+## Recipe publishing
+
+The site includes a recipe blog and a protected editor at `/admin/recipes`. The editor can:
+
+- change the article-generation prompt, OpenRouter model and temperature;
+- choose the publishing interval and next run time;
+- trigger generation immediately;
+- create or remove posts manually.
+
+Automatic publishing runs in the `recipe-worker` Compose service. Copy `.env.sample` to `.env`, add the OpenRouter key, and start Docker:
+
+```powershell
+Copy-Item .env.sample .env
+# Edit .env and set OPENROUTER_API_KEY.
+docker compose -f docker-compose.dev.yml up --build
+```
+
+Without Docker, run the worker in a second terminal after applying migrations:
+
+```powershell
+cd backend
+python manage.py recipe_worker --poll-interval 300
+```
+
 ## Local Development Without Docker
 
 ### Frontend (Next.js)
@@ -67,6 +91,8 @@ npm run dev
 ```
 
 Frontend will be available at http://localhost:3000.
+
+The browser always calls the same-origin `/api` path. Next.js proxies it to the backend using the internal Docker hostname, so `NEXT_PUBLIC_API_BASE_URL` is not required.
 
 ### Backend (Django DRF)
 
@@ -95,4 +121,4 @@ Backend will be available at http://localhost:8000.
 	- `ALLOWED_HOSTS=sofiafood.bg,www.sofiafood.bg,...`
 	- `CORS_ALLOWED_ORIGINS=https://sofiafood.bg,https://www.sofiafood.bg`
 	- `CSRF_TRUSTED_ORIGINS=https://sofiafood.bg,https://www.sofiafood.bg`
-	- `NEXT_PUBLIC_API_BASE_URL=https://sofiafood.bg/api`
+	- `OPENROUTER_SITE_URL=https://sofiafood.bg`

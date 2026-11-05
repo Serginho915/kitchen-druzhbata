@@ -6,13 +6,16 @@ from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import DailyMenu, DailySpecialOffers, Dish, SpecialOffer
+from .models import DailyMenu, DailySpecialOffers, Dish, RecipeAutomationSettings, RecipePost, SpecialOffer
+from .recipe_generation import generate_recipe
 from .serializers import (
     DailyMenuSerializer,
     DailyMenuUpdateSerializer,
     DailySpecialOffersSerializer,
     DailySpecialOffersUpdateSerializer,
     DishSerializer,
+    RecipeAutomationSettingsSerializer,
+    RecipePostSerializer,
     SpecialOfferSerializer,
     UserLoginSerializer,
 )
@@ -143,3 +146,46 @@ class AdminCurrentSpecialOfferView(APIView):
 
         serializer = DailySpecialOffersSerializer(daily_offers)
         return Response(serializer.data)
+
+
+class RecipePostViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = RecipePostSerializer
+    permission_classes = [permissions.AllowAny]
+    lookup_field = "slug"
+
+    def get_queryset(self):
+        return RecipePost.objects.filter(is_published=True, published_at__lte=timezone.now())
+
+
+class AdminRecipePostViewSet(viewsets.ModelViewSet):
+    serializer_class = RecipePostSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = RecipePost.objects.all()
+
+
+class AdminRecipeAutomationView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        return Response(RecipeAutomationSettingsSerializer(RecipeAutomationSettings.load()).data)
+
+    def put(self, request):
+        config = RecipeAutomationSettings.load()
+        serializer = RecipeAutomationSettingsSerializer(config, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+
+class AdminGenerateRecipeView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request):
+        try:
+            post = generate_recipe(force=True)
+        except Exception as exc:
+            return Response({"detail": str(exc)}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
+        return Response(RecipePostSerializer(post).data, status=status.HTTP_201_CREATED)

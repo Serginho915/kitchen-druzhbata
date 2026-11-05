@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import styles from "./TouristHeader.module.scss";
 import Image from "next/image";
 import Link from "next/link";
-import logo from "@/assets/images/logo.png";
 import phone from "@/assets/images/Vectors/phone.svg";
 import navigate from "@/assets/images/Vectors/navigate.svg";
 
@@ -46,8 +45,8 @@ export const TouristHeader = () => {
       <div className={styles.logoBlock}>
         <Link href="/">
           <Image
-            src={logo}
-            alt="Kitchen Druzhbata Logo"
+            src="/sofiafood-logo.png"
+            alt="SofiaFood"
             className={styles.logo}
             width={80}
             height={80}

@@ -1,0 +1,24 @@
+"use client";
+import { useEffect, useState } from "react";
+import { adminRecipesApi, type RecipeAutomation, type RecipePost } from "@/lib/recipesApi";
+import styles from "./recipes-admin.module.scss";
+const emptyPost = { title: "", excerpt: "", content: "", is_published: true };
+
+export default function AdminRecipesPage() {
+  const [automation,setAutomation] = useState<RecipeAutomation|null>(null); const [posts,setPosts] = useState<RecipePost[]>([]); const [post,setPost] = useState(emptyPost); const [busy,setBusy] = useState(false); const [message,setMessage] = useState("");
+  const load = async()=>{const [settings,list]=await Promise.all([adminRecipesApi.getAutomation(),adminRecipesApi.list()]);setAutomation(settings);setPosts(list);};
+  useEffect(()=>{load().catch(e=>setMessage(e.message));},[]);
+  const save=async()=>{if(!automation)return;setBusy(true);try{setAutomation(await adminRecipesApi.saveAutomation(automation));setMessage("Настройките са запазени.");}catch(e){setMessage(e instanceof Error?e.message:"Грешка");}finally{setBusy(false);}};
+  const generate=async()=>{setBusy(true);setMessage("Генерираме нова рецепта. Това може да отнеме минута…");try{const created=await adminRecipesApi.generate();setPosts(items=>[created,...items]);setMessage(`Публикувана е „${created.title}“.`);await load();}catch(e){setMessage(e instanceof Error?e.message:"Грешка");}finally{setBusy(false);}};
+  const create=async()=>{setBusy(true);try{const created=await adminRecipesApi.create(post);setPosts(items=>[created,...items]);setPost(emptyPost);setMessage("Рецептата е публикувана.");}catch(e){setMessage(e instanceof Error?e.message:"Грешка");}finally{setBusy(false);}};
+  const remove=async(id:number)=>{if(!confirm("Да изтрием ли тази рецепта?"))return;await adminRecipesApi.remove(id);setPosts(items=>items.filter(item=>item.id!==id));};
+  if(!automation)return <div className={styles.state}>{message||"Зареждане…"}</div>;
+  return <div className={styles.page}><header><span>Съдържание</span><h1>Рецепти и автоматизация</h1><p>Управлявайте седмичните публикации и редакторския промпт.</p></header>{message&&<div className={styles.message}>{message}</div>}
+    <section className={styles.panel}><div className={styles.panelHeading}><div><h2>Автоматично публикуване</h2><p>{automation.provider} · API ключ: {automation.api_key_configured ? "настроен" : "липсва в .env"}</p></div><label className={styles.toggle}><input type="checkbox" checked={automation.is_enabled} onChange={e=>setAutomation({...automation,is_enabled:e.target.checked})}/><span>{automation.is_enabled?"Включено":"Изключено"}</span></label></div>
+      <div className={styles.row}><label>Периодичност (дни)<input type="number" min="1" max="365" value={automation.frequency_days} onChange={e=>setAutomation({...automation,frequency_days:Number(e.target.value)})}/></label><label>OpenRouter модел<input value={automation.model} placeholder="openai/gpt-5-mini" onChange={e=>setAutomation({...automation,model:e.target.value})}/></label><label>Температура<input type="number" min="0" max="2" step="0.05" value={automation.temperature} onChange={e=>setAutomation({...automation,temperature:Number(e.target.value)})}/></label></div>
+      <div className={styles.row}><label>Следващо публикуване<input type="datetime-local" value={automation.next_run_at?.slice(0,16)} onChange={e=>setAutomation({...automation,next_run_at:new Date(e.target.value).toISOString()})}/></label></div>
+      <label className={styles.full}>Редакторски промпт<textarea rows={18} value={automation.prompt} onChange={e=>setAutomation({...automation,prompt:e.target.value})}/></label>{automation.last_error&&<p className={styles.error}>Последна грешка: {automation.last_error}</p>}<div className={styles.actions}><button disabled={busy} onClick={save}>Запази настройките</button><button className={styles.secondary} disabled={busy} onClick={generate}>Генерирай сега</button></div></section>
+    <section className={styles.panel}><h2>Нова ръчна публикация</h2><div className={styles.row}><label>Заглавие<input value={post.title} onChange={e=>setPost({...post,title:e.target.value})}/></label><label>Кратко описание<input value={post.excerpt} onChange={e=>setPost({...post,excerpt:e.target.value})}/></label></div><label className={styles.full}>Съдържание (Markdown)<textarea rows={12} value={post.content} onChange={e=>setPost({...post,content:e.target.value})}/></label><button disabled={busy||!post.title||!post.content} onClick={create}>Публикувай</button></section>
+    <section className={styles.panel}><h2>Публикации</h2><div className={styles.posts}>{posts.map(item=><article key={item.id}><div><b>{item.title}</b><small>{new Intl.DateTimeFormat("bg-BG",{dateStyle:"medium"}).format(new Date(item.published_at))} · {item.is_published?"Публикувана":"Чернова"}</small></div><button onClick={()=>remove(item.id)}>Изтрий</button></article>)}</div></section>
+  </div>;
+}

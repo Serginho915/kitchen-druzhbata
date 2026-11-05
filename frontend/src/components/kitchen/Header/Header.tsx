@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 import styles from "./Header.module.scss";
 
 interface KitchenHeaderProps {
@@ -16,9 +17,9 @@ export function KitchenHeader({ showEditButton = true }: KitchenHeaderProps) {
     <header className={styles.header}>
       <Link href={basePath} className={styles.logoContainer}>
         <div className={styles.logoWrapper}>
-          <img src="/kitchen-assets/kitchen.svg" alt="Logo" />
+          <Image src="/sofiafood-logo.png" alt="SofiaFood" width={52} height={52} />
         </div>
-        <h1 className={styles.title}>Кухня на Дружбата</h1>
+        <h1 className={styles.title}>SofiaFood</h1>
       </Link>
 
       {showEditButton ? (

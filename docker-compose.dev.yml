@@ -11,6 +11,11 @@ services:
       DEBUG: "1"
       SECRET_KEY: dev-secret-key-change-me
       ALLOWED_HOSTS: localhost,127.0.0.1,backend
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
+      OPENROUTER_MODEL: ${OPENROUTER_MODEL:-openai/gpt-5-mini}
+      OPENROUTER_BASE_URL: ${OPENROUTER_BASE_URL:-https://openrouter.ai/api/v1}
+      OPENROUTER_SITE_URL: ${OPENROUTER_SITE_URL:-http://localhost:3000}
+      OPENROUTER_APP_NAME: ${OPENROUTER_APP_NAME:-SofiaFood}
     volumes:
       - ./backend:/app
     stdin_open: true
@@ -29,9 +34,30 @@ services:
     environment:
       NODE_ENV: development
       WATCHPACK_POLLING: "true"
+      BACKEND_INTERNAL_URL: http://backend:8000
     volumes:
       - ./frontend:/app
       - /app/node_modules
       - /app/.next
     stdin_open: true
     tty: true
+
+  recipe-worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      target: dev
+    command: python manage.py recipe_worker --poll-interval 60
+    depends_on:
+      - backend
+    environment:
+      DEBUG: "1"
+      SECRET_KEY: dev-secret-key-change-me
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
+      OPENROUTER_MODEL: ${OPENROUTER_MODEL:-openai/gpt-5-mini}
+      OPENROUTER_BASE_URL: ${OPENROUTER_BASE_URL:-https://openrouter.ai/api/v1}
+      OPENROUTER_SITE_URL: ${OPENROUTER_SITE_URL:-http://localhost:3000}
+      OPENROUTER_APP_NAME: ${OPENROUTER_APP_NAME:-SofiaFood}
+    volumes:
+      - ./backend:/app
+    restart: unless-stopped

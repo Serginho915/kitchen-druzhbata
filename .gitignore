@@ -15,7 +15,12 @@ coverage/
 
 # next.js
 .next/
+.next-stale/
 out/
+
+# python caches
+__pycache__/
+*.py[cod]
 
 # production
 build/

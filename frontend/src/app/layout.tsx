@@ -14,8 +14,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Kitchen Druzhbata",
-  description: "Food ordering made easy",
+  title: "SofiaFood — рецепти, супа и специалитети",
+  description: "Кулинарни истории с чувство за хумор, топла супа за офиса и кетъринг специалитети.",
 };
 
 export default function RootLayout({

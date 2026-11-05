@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import styles from "@/components/layout/Footer/Footer.module.scss";
 import Image from "next/image";
 import Link from "next/link";
-import logo from "@/assets/images/logo.png";
 import { FaPhone, FaFacebookF, FaInstagram } from "react-icons/fa";
 
 import { PhoneButton as FooterPhoneButton } from "@/components/ui/footer/PhoneButton/PhoneButton";
@@ -20,16 +19,14 @@ export const TouristFooter = () => {
             <div className={styles.headerRow}>
               <div className={styles.logoArea}>
                 <Image
-                  src={logo}
-                  alt="Kitchen on Druzhba"
+                  src="/sofiafood-logo.png"
+                  alt="SofiaFood"
                   width={80}
                   height={80}
                   className={styles.logo}
                 />
                 <span className={styles.brandName}>
-                  Kitchen
-                  <br />
-                  on Druzhba
+                  SofiaFood
                 </span>
               </div>
               <div className={styles.hoursArea}>
