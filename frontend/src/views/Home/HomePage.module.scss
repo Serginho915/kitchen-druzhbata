@@ -12,8 +12,43 @@
 .heroAside { align-self: end; min-height: 250px; padding: 28px; position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: space-between; border-radius: 28px; background: #fff; color: $prim-black; transform: rotate(2deg); }
 .bigEmoji { font-size: 92px; }.heroAside p { font-family: $font-primary; font-size: 20px; line-height: 1.45; font-weight: 700; }
 .paths { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
-.pathCard { min-height: 135px; padding: 24px; display: flex; align-items: center; gap: 20px; border-radius: 28px; color: $prim-black; text-decoration: none; transition: transform .2s ease; &:hover { transform: translateY(-4px); } svg { font-size: 34px; flex: 0 0 auto; } div { display: flex; flex-direction: column; gap: 6px; } b { font-family: $font-primary; font-size: 22px; } span { font-size: 15px; opacity: .7; } }
-.yellow { background: #ffd87f; }.green { background: $bg-green; }.dark { background: #656361; color: #fff; }
+.pathCard {
+  min-height: 135px;
+  padding: 34px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border: 1px solid rgba(240,170,24,.72);
+  border-radius: 30px;
+  background: #fff;
+  color: $prim-black;
+  box-shadow: 0 7px 22px rgba(240,170,24,.16), 0 3px 10px rgba(59,58,58,.07);
+  text-decoration: none;
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: $prim-yellow;
+    box-shadow: 0 11px 28px rgba(240,170,24,.22), 0 5px 14px rgba(59,58,58,.09);
+  }
+
+  > svg {
+    width: 48px;
+    height: 48px;
+    padding: 13px;
+    box-sizing: border-box;
+    flex: 0 0 48px;
+    border-radius: 50%;
+    background: $prim-black;
+    color: #fff;
+  }
+
+  div { display: flex; flex-direction: column; gap: 6px; }
+  b { font-family: $font-primary; font-size: 26px; line-height: 1.25; }
+  span { font-size: 15px; line-height: 1.45; opacity: .7; }
+}
+
+.yellow, .green, .dark { background: #fff; color: $prim-black; }
 .latest { padding: 44px 0; }.sectionHeading { margin-bottom: 26px; display: flex; justify-content: space-between; align-items: end; gap: 30px; h2 { margin-top: 5px; font-family: $font-primary; font-size: 42px; } span { color: #b87500; font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: .1em; } p { max-width: 490px; color: rgba(59,58,58,.65); line-height: 1.55; } }
 .recipeGrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }.recipeCard { min-width: 0; overflow: hidden; border-radius: 30px; background: #fff; box-shadow: 0 3px 20px rgba(59,58,58,.06); }.cardVisual { min-height: 190px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; background: #f0aa18; span { font-size: 70px; } small { width: fit-content; padding: 7px 10px; border-radius: 99px; background: rgba(255,255,255,.75); font-weight: 700; } }.cardBody { padding: 24px; h3 { font-family: $font-primary; font-size: 22px; line-height: 1.25; } p { margin: 14px 0 20px; color: rgba(59,58,58,.67); font-size: 16px; line-height: 1.55; } a { display: inline-flex; align-items: center; gap: 8px; color: $prim-black; font-weight: 800; text-decoration: none; } }
 .state,.empty { padding: 70px 30px; text-align: center; border-radius: 30px; background: #fff; }.empty span { font-size: 55px; }.empty h3 { margin: 12px 0 8px; font-family: $font-primary; }
